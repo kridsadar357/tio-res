@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TioRes - เช็คบิล</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#00D9FF',
+                        accent: '#FF6B6B',
+                        success: '#22C55E',
+                        dark: { 900: '#0D1117', 800: '#161B22', 700: '#21262D' }
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="bg-dark-900 text-white font-['Prompt'] min-h-screen flex flex-col">
+    <!-- Header -->
+    <header class="sticky top-0 z-50 backdrop-blur-xl bg-dark-900/80 border-b border-white/10">
+        <div class="container mx-auto px-4 py-3 flex items-center">
+            <a href="orders.html" class="p-2 -ml-2 hover:bg-white/10 rounded-full transition">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+            </a>
+            <h1 class="text-xl font-bold ml-4">เช็คบิล</h1>
+        </div>
+    </header>
+
+    <!-- Bill Content -->
+    <main class="flex-1 container mx-auto px-4 py-6">
+        <!-- Table Info Card -->
+        <div class="bg-gradient-to-r from-dark-800 to-dark-700 rounded-2xl p-6 mb-6 border border-white/10">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm text-white/50 mb-1">โต๊ะ</p>
+                    <h2 id="bill-table" class="text-3xl font-bold">-</h2>
+                </div>
+                <div class="text-right">
+                    <p class="text-sm text-white/50 mb-1">เวลาเปิดโต๊ะ</p>
+                    <p id="bill-time" class="font-medium">--:--</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Order Items -->
+        <div class="bg-dark-800 rounded-2xl overflow-hidden border border-white/10 mb-6">
+            <div class="px-6 py-4 border-b border-white/10">
+                <h3 class="font-bold">รายการอาหาร</h3>
+            </div>
+            <div id="bill-items" class="divide-y divide-white/5">
+                <!-- Items injected by JS -->
+            </div>
+        </div>
+
+        <!-- Summary -->
+        <div class="bg-dark-800 rounded-2xl p-6 border border-white/10">
+            <div class="space-y-3 text-white/70">
+                <div class="flex justify-between">
+                    <span>ยอดรวม</span>
+                    <span id="bill-subtotal">฿0</span>
+                </div>
+                <div id="discount-row" class="hidden flex justify-between text-accent">
+                    <span>ส่วนลด</span>
+                    <span id="bill-discount">-฿0</span>
+                </div>
+                <div id="tax-row" class="hidden flex justify-between">
+                    <span>ภาษี (7%)</span>
+                    <span id="bill-tax">฿0</span>
+                </div>
+            </div>
+            <div class="border-t border-white/10 mt-4 pt-4">
+                <div class="flex justify-between items-center">
+                    <span class="text-xl font-bold">ยอดชำระ</span>
+                    <span id="bill-total" class="text-3xl font-bold text-primary">฿0</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading State -->
+        <div id="loading" class="flex flex-col items-center justify-center py-20">
+            <div class="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+            <p class="mt-4 text-white/60">กำลังโหลดบิล...</p>
+        </div>
+    </main>
+
+    <!-- Bottom Actions -->
+    <footer class="sticky bottom-0 bg-dark-800 border-t border-white/10 p-4">
+        <div class="container mx-auto space-y-3">
+            <!-- Call Waiter -->
+            <button onclick="callWaiter()"
+                class="w-full py-4 bg-dark-700 border border-white/20 rounded-2xl font-bold hover:bg-dark-600 transition flex items-center justify-center gap-3">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                </svg>
+                เรียกพนักงาน
+            </button>
+
+            <!-- PromptPay QR (if available) -->
+            <button id="promptpay-btn" onclick="showPromptPayQR()"
+                class="hidden w-full py-4 bg-gradient-to-r from-primary to-primary/80 text-dark-900 rounded-2xl font-bold hover:shadow-lg hover:shadow-primary/30 transition flex items-center justify-center gap-3">
+                <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                        d="M3 11h8V3H3v8zm2-6h4v4H5V5zm8-2v8h8V3h-8zm6 6h-4V5h4v4zM3 21h8v-8H3v8zm2-6h4v4H5v-4zm13 2h-2v4h2v-4zm-4-4h2v2h-2v-2zm2 4h2v2h-2v-2zm-4 2h2v2h-2v-2zm4 2h2v2h-2v-2z" />
+                </svg>
+                จ่ายผ่าน PromptPay
+            </button>
+        </div>
+    </footer>
+
+    <!-- PromptPay Modal -->
+    <div id="promptpay-modal"
+        class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 backdrop-blur-sm">
+        <div class="bg-white rounded-2xl p-6 text-center max-w-sm mx-4">
+            <h3 class="text-xl font-bold text-gray-800 mb-2">สแกน QR ชำระเงิน</h3>
+            <p class="text-gray-500 mb-4">PromptPay</p>
+            <div id="qr-container" class="bg-white p-4 rounded-xl mb-4">
+                <img id="promptpay-qr" src="" alt="PromptPay QR" class="w-48 h-48 mx-auto">
+            </div>
+            <p class="text-2xl font-bold text-primary mb-4">฿<span id="qr-amount">0</span></p>
+            <button onclick="closePromptPayModal()"
+                class="w-full py-3 bg-gray-200 text-gray-800 rounded-xl font-medium">ปิด</button>
+        </div>
+    </div>
+
+    <!-- Waiter Called Modal -->
+    <div id="waiter-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/60 backdrop-blur-sm">
+        <div class="bg-dark-800 rounded-2xl p-8 text-center max-w-sm mx-4 border border-primary/30">
+            <div class="w-20 h-20 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg class="w-10 h-10 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                </svg>
+            </div>
+            <h3 class="text-2xl font-bold mb-2">เรียกแล้ว!</h3>
+            <p class="text-white/60 mb-6">พนักงานกำลังมา</p>
+            <button onclick="closeWaiterModal()"
+                class="w-full py-3 bg-primary text-dark-900 rounded-xl font-bold">ตกลง</button>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            TioRes.initBillPage();
+        });
+    </script>
+</body>
+
+</html>

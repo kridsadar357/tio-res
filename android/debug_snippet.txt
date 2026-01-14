@@ -1,0 +1,1000 @@
+2569-01-14T23:51:03.219+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:mergeDebugJavaResource' started
+2569-01-14T23:51:03.219+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:mergeDebugJavaResource'
+2569-01-14T23:51:03.219+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:checkDebugDuplicateClasses' started
+2569-01-14T23:51:03.219+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:checkDebugDuplicateClasses'
+2569-01-14T23:51:03.220+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:dexBuilderDebug' started
+2569-01-14T23:51:03.220+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:dexBuilderDebug'
+2569-01-14T23:51:03.220+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:desugarDebugFileDependencies' started
+2569-01-14T23:51:03.220+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:desugarDebugFileDependencies'
+2569-01-14T23:51:03.220+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:mergeExtDexDebug' started
+2569-01-14T23:51:03.220+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:mergeExtDexDebug'
+2569-01-14T23:51:03.220+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:mergeProjectDexDebug' started
+2569-01-14T23:51:03.220+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:mergeProjectDexDebug'
+2569-01-14T23:51:03.220+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:mergeLibDexDebug' started
+2569-01-14T23:51:03.220+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:mergeLibDexDebug'
+2569-01-14T23:51:03.220+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:mergeDebugGlobalSynthetics' started
+2569-01-14T23:51:03.220+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:mergeDebugGlobalSynthetics'
+2569-01-14T23:51:03.220+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:stripDebugDebugSymbols' started
+2569-01-14T23:51:03.220+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:stripDebugDebugSymbols'
+2569-01-14T23:51:03.220+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:extractDebugNativeDebugMetadata' started
+2569-01-14T23:51:03.220+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:extractDebugNativeDebugMetadata'
+2569-01-14T23:51:03.220+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:extractDebugNativeSymbolTables' started
+2569-01-14T23:51:03.220+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:extractDebugNativeSymbolTables'
+2569-01-14T23:51:03.220+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:packageDebug' started
+2569-01-14T23:51:03.220+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:packageDebug'
+2569-01-14T23:51:03.220+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:createDebugApkListingFileRedirect' started
+2569-01-14T23:51:03.220+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:createDebugApkListingFileRedirect'
+2569-01-14T23:51:03.220+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:installDebug' started
+2569-01-14T23:51:03.220+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:installDebug'
+2569-01-14T23:51:03.220+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:uninstallDebug' started
+2569-01-14T23:51:03.220+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:uninstallDebug'
+2569-01-14T23:51:03.221+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:generateDebugFeatureTransitiveDeps' started
+2569-01-14T23:51:03.221+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:generateDebugFeatureTransitiveDeps'
+2569-01-14T23:51:03.221+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:zipApksForDebug' started
+2569-01-14T23:51:03.221+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:zipApksForDebug'
+2569-01-14T23:51:03.221+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:bundleDebug' started
+2569-01-14T23:51:03.221+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:bundleDebug'
+2569-01-14T23:51:03.221+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:createDebugVariantModel' started
+2569-01-14T23:51:03.221+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:createDebugVariantModel'
+2569-01-14T23:51:03.221+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:generateDebugFeatureMetadata' started
+2569-01-14T23:51:03.221+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:generateDebugFeatureMetadata'
+2569-01-14T23:51:03.221+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:validateSigningDebug' started
+2569-01-14T23:51:03.221+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:validateSigningDebug'
+2569-01-14T23:51:03.221+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:signingConfigWriterDebug' started
+2569-01-14T23:51:03.221+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:signingConfigWriterDebug'
+2569-01-14T23:51:03.221+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:writeDebugSigningConfigVersions' started
+2569-01-14T23:51:03.221+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:writeDebugSigningConfigVersions'
+2569-01-14T23:51:03.221+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:writeDebugAppMetadata' started
+2569-01-14T23:51:03.221+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:writeDebugAppMetadata'
+2569-01-14T23:51:03.221+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:mergeDebugArtProfile' started
+2569-01-14T23:51:03.221+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:mergeDebugArtProfile'
+2569-01-14T23:51:03.221+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:compileDebugArtProfile' started
+2569-01-14T23:51:03.221+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:compileDebugArtProfile'
+2569-01-14T23:51:03.221+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:asarToCompatSplitsForDebug' started
+2569-01-14T23:51:03.221+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:asarToCompatSplitsForDebug'
+2569-01-14T23:51:03.221+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:buildDebugPreBundle' started
+2569-01-14T23:51:03.221+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:buildDebugPreBundle'
+2569-01-14T23:51:03.221+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:parseDebugIntegrityConfig' started
+2569-01-14T23:51:03.221+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:parseDebugIntegrityConfig'
+2569-01-14T23:51:03.221+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:packageDebugBundle' started
+2569-01-14T23:51:03.222+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:packageDebugBundle'
+2569-01-14T23:51:03.222+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:signDebugBundle' started
+2569-01-14T23:51:03.222+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:signDebugBundle'
+2569-01-14T23:51:03.222+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:produceDebugBundleIdeListingFile' started
+2569-01-14T23:51:03.222+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:produceDebugBundleIdeListingFile'
+2569-01-14T23:51:03.222+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:createDebugBundleListingFileRedirect' started
+2569-01-14T23:51:03.222+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:createDebugBundleListingFileRedirect'
+2569-01-14T23:51:03.222+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:makeApkFromBundleForDebug' started
+2569-01-14T23:51:03.222+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:makeApkFromBundleForDebug'
+2569-01-14T23:51:03.222+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:packageDebugUniversalApk' started
+2569-01-14T23:51:03.222+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:packageDebugUniversalApk'
+2569-01-14T23:51:03.222+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:extractApksFromBundleForDebug' started
+2569-01-14T23:51:03.222+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:extractApksFromBundleForDebug'
+2569-01-14T23:51:03.222+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:extractApksFromSdkSplitsForDebug' started
+2569-01-14T23:51:03.222+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:extractApksFromSdkSplitsForDebug'
+2569-01-14T23:51:03.222+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:createDebugApksFromBundleListingFileRedirect' started
+2569-01-14T23:51:03.222+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:createDebugApksFromBundleListingFileRedirect'
+2569-01-14T23:51:03.222+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:extractApksForDebug' started
+2569-01-14T23:51:03.222+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:extractApksForDebug'
+2569-01-14T23:51:03.222+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:mergeDebugNativeDebugMetadata' started
+2569-01-14T23:51:03.222+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:mergeDebugNativeDebugMetadata'
+2569-01-14T23:51:03.222+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:assembleRelease' started
+2569-01-14T23:51:03.222+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:assembleRelease'
+2569-01-14T23:51:03.222+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:preReleaseBuild' started
+2569-01-14T23:51:03.222+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:preReleaseBuild'
+2569-01-14T23:51:03.222+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:generateReleaseSources' started
+2569-01-14T23:51:03.222+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:generateReleaseSources'
+2569-01-14T23:51:03.222+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:generateReleaseResources' started
+2569-01-14T23:51:03.222+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:generateReleaseResources'
+2569-01-14T23:51:03.222+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:generateReleaseAssets' started
+2569-01-14T23:51:03.222+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:generateReleaseAssets'
+2569-01-14T23:51:03.223+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:compileReleaseSources' started
+2569-01-14T23:51:03.223+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:compileReleaseSources'
+2569-01-14T23:51:03.223+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:extractDeepLinksRelease' started
+2569-01-14T23:51:03.223+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:extractDeepLinksRelease'
+2569-01-14T23:51:03.223+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:writeReleaseModuleMetadata' started
+2569-01-14T23:51:03.223+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:writeReleaseModuleMetadata'
+2569-01-14T23:51:03.223+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:writeReleaseApplicationId' started
+2569-01-14T23:51:03.223+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:writeReleaseApplicationId'
+2569-01-14T23:51:03.223+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:checkReleaseManifest' started
+2569-01-14T23:51:03.223+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:checkReleaseManifest'
+2569-01-14T23:51:03.223+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:createReleaseCompatibleScreenManifests' started
+2569-01-14T23:51:03.223+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:createReleaseCompatibleScreenManifests'
+2569-01-14T23:51:03.223+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:processApplicationManifestReleaseForBundle' started
+2569-01-14T23:51:03.223+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:processApplicationManifestReleaseForBundle'
+2569-01-14T23:51:03.223+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:processManifestReleaseForFeature' started
+2569-01-14T23:51:03.223+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:processManifestReleaseForFeature'
+2569-01-14T23:51:03.223+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:processReleaseManifestForInstantApp' started
+2569-01-14T23:51:03.223+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:processReleaseManifestForInstantApp'
+2569-01-14T23:51:03.223+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:processReleaseManifestForPackage' started
+2569-01-14T23:51:03.223+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:processReleaseManifestForPackage'
+2569-01-14T23:51:03.223+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:generateReleaseManifestClass' started
+2569-01-14T23:51:03.223+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:generateReleaseManifestClass'
+2569-01-14T23:51:03.223+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:processReleaseMainManifest' started
+2569-01-14T23:51:03.223+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:processReleaseMainManifest'
+2569-01-14T23:51:03.223+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:processReleaseManifest' started
+2569-01-14T23:51:03.223+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:processReleaseManifest'
+2569-01-14T23:51:03.223+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:generateReleaseResValues' started
+2569-01-14T23:51:03.223+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:generateReleaseResValues'
+2569-01-14T23:51:03.223+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:mergeReleaseResources' started
+2569-01-14T23:51:03.224+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:mergeReleaseResources'
+2569-01-14T23:51:03.224+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:mapReleaseSourceSetPaths' started
+2569-01-14T23:51:03.224+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:mapReleaseSourceSetPaths'
+2569-01-14T23:51:03.224+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:mergeReleaseShaders' started
+2569-01-14T23:51:03.224+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:mergeReleaseShaders'
+2569-01-14T23:51:03.224+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:compileReleaseShaders' started
+2569-01-14T23:51:03.224+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:compileReleaseShaders'
+2569-01-14T23:51:03.224+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:mergeReleaseAssets' started
+2569-01-14T23:51:03.224+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:mergeReleaseAssets'
+2569-01-14T23:51:03.224+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:compressReleaseAssets' started
+2569-01-14T23:51:03.224+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:compressReleaseAssets'
+2569-01-14T23:51:03.224+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:generateReleaseBuildConfig' started
+2569-01-14T23:51:03.224+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:generateReleaseBuildConfig'
+2569-01-14T23:51:03.224+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:checkReleaseAarMetadata' started
+2569-01-14T23:51:03.224+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:checkReleaseAarMetadata'
+2569-01-14T23:51:03.224+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:processReleaseResources' started
+2569-01-14T23:51:03.224+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:processReleaseResources'
+2569-01-14T23:51:03.224+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:bundleReleaseResources' started
+2569-01-14T23:51:03.224+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:bundleReleaseResources'
+2569-01-14T23:51:03.224+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:optimizeReleaseResources' started
+2569-01-14T23:51:03.224+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:optimizeReleaseResources'
+2569-01-14T23:51:03.224+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:processReleaseJavaRes' started
+2569-01-14T23:51:03.224+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:processReleaseJavaRes'
+2569-01-14T23:51:03.224+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:mergeReleaseJniLibFolders' started
+2569-01-14T23:51:03.224+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:mergeReleaseJniLibFolders'
+2569-01-14T23:51:03.224+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:mergeReleaseNativeLibs' started
+2569-01-14T23:51:03.224+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:mergeReleaseNativeLibs'
+2569-01-14T23:51:03.224+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:expandReleaseArtProfileWildcards' started
+2569-01-14T23:51:03.225+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:expandReleaseArtProfileWildcards'
+2569-01-14T23:51:03.225+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:javaPreCompileRelease' started
+2569-01-14T23:51:03.225+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:javaPreCompileRelease'
+2569-01-14T23:51:03.225+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:compileReleaseJavaWithJavac' started
+2569-01-14T23:51:03.225+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:compileReleaseJavaWithJavac'
+2569-01-14T23:51:03.225+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:bundleReleaseClassesToCompileJar' started
+2569-01-14T23:51:03.225+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:bundleReleaseClassesToCompileJar'
+2569-01-14T23:51:03.225+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:bundleReleaseClassesToRuntimeJar' started
+2569-01-14T23:51:03.225+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:bundleReleaseClassesToRuntimeJar'
+2569-01-14T23:51:03.225+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:mergeReleaseGeneratedProguardFiles' started
+2569-01-14T23:51:03.225+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:mergeReleaseGeneratedProguardFiles'
+2569-01-14T23:51:03.225+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:mergeReleaseJavaResource' started
+2569-01-14T23:51:03.225+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:mergeReleaseJavaResource'
+2569-01-14T23:51:03.225+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:checkReleaseDuplicateClasses' started
+2569-01-14T23:51:03.225+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:checkReleaseDuplicateClasses'
+2569-01-14T23:51:03.225+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:shrinkReleaseRes' started
+2569-01-14T23:51:03.225+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:shrinkReleaseRes'
+2569-01-14T23:51:03.225+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:shrinkBundleReleaseResources' started
+2569-01-14T23:51:03.225+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:shrinkBundleReleaseResources'
+2569-01-14T23:51:03.225+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:minifyReleaseWithR8' started
+2569-01-14T23:51:03.225+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:minifyReleaseWithR8'
+2569-01-14T23:51:03.225+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:stripReleaseDebugSymbols' started
+2569-01-14T23:51:03.225+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:stripReleaseDebugSymbols'
+2569-01-14T23:51:03.226+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:extractReleaseNativeDebugMetadata' started
+2569-01-14T23:51:03.226+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:extractReleaseNativeDebugMetadata'
+2569-01-14T23:51:03.226+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:extractReleaseNativeSymbolTables' started
+2569-01-14T23:51:03.226+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:extractReleaseNativeSymbolTables'
+2569-01-14T23:51:03.226+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:packageRelease' started
+2569-01-14T23:51:03.226+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:packageRelease'
+2569-01-14T23:51:03.226+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:createReleaseApkListingFileRedirect' started
+2569-01-14T23:51:03.226+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:createReleaseApkListingFileRedirect'
+2569-01-14T23:51:03.226+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:installRelease' started
+2569-01-14T23:51:03.226+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:installRelease'
+2569-01-14T23:51:03.226+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:uninstallRelease' started
+2569-01-14T23:51:03.226+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:uninstallRelease'
+2569-01-14T23:51:03.226+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:generateReleaseFeatureTransitiveDeps' started
+2569-01-14T23:51:03.226+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:generateReleaseFeatureTransitiveDeps'
+2569-01-14T23:51:03.226+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:zipApksForRelease' started
+2569-01-14T23:51:03.226+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:zipApksForRelease'
+2569-01-14T23:51:03.226+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:bundleRelease' started
+2569-01-14T23:51:03.226+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:bundleRelease'
+2569-01-14T23:51:03.226+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:createReleaseVariantModel' started
+2569-01-14T23:51:03.226+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:createReleaseVariantModel'
+2569-01-14T23:51:03.226+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:generateReleaseFeatureMetadata' started
+2569-01-14T23:51:03.226+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:generateReleaseFeatureMetadata'
+2569-01-14T23:51:03.226+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:validateSigningRelease' started
+2569-01-14T23:51:03.226+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:validateSigningRelease'
+2569-01-14T23:51:03.226+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:signingConfigWriterRelease' started
+2569-01-14T23:51:03.226+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:signingConfigWriterRelease'
+2569-01-14T23:51:03.226+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:writeReleaseSigningConfigVersions' started
+2569-01-14T23:51:03.226+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:writeReleaseSigningConfigVersions'
+2569-01-14T23:51:03.226+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:writeReleaseAppMetadata' started
+2569-01-14T23:51:03.226+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:writeReleaseAppMetadata'
+2569-01-14T23:51:03.227+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:mergeReleaseArtProfile' started
+2569-01-14T23:51:03.227+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:mergeReleaseArtProfile'
+2569-01-14T23:51:03.227+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:compileReleaseArtProfile' started
+2569-01-14T23:51:03.227+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:compileReleaseArtProfile'
+2569-01-14T23:51:03.227+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:asarToCompatSplitsForRelease' started
+2569-01-14T23:51:03.227+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:asarToCompatSplitsForRelease'
+2569-01-14T23:51:03.227+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:buildReleasePreBundle' started
+2569-01-14T23:51:03.227+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:buildReleasePreBundle'
+2569-01-14T23:51:03.227+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:collectReleaseDependencies' started
+2569-01-14T23:51:03.227+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:collectReleaseDependencies'
+2569-01-14T23:51:03.227+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:parseReleaseIntegrityConfig' started
+2569-01-14T23:51:03.227+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:parseReleaseIntegrityConfig'
+2569-01-14T23:51:03.227+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:packageReleaseBundle' started
+2569-01-14T23:51:03.227+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:packageReleaseBundle'
+2569-01-14T23:51:03.227+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:configureReleaseDependencies' started
+2569-01-14T23:51:03.227+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:configureReleaseDependencies'
+2569-01-14T23:51:03.227+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:sdkReleaseDependencyData' started
+2569-01-14T23:51:03.227+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:sdkReleaseDependencyData'
+2569-01-14T23:51:03.227+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:signReleaseBundle' started
+2569-01-14T23:51:03.227+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:signReleaseBundle'
+2569-01-14T23:51:03.227+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:produceReleaseBundleIdeListingFile' started
+2569-01-14T23:51:03.227+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:produceReleaseBundleIdeListingFile'
+2569-01-14T23:51:03.227+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:createReleaseBundleListingFileRedirect' started
+2569-01-14T23:51:03.227+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:createReleaseBundleListingFileRedirect'
+2569-01-14T23:51:03.227+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:makeApkFromBundleForRelease' started
+2569-01-14T23:51:03.227+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:makeApkFromBundleForRelease'
+2569-01-14T23:51:03.227+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:packageReleaseUniversalApk' started
+2569-01-14T23:51:03.227+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:packageReleaseUniversalApk'
+2569-01-14T23:51:03.227+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:extractApksFromBundleForRelease' started
+2569-01-14T23:51:03.227+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:extractApksFromBundleForRelease'
+2569-01-14T23:51:03.227+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:extractApksFromSdkSplitsForRelease' started
+2569-01-14T23:51:03.228+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:extractApksFromSdkSplitsForRelease'
+2569-01-14T23:51:03.228+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:createReleaseApksFromBundleListingFileRedirect' started
+2569-01-14T23:51:03.228+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:createReleaseApksFromBundleListingFileRedirect'
+2569-01-14T23:51:03.228+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:extractApksForRelease' started
+2569-01-14T23:51:03.228+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:extractApksForRelease'
+2569-01-14T23:51:03.228+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:mergeReleaseNativeDebugMetadata' started
+2569-01-14T23:51:03.228+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:mergeReleaseNativeDebugMetadata'
+2569-01-14T23:51:03.228+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:assembleProfile' started
+2569-01-14T23:51:03.228+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:assembleProfile'
+2569-01-14T23:51:03.228+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:preProfileBuild' started
+2569-01-14T23:51:03.228+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:preProfileBuild'
+2569-01-14T23:51:03.228+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:generateProfileSources' started
+2569-01-14T23:51:03.228+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:generateProfileSources'
+2569-01-14T23:51:03.229+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:generateProfileResources' started
+2569-01-14T23:51:03.229+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:generateProfileResources'
+2569-01-14T23:51:03.229+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:generateProfileAssets' started
+2569-01-14T23:51:03.229+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:generateProfileAssets'
+2569-01-14T23:51:03.229+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:compileProfileSources' started
+2569-01-14T23:51:03.229+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:compileProfileSources'
+2569-01-14T23:51:03.229+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:extractDeepLinksProfile' started
+2569-01-14T23:51:03.229+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:extractDeepLinksProfile'
+2569-01-14T23:51:03.229+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:writeProfileModuleMetadata' started
+2569-01-14T23:51:03.229+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:writeProfileModuleMetadata'
+2569-01-14T23:51:03.229+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:writeProfileApplicationId' started
+2569-01-14T23:51:03.229+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:writeProfileApplicationId'
+2569-01-14T23:51:03.229+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:checkProfileManifest' started
+2569-01-14T23:51:03.230+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:checkProfileManifest'
+2569-01-14T23:51:03.230+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:createProfileCompatibleScreenManifests' started
+2569-01-14T23:51:03.230+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:createProfileCompatibleScreenManifests'
+2569-01-14T23:51:03.230+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:processApplicationManifestProfileForBundle' started
+2569-01-14T23:51:03.230+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:processApplicationManifestProfileForBundle'
+2569-01-14T23:51:03.230+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:processManifestProfileForFeature' started
+2569-01-14T23:51:03.230+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:processManifestProfileForFeature'
+2569-01-14T23:51:03.230+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:processProfileManifestForInstantApp' started
+2569-01-14T23:51:03.230+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:processProfileManifestForInstantApp'
+2569-01-14T23:51:03.230+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:processProfileManifestForPackage' started
+2569-01-14T23:51:03.230+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:processProfileManifestForPackage'
+2569-01-14T23:51:03.230+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:generateProfileManifestClass' started
+2569-01-14T23:51:03.230+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:generateProfileManifestClass'
+2569-01-14T23:51:03.230+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:processProfileMainManifest' started
+2569-01-14T23:51:03.230+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:processProfileMainManifest'
+2569-01-14T23:51:03.230+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:processProfileManifest' started
+2569-01-14T23:51:03.230+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:processProfileManifest'
+2569-01-14T23:51:03.231+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:generateProfileResValues' started
+2569-01-14T23:51:03.231+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:generateProfileResValues'
+2569-01-14T23:51:03.231+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:mergeProfileResources' started
+2569-01-14T23:51:03.231+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:mergeProfileResources'
+2569-01-14T23:51:03.231+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:mapProfileSourceSetPaths' started
+2569-01-14T23:51:03.231+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:mapProfileSourceSetPaths'
+2569-01-14T23:51:03.231+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:mergeProfileShaders' started
+2569-01-14T23:51:03.231+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:mergeProfileShaders'
+2569-01-14T23:51:03.231+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:compileProfileShaders' started
+2569-01-14T23:51:03.231+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:compileProfileShaders'
+2569-01-14T23:51:03.231+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:mergeProfileAssets' started
+2569-01-14T23:51:03.232+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:mergeProfileAssets'
+2569-01-14T23:51:03.232+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:compressProfileAssets' started
+2569-01-14T23:51:03.232+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:compressProfileAssets'
+2569-01-14T23:51:03.232+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:generateProfileBuildConfig' started
+2569-01-14T23:51:03.232+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:generateProfileBuildConfig'
+2569-01-14T23:51:03.232+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:checkProfileAarMetadata' started
+2569-01-14T23:51:03.232+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:checkProfileAarMetadata'
+2569-01-14T23:51:03.232+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:processProfileResources' started
+2569-01-14T23:51:03.232+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:processProfileResources'
+2569-01-14T23:51:03.232+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:bundleProfileResources' started
+2569-01-14T23:51:03.232+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:bundleProfileResources'
+2569-01-14T23:51:03.232+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:processProfileJavaRes' started
+2569-01-14T23:51:03.232+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:processProfileJavaRes'
+2569-01-14T23:51:03.233+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:mergeProfileJniLibFolders' started
+2569-01-14T23:51:03.233+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:mergeProfileJniLibFolders'
+2569-01-14T23:51:03.233+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:mergeProfileNativeLibs' started
+2569-01-14T23:51:03.233+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:mergeProfileNativeLibs'
+2569-01-14T23:51:03.233+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:javaPreCompileProfile' started
+2569-01-14T23:51:03.233+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:javaPreCompileProfile'
+2569-01-14T23:51:03.233+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:compileProfileJavaWithJavac' started
+2569-01-14T23:51:03.233+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:compileProfileJavaWithJavac'
+2569-01-14T23:51:03.233+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:bundleProfileClassesToCompileJar' started
+2569-01-14T23:51:03.233+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:bundleProfileClassesToCompileJar'
+2569-01-14T23:51:03.233+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:bundleProfileClassesToRuntimeJar' started
+2569-01-14T23:51:03.233+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:bundleProfileClassesToRuntimeJar'
+2569-01-14T23:51:03.233+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:mergeProfileGeneratedProguardFiles' started
+2569-01-14T23:51:03.233+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:mergeProfileGeneratedProguardFiles'
+2569-01-14T23:51:03.233+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:mergeProfileJavaResource' started
+2569-01-14T23:51:03.233+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:mergeProfileJavaResource'
+2569-01-14T23:51:03.234+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:checkProfileDuplicateClasses' started
+2569-01-14T23:51:03.234+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:checkProfileDuplicateClasses'
+2569-01-14T23:51:03.234+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:dexBuilderProfile' started
+2569-01-14T23:51:03.234+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:dexBuilderProfile'
+2569-01-14T23:51:03.234+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:desugarProfileFileDependencies' started
+2569-01-14T23:51:03.234+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:desugarProfileFileDependencies'
+2569-01-14T23:51:03.234+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:mergeExtDexProfile' started
+2569-01-14T23:51:03.235+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:mergeExtDexProfile'
+2569-01-14T23:51:03.235+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:mergeProjectDexProfile' started
+2569-01-14T23:51:03.235+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:mergeProjectDexProfile'
+2569-01-14T23:51:03.235+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:mergeLibDexProfile' started
+2569-01-14T23:51:03.235+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:mergeLibDexProfile'
+2569-01-14T23:51:03.235+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:mergeProfileGlobalSynthetics' started
+2569-01-14T23:51:03.235+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:mergeProfileGlobalSynthetics'
+2569-01-14T23:51:03.235+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:stripProfileDebugSymbols' started
+2569-01-14T23:51:03.235+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:stripProfileDebugSymbols'
+2569-01-14T23:51:03.235+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:extractProfileNativeDebugMetadata' started
+2569-01-14T23:51:03.235+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:extractProfileNativeDebugMetadata'
+2569-01-14T23:51:03.235+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:extractProfileNativeSymbolTables' started
+2569-01-14T23:51:03.235+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:extractProfileNativeSymbolTables'
+2569-01-14T23:51:03.236+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:packageProfile' started
+2569-01-14T23:51:03.236+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:packageProfile'
+2569-01-14T23:51:03.236+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:createProfileApkListingFileRedirect' started
+2569-01-14T23:51:03.236+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:createProfileApkListingFileRedirect'
+2569-01-14T23:51:03.236+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:installProfile' started
+2569-01-14T23:51:03.236+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:installProfile'
+2569-01-14T23:51:03.236+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:uninstallProfile' started
+2569-01-14T23:51:03.236+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:uninstallProfile'
+2569-01-14T23:51:03.236+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:generateProfileFeatureTransitiveDeps' started
+2569-01-14T23:51:03.236+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:generateProfileFeatureTransitiveDeps'
+2569-01-14T23:51:03.236+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:zipApksForProfile' started
+2569-01-14T23:51:03.236+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:zipApksForProfile'
+2569-01-14T23:51:03.236+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:bundleProfile' started
+2569-01-14T23:51:03.236+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:bundleProfile'
+2569-01-14T23:51:03.236+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:createProfileVariantModel' started
+2569-01-14T23:51:03.236+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:createProfileVariantModel'
+2569-01-14T23:51:03.236+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:generateProfileFeatureMetadata' started
+2569-01-14T23:51:03.236+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:generateProfileFeatureMetadata'
+2569-01-14T23:51:03.236+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:validateSigningProfile' started
+2569-01-14T23:51:03.236+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:validateSigningProfile'
+2569-01-14T23:51:03.236+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:signingConfigWriterProfile' started
+2569-01-14T23:51:03.236+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:signingConfigWriterProfile'
+2569-01-14T23:51:03.236+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:writeProfileSigningConfigVersions' started
+2569-01-14T23:51:03.236+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:writeProfileSigningConfigVersions'
+2569-01-14T23:51:03.236+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:writeProfileAppMetadata' started
+2569-01-14T23:51:03.236+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:writeProfileAppMetadata'
+2569-01-14T23:51:03.237+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:mergeProfileArtProfile' started
+2569-01-14T23:51:03.237+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:mergeProfileArtProfile'
+2569-01-14T23:51:03.237+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:compileProfileArtProfile' started
+2569-01-14T23:51:03.237+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:compileProfileArtProfile'
+2569-01-14T23:51:03.237+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:asarToCompatSplitsForProfile' started
+2569-01-14T23:51:03.237+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:asarToCompatSplitsForProfile'
+2569-01-14T23:51:03.237+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:buildProfilePreBundle' started
+2569-01-14T23:51:03.237+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:buildProfilePreBundle'
+2569-01-14T23:51:03.237+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:parseProfileIntegrityConfig' started
+2569-01-14T23:51:03.237+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:parseProfileIntegrityConfig'
+2569-01-14T23:51:03.237+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:packageProfileBundle' started
+2569-01-14T23:51:03.237+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:packageProfileBundle'
+2569-01-14T23:51:03.237+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:signProfileBundle' started
+2569-01-14T23:51:03.237+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:signProfileBundle'
+2569-01-14T23:51:03.237+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:produceProfileBundleIdeListingFile' started
+2569-01-14T23:51:03.237+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:produceProfileBundleIdeListingFile'
+2569-01-14T23:51:03.237+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:createProfileBundleListingFileRedirect' started
+2569-01-14T23:51:03.237+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:createProfileBundleListingFileRedirect'
+2569-01-14T23:51:03.237+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:makeApkFromBundleForProfile' started
+2569-01-14T23:51:03.237+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:makeApkFromBundleForProfile'
+2569-01-14T23:51:03.237+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:packageProfileUniversalApk' started
+2569-01-14T23:51:03.237+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:packageProfileUniversalApk'
+2569-01-14T23:51:03.237+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:extractApksFromBundleForProfile' started
+2569-01-14T23:51:03.237+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:extractApksFromBundleForProfile'
+2569-01-14T23:51:03.238+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:extractApksFromSdkSplitsForProfile' started
+2569-01-14T23:51:03.238+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:extractApksFromSdkSplitsForProfile'
+2569-01-14T23:51:03.238+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:createProfileApksFromBundleListingFileRedirect' started
+2569-01-14T23:51:03.238+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:createProfileApksFromBundleListingFileRedirect'
+2569-01-14T23:51:03.238+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:extractApksForProfile' started
+2569-01-14T23:51:03.238+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:extractApksForProfile'
+2569-01-14T23:51:03.238+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:mergeProfileNativeDebugMetadata' started
+2569-01-14T23:51:03.238+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:mergeProfileNativeDebugMetadata'
+2569-01-14T23:51:03.238+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:assembleDebugAndroidTest' started
+2569-01-14T23:51:03.238+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:assembleDebugAndroidTest'
+2569-01-14T23:51:03.238+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:preDebugAndroidTestBuild' started
+2569-01-14T23:51:03.238+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:preDebugAndroidTestBuild'
+2569-01-14T23:51:03.238+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:generateDebugAndroidTestSources' started
+2569-01-14T23:51:03.238+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:generateDebugAndroidTestSources'
+2569-01-14T23:51:03.238+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:generateDebugAndroidTestResources' started
+2569-01-14T23:51:03.238+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:generateDebugAndroidTestResources'
+2569-01-14T23:51:03.238+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:generateDebugAndroidTestAssets' started
+2569-01-14T23:51:03.238+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:generateDebugAndroidTestAssets'
+2569-01-14T23:51:03.238+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:compileDebugAndroidTestSources' started
+2569-01-14T23:51:03.238+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:compileDebugAndroidTestSources'
+2569-01-14T23:51:03.239+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:processDebugAndroidTestManifest' started
+2569-01-14T23:51:03.239+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:processDebugAndroidTestManifest'
+2569-01-14T23:51:03.239+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:generateDebugAndroidTestResValues' started
+2569-01-14T23:51:03.239+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:generateDebugAndroidTestResValues'
+2569-01-14T23:51:03.239+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:mergeDebugAndroidTestResources' started
+2569-01-14T23:51:03.239+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:mergeDebugAndroidTestResources'
+2569-01-14T23:51:03.239+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:mapDebugAndroidTestSourceSetPaths' started
+2569-01-14T23:51:03.239+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:mapDebugAndroidTestSourceSetPaths'
+2569-01-14T23:51:03.239+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:mergeDebugAndroidTestShaders' started
+2569-01-14T23:51:03.239+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:mergeDebugAndroidTestShaders'
+2569-01-14T23:51:03.239+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:compileDebugAndroidTestShaders' started
+2569-01-14T23:51:03.239+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:compileDebugAndroidTestShaders'
+2569-01-14T23:51:03.239+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:mergeDebugAndroidTestAssets' started
+2569-01-14T23:51:03.239+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:mergeDebugAndroidTestAssets'
+2569-01-14T23:51:03.239+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:compressDebugAndroidTestAssets' started
+2569-01-14T23:51:03.239+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:compressDebugAndroidTestAssets'
+2569-01-14T23:51:03.239+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:generateDebugAndroidTestBuildConfig' started
+2569-01-14T23:51:03.239+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:generateDebugAndroidTestBuildConfig'
+2569-01-14T23:51:03.239+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:checkDebugAndroidTestAarMetadata' started
+2569-01-14T23:51:03.239+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:checkDebugAndroidTestAarMetadata'
+2569-01-14T23:51:03.240+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:processDebugAndroidTestResources' started
+2569-01-14T23:51:03.240+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:processDebugAndroidTestResources'
+2569-01-14T23:51:03.240+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:processDebugAndroidTestJavaRes' started
+2569-01-14T23:51:03.240+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:processDebugAndroidTestJavaRes'
+2569-01-14T23:51:03.240+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:mergeDebugAndroidTestJniLibFolders' started
+2569-01-14T23:51:03.240+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:mergeDebugAndroidTestJniLibFolders'
+2569-01-14T23:51:03.240+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:mergeDebugAndroidTestNativeLibs' started
+2569-01-14T23:51:03.240+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:mergeDebugAndroidTestNativeLibs'
+2569-01-14T23:51:03.240+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:javaPreCompileDebugAndroidTest' started
+2569-01-14T23:51:03.240+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:javaPreCompileDebugAndroidTest'
+2569-01-14T23:51:03.240+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:compileDebugAndroidTestJavaWithJavac' started
+2569-01-14T23:51:03.240+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:compileDebugAndroidTestJavaWithJavac'
+2569-01-14T23:51:03.240+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:mergeDebugAndroidTestGeneratedProguardFiles' started
+2569-01-14T23:51:03.240+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:mergeDebugAndroidTestGeneratedProguardFiles'
+2569-01-14T23:51:03.241+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:mergeDebugAndroidTestJavaResource' started
+2569-01-14T23:51:03.241+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:mergeDebugAndroidTestJavaResource'
+2569-01-14T23:51:03.241+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:checkDebugAndroidTestDuplicateClasses' started
+2569-01-14T23:51:03.241+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:checkDebugAndroidTestDuplicateClasses'
+2569-01-14T23:51:03.241+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:dexBuilderDebugAndroidTest' started
+2569-01-14T23:51:03.241+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:dexBuilderDebugAndroidTest'
+2569-01-14T23:51:03.241+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:desugarDebugAndroidTestFileDependencies' started
+2569-01-14T23:51:03.241+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:desugarDebugAndroidTestFileDependencies'
+2569-01-14T23:51:03.241+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:mergeExtDexDebugAndroidTest' started
+2569-01-14T23:51:03.241+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:mergeExtDexDebugAndroidTest'
+2569-01-14T23:51:03.241+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:mergeProjectDexDebugAndroidTest' started
+2569-01-14T23:51:03.241+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:mergeProjectDexDebugAndroidTest'
+2569-01-14T23:51:03.241+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:mergeLibDexDebugAndroidTest' started
+2569-01-14T23:51:03.241+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:mergeLibDexDebugAndroidTest'
+2569-01-14T23:51:03.241+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:mergeDebugAndroidTestGlobalSynthetics' started
+2569-01-14T23:51:03.241+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:mergeDebugAndroidTestGlobalSynthetics'
+2569-01-14T23:51:03.241+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:validateSigningDebugAndroidTest' started
+2569-01-14T23:51:03.241+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:validateSigningDebugAndroidTest'
+2569-01-14T23:51:03.241+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:signingConfigWriterDebugAndroidTest' started
+2569-01-14T23:51:03.241+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:signingConfigWriterDebugAndroidTest'
+2569-01-14T23:51:03.241+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:writeDebugAndroidTestSigningConfigVersions' started
+2569-01-14T23:51:03.241+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:writeDebugAndroidTestSigningConfigVersions'
+2569-01-14T23:51:03.241+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:stripDebugAndroidTestDebugSymbols' started
+2569-01-14T23:51:03.241+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:stripDebugAndroidTestDebugSymbols'
+2569-01-14T23:51:03.242+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:packageDebugAndroidTest' started
+2569-01-14T23:51:03.242+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:packageDebugAndroidTest'
+2569-01-14T23:51:03.242+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:createDebugAndroidTestApkListingFileRedirect' started
+2569-01-14T23:51:03.242+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:createDebugAndroidTestApkListingFileRedirect'
+2569-01-14T23:51:03.242+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:installDebugAndroidTest' started
+2569-01-14T23:51:03.242+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:installDebugAndroidTest'
+2569-01-14T23:51:03.242+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:uninstallDebugAndroidTest' started
+2569-01-14T23:51:03.242+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:uninstallDebugAndroidTest'
+2569-01-14T23:51:03.242+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:connectedDebugAndroidTest' started
+2569-01-14T23:51:03.242+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:connectedDebugAndroidTest'
+2569-01-14T23:51:03.242+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:assembleDebugUnitTest' started
+2569-01-14T23:51:03.242+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:assembleDebugUnitTest'
+2569-01-14T23:51:03.242+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:preDebugUnitTestBuild' started
+2569-01-14T23:51:03.242+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:preDebugUnitTestBuild'
+2569-01-14T23:51:03.242+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:generateDebugUnitTestSources' started
+2569-01-14T23:51:03.242+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:generateDebugUnitTestSources'
+2569-01-14T23:51:03.242+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:generateDebugUnitTestResources' started
+2569-01-14T23:51:03.242+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:generateDebugUnitTestResources'
+2569-01-14T23:51:03.242+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:generateDebugUnitTestAssets' started
+2569-01-14T23:51:03.242+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:generateDebugUnitTestAssets'
+2569-01-14T23:51:03.242+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:compileDebugUnitTestSources' started
+2569-01-14T23:51:03.243+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:compileDebugUnitTestSources'
+2569-01-14T23:51:03.243+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:processDebugUnitTestJavaRes' started
+2569-01-14T23:51:03.243+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:processDebugUnitTestJavaRes'
+2569-01-14T23:51:03.243+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:javaPreCompileDebugUnitTest' started
+2569-01-14T23:51:03.243+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:javaPreCompileDebugUnitTest'
+2569-01-14T23:51:03.243+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:compileDebugUnitTestJavaWithJavac' started
+2569-01-14T23:51:03.243+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:compileDebugUnitTestJavaWithJavac'
+2569-01-14T23:51:03.243+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:testDebugUnitTest' started
+2569-01-14T23:51:03.243+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:testDebugUnitTest'
+2569-01-14T23:51:03.243+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:assembleReleaseUnitTest' started
+2569-01-14T23:51:03.243+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:assembleReleaseUnitTest'
+2569-01-14T23:51:03.243+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:preReleaseUnitTestBuild' started
+2569-01-14T23:51:03.243+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:preReleaseUnitTestBuild'
+2569-01-14T23:51:03.243+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:generateReleaseUnitTestSources' started
+2569-01-14T23:51:03.243+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:generateReleaseUnitTestSources'
+2569-01-14T23:51:03.243+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:generateReleaseUnitTestResources' started
+2569-01-14T23:51:03.243+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:generateReleaseUnitTestResources'
+2569-01-14T23:51:03.243+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:generateReleaseUnitTestAssets' started
+2569-01-14T23:51:03.243+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:generateReleaseUnitTestAssets'
+2569-01-14T23:51:03.243+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:compileReleaseUnitTestSources' started
+2569-01-14T23:51:03.243+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:compileReleaseUnitTestSources'
+2569-01-14T23:51:03.243+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:processReleaseUnitTestJavaRes' started
+2569-01-14T23:51:03.243+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:processReleaseUnitTestJavaRes'
+2569-01-14T23:51:03.243+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:javaPreCompileReleaseUnitTest' started
+2569-01-14T23:51:03.243+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:javaPreCompileReleaseUnitTest'
+2569-01-14T23:51:03.243+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:compileReleaseUnitTestJavaWithJavac' started
+2569-01-14T23:51:03.243+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:compileReleaseUnitTestJavaWithJavac'
+2569-01-14T23:51:03.244+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:testReleaseUnitTest' started
+2569-01-14T23:51:03.244+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:testReleaseUnitTest'
+2569-01-14T23:51:03.244+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:assembleProfileUnitTest' started
+2569-01-14T23:51:03.244+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:assembleProfileUnitTest'
+2569-01-14T23:51:03.244+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:preProfileUnitTestBuild' started
+2569-01-14T23:51:03.244+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:preProfileUnitTestBuild'
+2569-01-14T23:51:03.244+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:generateProfileUnitTestSources' started
+2569-01-14T23:51:03.244+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:generateProfileUnitTestSources'
+2569-01-14T23:51:03.244+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:generateProfileUnitTestResources' started
+2569-01-14T23:51:03.244+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:generateProfileUnitTestResources'
+2569-01-14T23:51:03.244+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:generateProfileUnitTestAssets' started
+2569-01-14T23:51:03.244+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:generateProfileUnitTestAssets'
+2569-01-14T23:51:03.244+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:compileProfileUnitTestSources' started
+2569-01-14T23:51:03.244+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:compileProfileUnitTestSources'
+2569-01-14T23:51:03.244+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:processProfileUnitTestJavaRes' started
+2569-01-14T23:51:03.244+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:processProfileUnitTestJavaRes'
+2569-01-14T23:51:03.244+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:javaPreCompileProfileUnitTest' started
+2569-01-14T23:51:03.244+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:javaPreCompileProfileUnitTest'
+2569-01-14T23:51:03.244+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:compileProfileUnitTestJavaWithJavac' started
+2569-01-14T23:51:03.244+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:compileProfileUnitTestJavaWithJavac'
+2569-01-14T23:51:03.244+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:testProfileUnitTest' started
+2569-01-14T23:51:03.244+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:testProfileUnitTest'
+2569-01-14T23:51:03.244+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:generateDebugLintModel' started
+2569-01-14T23:51:03.244+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:generateDebugLintModel'
+2569-01-14T23:51:03.244+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:lintAnalyzeDebug' started
+2569-01-14T23:51:03.244+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:lintAnalyzeDebug'
+2569-01-14T23:51:03.245+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:generateDebugLintReportModel' started
+2569-01-14T23:51:03.245+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:generateDebugLintReportModel'
+2569-01-14T23:51:03.245+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:updateLintBaselineDebug' started
+2569-01-14T23:51:03.245+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:updateLintBaselineDebug'
+2569-01-14T23:51:03.245+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:lintReportDebug' started
+2569-01-14T23:51:03.245+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:lintReportDebug'
+2569-01-14T23:51:03.245+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:lintDebug' started
+2569-01-14T23:51:03.245+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:lintDebug'
+2569-01-14T23:51:03.245+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:lintFixDebug' started
+2569-01-14T23:51:03.245+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:lintFixDebug'
+2569-01-14T23:51:03.245+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:generateReleaseLintModel' started
+2569-01-14T23:51:03.245+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:generateReleaseLintModel'
+2569-01-14T23:51:03.245+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:lintAnalyzeRelease' started
+2569-01-14T23:51:03.245+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:lintAnalyzeRelease'
+2569-01-14T23:51:03.245+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:generateReleaseLintReportModel' started
+2569-01-14T23:51:03.245+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:generateReleaseLintReportModel'
+2569-01-14T23:51:03.245+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:updateLintBaselineRelease' started
+2569-01-14T23:51:03.245+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:updateLintBaselineRelease'
+2569-01-14T23:51:03.245+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:lintReportRelease' started
+2569-01-14T23:51:03.245+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:lintReportRelease'
+2569-01-14T23:51:03.245+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:lintRelease' started
+2569-01-14T23:51:03.245+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:lintRelease'
+2569-01-14T23:51:03.245+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:lintVitalAnalyzeRelease' started
+2569-01-14T23:51:03.245+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:lintVitalAnalyzeRelease'
+2569-01-14T23:51:03.245+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:generateReleaseLintVitalReportModel' started
+2569-01-14T23:51:03.245+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:generateReleaseLintVitalReportModel'
+2569-01-14T23:51:03.245+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:lintVitalReportRelease' started
+2569-01-14T23:51:03.245+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:lintVitalReportRelease'
+2569-01-14T23:51:03.245+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:lintVitalRelease' started
+2569-01-14T23:51:03.245+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:lintVitalRelease'
+2569-01-14T23:51:03.246+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:lintFixRelease' started
+2569-01-14T23:51:03.246+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:lintFixRelease'
+2569-01-14T23:51:03.246+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:generateProfileLintModel' started
+2569-01-14T23:51:03.246+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:generateProfileLintModel'
+2569-01-14T23:51:03.246+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:lintAnalyzeProfile' started
+2569-01-14T23:51:03.246+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:lintAnalyzeProfile'
+2569-01-14T23:51:03.246+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:generateProfileLintReportModel' started
+2569-01-14T23:51:03.246+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:generateProfileLintReportModel'
+2569-01-14T23:51:03.246+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:updateLintBaselineProfile' started
+2569-01-14T23:51:03.246+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:updateLintBaselineProfile'
+2569-01-14T23:51:03.246+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:lintReportProfile' started
+2569-01-14T23:51:03.246+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:lintReportProfile'
+2569-01-14T23:51:03.246+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:lintProfile' started
+2569-01-14T23:51:03.246+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:lintProfile'
+2569-01-14T23:51:03.246+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:lintFixProfile' started
+2569-01-14T23:51:03.246+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:lintFixProfile'
+2569-01-14T23:51:03.246+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:androidDependencies' started
+2569-01-14T23:51:03.246+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:androidDependencies'
+2569-01-14T23:51:03.246+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:signingReport' started
+2569-01-14T23:51:03.246+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:signingReport'
+2569-01-14T23:51:03.246+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:analyzeDebugDependencies' started
+2569-01-14T23:51:03.246+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:analyzeDebugDependencies'
+2569-01-14T23:51:03.246+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:analyzeReleaseDependencies' started
+2569-01-14T23:51:03.246+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:analyzeReleaseDependencies'
+2569-01-14T23:51:03.246+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:analyzeProfileDependencies' started
+2569-01-14T23:51:03.246+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:analyzeProfileDependencies'
+2569-01-14T23:51:03.246+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:analyzeDebugAndroidTestDependencies' started
+2569-01-14T23:51:03.247+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:analyzeDebugAndroidTestDependencies'
+2569-01-14T23:51:03.247+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:analyzeDebugUnitTestDependencies' started
+2569-01-14T23:51:03.247+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:analyzeDebugUnitTestDependencies'
+2569-01-14T23:51:03.247+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:analyzeReleaseUnitTestDependencies' started
+2569-01-14T23:51:03.247+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:analyzeReleaseUnitTestDependencies'
+2569-01-14T23:51:03.247+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:analyzeProfileUnitTestDependencies' started
+2569-01-14T23:51:03.247+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:analyzeProfileUnitTestDependencies'
+2569-01-14T23:51:03.247+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:checkJetifier' started
+2569-01-14T23:51:03.247+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:checkJetifier'
+2569-01-14T23:51:03.268+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:configureCMakeDebug[armeabi-v7a]' started
+2569-01-14T23:51:03.268+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:configureCMakeDebug[armeabi-v7a]'
+2569-01-14T23:51:03.268+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:configureCMakeDebug[arm64-v8a]' started
+2569-01-14T23:51:03.268+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:configureCMakeDebug[arm64-v8a]'
+2569-01-14T23:51:03.268+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:configureCMakeDebug[x86_64]' started
+2569-01-14T23:51:03.268+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:configureCMakeDebug[x86_64]'
+2569-01-14T23:51:03.268+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:configureCMakeRelease[armeabi-v7a]' started
+2569-01-14T23:51:03.268+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:configureCMakeRelease[armeabi-v7a]'
+2569-01-14T23:51:03.268+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:configureCMakeRelease[arm64-v8a]' started
+2569-01-14T23:51:03.268+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:configureCMakeRelease[arm64-v8a]'
+2569-01-14T23:51:03.268+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:configureCMakeRelease[x86_64]' started
+2569-01-14T23:51:03.268+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:configureCMakeRelease[x86_64]'
+2569-01-14T23:51:03.268+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:configureCMakeProfile[armeabi-v7a]' started
+2569-01-14T23:51:03.268+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:configureCMakeProfile[armeabi-v7a]'
+2569-01-14T23:51:03.268+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:configureCMakeProfile[arm64-v8a]' started
+2569-01-14T23:51:03.268+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:configureCMakeProfile[arm64-v8a]'
+2569-01-14T23:51:03.268+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:configureCMakeProfile[x86_64]' started
+2569-01-14T23:51:03.268+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:configureCMakeProfile[x86_64]'
+2569-01-14T23:51:03.268+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:configureCMakeDebug' started
+2569-01-14T23:51:03.268+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:configureCMakeDebug'
+2569-01-14T23:51:03.268+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:configureCMakeRelease' started
+2569-01-14T23:51:03.268+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:configureCMakeRelease'
+2569-01-14T23:51:03.268+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:configureCMakeProfile' started
+2569-01-14T23:51:03.268+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:configureCMakeProfile'
+2569-01-14T23:51:03.268+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:buildCMakeDebug[armeabi-v7a]' started
+2569-01-14T23:51:03.268+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:buildCMakeDebug[armeabi-v7a]'
+2569-01-14T23:51:03.268+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:buildCMakeDebug[arm64-v8a]' started
+2569-01-14T23:51:03.268+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:buildCMakeDebug[arm64-v8a]'
+2569-01-14T23:51:03.268+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:buildCMakeDebug[x86_64]' started
+2569-01-14T23:51:03.268+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:buildCMakeDebug[x86_64]'
+2569-01-14T23:51:03.269+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:buildCMakeRelease[armeabi-v7a]' started
+2569-01-14T23:51:03.269+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:buildCMakeRelease[armeabi-v7a]'
+2569-01-14T23:51:03.269+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:buildCMakeRelease[arm64-v8a]' started
+2569-01-14T23:51:03.269+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:buildCMakeRelease[arm64-v8a]'
+2569-01-14T23:51:03.269+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:buildCMakeRelease[x86_64]' started
+2569-01-14T23:51:03.269+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:buildCMakeRelease[x86_64]'
+2569-01-14T23:51:03.269+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:buildCMakeProfile[armeabi-v7a]' started
+2569-01-14T23:51:03.269+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:buildCMakeProfile[armeabi-v7a]'
+2569-01-14T23:51:03.269+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:buildCMakeProfile[arm64-v8a]' started
+2569-01-14T23:51:03.269+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:buildCMakeProfile[arm64-v8a]'
+2569-01-14T23:51:03.269+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:buildCMakeProfile[x86_64]' started
+2569-01-14T23:51:03.269+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:buildCMakeProfile[x86_64]'
+2569-01-14T23:51:03.269+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:buildCMakeDebug' started
+2569-01-14T23:51:03.269+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:buildCMakeDebug'
+2569-01-14T23:51:03.269+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:buildCMakeRelease' started
+2569-01-14T23:51:03.269+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:buildCMakeRelease'
+2569-01-14T23:51:03.269+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:buildCMakeProfile' started
+2569-01-14T23:51:03.269+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:buildCMakeProfile'
+2569-01-14T23:51:03.269+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:generateJsonModelDebug' started
+2569-01-14T23:51:03.269+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:generateJsonModelDebug'
+2569-01-14T23:51:03.269+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:generateJsonModelRelease' started
+2569-01-14T23:51:03.269+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:generateJsonModelRelease'
+2569-01-14T23:51:03.269+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:generateJsonModelProfile' started
+2569-01-14T23:51:03.269+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:generateJsonModelProfile'
+2569-01-14T23:51:03.269+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:externalNativeBuildDebug' started
+2569-01-14T23:51:03.269+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:externalNativeBuildDebug'
+2569-01-14T23:51:03.269+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:externalNativeBuildCleanDebug' started
+2569-01-14T23:51:03.269+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:externalNativeBuildCleanDebug'
+2569-01-14T23:51:03.269+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:externalNativeBuildRelease' started
+2569-01-14T23:51:03.269+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:externalNativeBuildRelease'
+2569-01-14T23:51:03.269+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:externalNativeBuildCleanRelease' started
+2569-01-14T23:51:03.269+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:externalNativeBuildCleanRelease'
+2569-01-14T23:51:03.269+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:externalNativeBuildProfile' started
+2569-01-14T23:51:03.269+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:externalNativeBuildProfile'
+2569-01-14T23:51:03.269+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:externalNativeBuildCleanProfile' started
+2569-01-14T23:51:03.269+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:externalNativeBuildCleanProfile'
+2569-01-14T23:51:03.270+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Register task :app:appIdListTask' started
+2569-01-14T23:51:03.270+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Register task :app:appIdListTask'
+2569-01-14T23:51:03.270+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.270+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.270+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.270+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.270+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.270+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.270+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.270+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.270+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.270+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.270+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.270+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.270+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.270+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.270+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.270+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.270+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.270+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.271+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.271+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.271+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.271+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.271+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.271+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.271+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.271+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.271+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.271+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.271+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.271+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.271+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.271+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.271+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.271+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.271+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.271+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.271+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.271+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.271+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.271+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.271+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.271+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.271+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.271+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.271+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.271+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.271+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.271+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.271+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.271+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.271+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.271+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.271+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.271+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.271+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.271+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.271+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.271+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.271+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.271+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.271+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.271+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.271+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.271+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.271+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.271+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.271+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.271+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.272+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.272+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.272+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.272+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.272+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.272+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.272+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.272+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.272+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.272+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.272+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.272+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.272+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.272+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.272+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.272+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.272+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.272+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.272+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.272+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.272+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.272+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.272+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.272+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.272+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.272+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.272+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.272+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.272+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.272+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.272+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.272+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.272+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.272+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.272+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.272+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.272+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.272+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.272+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.272+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.272+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.272+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.272+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.272+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.272+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.272+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.272+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.272+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.272+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.272+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.272+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.273+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.273+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.273+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.273+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.273+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.273+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.273+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.273+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.273+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.273+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.273+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.273+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.273+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.273+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.273+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.273+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.273+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.273+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.273+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.273+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.273+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.273+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.273+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.273+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.273+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.273+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.273+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.273+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.273+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.273+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.273+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.273+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.273+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.273+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.273+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.273+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.273+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.273+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.273+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.273+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.273+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.273+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.273+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.273+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.273+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.273+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.273+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.273+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.273+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.273+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.273+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.274+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.274+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.274+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.274+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.274+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.274+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.274+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.274+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.274+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.274+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.274+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.274+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.274+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.274+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.274+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.274+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.274+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.274+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.274+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.274+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.274+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.274+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.274+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.274+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.274+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.274+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.274+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.274+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.274+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.274+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.274+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.274+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.274+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.274+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.274+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.274+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.274+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.274+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.274+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.274+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.274+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.274+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.274+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.274+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.274+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.274+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.274+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.274+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.274+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.274+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.274+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.274+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.274+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.275+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.275+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.275+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.275+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.275+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.275+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.275+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.275+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.275+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.275+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.275+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.275+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.275+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.275+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.275+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.275+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.275+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.275+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.275+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.275+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.275+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.275+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.275+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.275+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.275+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.275+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.275+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.275+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.275+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.275+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.275+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.275+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.275+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.275+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.275+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.275+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.275+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.275+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.275+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.275+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.275+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.275+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.275+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.275+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.275+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.275+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.275+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.275+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.275+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.275+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.275+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.276+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.276+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.276+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.276+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.276+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.276+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.276+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.276+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.276+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.276+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.276+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.276+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.276+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.276+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.276+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.276+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.276+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.276+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.276+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.276+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.276+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.276+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.276+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.276+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.276+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.276+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.276+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.276+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.276+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.276+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.276+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.276+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.276+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.276+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.276+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.276+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.276+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.276+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.276+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.276+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.276+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.276+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.276+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.276+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.276+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.276+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.276+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.276+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.276+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.276+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.276+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.276+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.277+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.277+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'
+2569-01-14T23:51:03.277+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute container callback action' started
+2569-01-14T23:51:03.277+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute container callback action'

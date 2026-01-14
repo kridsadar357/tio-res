@@ -1,0 +1,56 @@
+name: respos
+description: A Buffet Restaurant POS System for Android Tablet
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  intl: ^0.20.2
+
+  # State Management
+  flutter_riverpod: ^2.4.9
+  provider: ^6.1.1
+
+  # Database
+  sqflite: ^2.3.0
+  path: ^1.8.3
+
+  # Material Design 3
+  cupertino_icons: ^1.0.6
+  font_awesome_flutter: ^10.7.0
+
+  # Image Handling
+  image_picker: ^1.0.5
+  path_provider: ^2.1.1
+
+  # UI Utilities
+  flutter_screenutil: ^5.9.0
+  qr_flutter: ^4.1.0
+  # Bluetooth Thermal Printer
+  # blue_thermal_printer:
+  #   path: ./plugins/blue_thermal_printer
+  esc_pos_utils_plus: ^2.0.4
+  permission_handler: ^11.1.0
+  shared_preferences: ^2.2.2
+  google_fonts: ^7.0.0
+  animate_do: ^4.2.0
+  http: ^1.2.0
+  # flutter_tts: ^4.2.0
+  fl_chart: ^1.1.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  generate: true
+  uses-material-design: true
+  assets:
+    - assets/images/

@@ -1,0 +1,639 @@
+import 'package:flutter/material.dart';
+import 'package:respos/l10n/app_localizations.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:blue_thermal_printer/blue_thermal_printer.dart';
+import '../../services/printer_service.dart';
+import '../../services/printer/bluetooth_printer_adapter.dart';
+import '../../widgets/premium_scaffold.dart';
+import '../../widgets/premium_toast.dart';
+import '../../theme/app_theme.dart';
+import '../receipt_designer/visual_receipt_designer_screen.dart';
+
+class PrinterSettingsScreen extends StatefulWidget {
+  const PrinterSettingsScreen({super.key});
+
+  @override
+  State<PrinterSettingsScreen> createState() => _PrinterSettingsScreenState();
+}
+
+class _PrinterSettingsScreenState extends State<PrinterSettingsScreen>
+    with SingleTickerProviderStateMixin {
+  late TabController _tabController;
+  final PrinterService _printerService = PrinterService();
+
+  // Network Controllers
+  final TextEditingController _ipController = TextEditingController();
+  final TextEditingController _portController =
+      TextEditingController(text: '9100');
+
+  // Bluetooth State
+  List<BluetoothDevice> _btDevices = [];
+  bool _isScanning = false;
+
+  // Loading State
+  bool _isTesting = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 3, vsync: this);
+
+    // Initialize fields based on current settings
+    _loadCurrentSettings();
+  }
+
+  void _loadCurrentSettings() {
+    final currentType = _printerService.type;
+    int index = 0;
+    switch (currentType) {
+      case PrinterType.bluetooth:
+        index = 0;
+        break;
+      case PrinterType.network:
+        index = 1;
+        if (_printerService.address != null) {
+          final parts = _printerService.address!.split(':');
+          _ipController.text = parts[0];
+          if (parts.length > 1) {
+            _portController.text = parts[1];
+          }
+        }
+        break;
+      case PrinterType.usb:
+        index = 2;
+        break;
+    }
+    _tabController.index = index;
+
+    // If bluetooth, scan initially
+    if (index == 0) {
+      _scanBluetoothDevices();
+    }
+  }
+
+  Future<void> _scanBluetoothDevices() async {
+    setState(() => _isScanning = true);
+    // Create a temporary adapter to scan if not currently using BT
+    final adapter = BluetoothPrinterAdapter();
+    try {
+      final devices = await adapter.scanDevices();
+      if (mounted) {
+        setState(() {
+          _btDevices = devices;
+          _isScanning = false;
+        });
+      }
+    } catch (e) {
+      if (mounted) {
+        setState(() => _isScanning = false);
+        PremiumToast.show(context, 'Scan failed: $e', isError: true);
+      }
+    }
+  }
+
+  Future<void> _checkConnection() async {
+    setState(() => _isTesting = true);
+    final success = await _printerService.printTest();
+    if (mounted) {
+      setState(() => _isTesting = false);
+      if (success) {
+        PremiumToast.show(
+            context, 'Check Connection & Print Test Successfully');
+      } else {
+        PremiumToast.show(context, 'Connection Failed', isError: true);
+      }
+    }
+  }
+
+  Future<void> _saveBluetooth(BluetoothDevice device) async {
+    await _printerService.saveSettings(
+        PrinterType.bluetooth, device.address ?? '');
+    if (mounted) {
+      PremiumToast.show(context, 'Printer set to ${device.name}');
+      setState(() {}); // Refresh UI Status
+    }
+  }
+
+  Future<void> _saveNetwork() async {
+    final ip = _ipController.text.trim();
+    final port = _portController.text.trim();
+    if (ip.isEmpty || port.isEmpty) {
+      PremiumToast.show(context, 'Invalid IP or Port', isError: true);
+      return;
+    }
+    final address = '$ip:$port';
+    await _printerService.saveSettings(PrinterType.network, address);
+    if (mounted) {
+      PremiumToast.show(context, 'Network Printer Saved');
+      setState(() {});
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
+    return PremiumScaffold(
+      header: _buildHeader(theme, l10n),
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              theme.scaffoldBackgroundColor,
+              theme.scaffoldBackgroundColor.withValues(alpha: 0.95),
+            ],
+          ),
+        ),
+        child: Column(
+          children: [
+            SizedBox(height: 16.h),
+            _buildTabs(theme, l10n),
+            SizedBox(height: 24.h),
+            Expanded(
+              child: TabBarView(
+                controller: _tabController,
+                children: [
+                  _buildBluetoothTab(theme, l10n),
+                  _buildNetworkTab(theme, l10n),
+                  _buildUsbTab(theme, l10n),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildHeader(ThemeData theme, AppLocalizations l10n) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 20.h),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            children: [
+              GestureDetector(
+                onTap: () => Navigator.pop(context),
+                child: Container(
+                  padding: EdgeInsets.all(10.w),
+                  decoration: BoxDecoration(
+                    color: Colors.white.withValues(alpha: 0.1),
+                    borderRadius: BorderRadius.circular(12.r),
+                    border:
+                        Border.all(color: Colors.white.withValues(alpha: 0.1)),
+                  ),
+                  child: Icon(Icons.arrow_back_ios_new,
+                      color: Colors.white, size: 18.sp),
+                ),
+              ),
+              SizedBox(width: 20.w),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(l10n.printerSettings,
+                      style: TextStyle(
+                          fontSize: 28.sp,
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: -0.5,
+                          color: Colors.white)),
+                  if (_printerService.isConnected) ...[
+                    SizedBox(height: 6.h),
+                    Container(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
+                      decoration: BoxDecoration(
+                        color: AppTheme.statusAvailable.withValues(alpha: 0.15),
+                        borderRadius: BorderRadius.circular(20.r),
+                        border: Border.all(
+                            color: AppTheme.statusAvailable
+                                .withValues(alpha: 0.3)),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(Icons.check_circle,
+                              color: AppTheme.statusAvailable, size: 12.sp),
+                          SizedBox(width: 6.w),
+                          Text(
+                              '${l10n.connected} (${_printerService.type.toString().split('.').last.toUpperCase()})',
+                              style: TextStyle(
+                                  color: AppTheme.statusAvailable,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 12.sp)),
+                        ],
+                      ),
+                    )
+                  ]
+                ],
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              _buildActionButton(
+                icon: Icons.print_outlined,
+                label: l10n.testPrint,
+                isLoading: _isTesting,
+                onTap: _isTesting ? null : _checkConnection,
+                theme: theme,
+              ),
+              SizedBox(width: 12.w),
+              _buildActionButton(
+                icon: Icons.dashboard_customize_outlined,
+                label: l10n.setupLayout,
+                isPrimary: true,
+                onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (_) => const VisualReceiptDesignerScreen()),
+                ),
+                theme: theme,
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildActionButton({
+    required IconData icon,
+    required String label,
+    VoidCallback? onTap,
+    bool isPrimary = false,
+    bool isLoading = false,
+    required ThemeData theme,
+  }) {
+    final color = isPrimary ? const Color(0xFF2FA87D) : theme.primaryColor;
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(12.r),
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
+          decoration: BoxDecoration(
+            color: onTap == null
+                ? Colors.grey.withValues(alpha: 0.3)
+                : color.withValues(alpha: isPrimary ? 1.0 : 0.8),
+            borderRadius: BorderRadius.circular(12.r),
+            boxShadow: isPrimary
+                ? [
+                    BoxShadow(
+                        color: color.withValues(alpha: 0.3),
+                        blurRadius: 12,
+                        offset: const Offset(0, 4))
+                  ]
+                : [],
+            border: Border.all(
+                color: Colors.white.withValues(alpha: 0.1), width: 1),
+          ),
+          child: Row(
+            children: [
+              if (isLoading)
+                SizedBox(
+                    width: 16.sp,
+                    height: 16.sp,
+                    child: CircularProgressIndicator(
+                        strokeWidth: 2, color: Colors.white))
+              else
+                Icon(icon, color: Colors.white, size: 18.sp),
+              SizedBox(width: 8.w),
+              Text(
+                label,
+                style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 14.sp),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTabs(ThemeData theme, AppLocalizations l10n) {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 24.w),
+      padding: EdgeInsets.all(4.w),
+      decoration: BoxDecoration(
+        color: const Color(0xFF1E1E2C), // Darker tab background
+        borderRadius: BorderRadius.circular(16.r),
+        border: Border.all(color: Colors.white.withValues(alpha: 0.05)),
+      ),
+      child: TabBar(
+        controller: _tabController,
+        indicator: BoxDecoration(
+          borderRadius: BorderRadius.circular(12.r),
+          color: theme.primaryColor, // Active tab color
+          boxShadow: [
+            BoxShadow(
+                color: theme.primaryColor.withValues(alpha: 0.4),
+                blurRadius: 8,
+                offset: const Offset(0, 2))
+          ],
+        ),
+        indicatorSize: TabBarIndicatorSize.tab,
+        labelColor: Colors.white,
+        unselectedLabelColor: Colors.white60,
+        labelStyle: TextStyle(fontWeight: FontWeight.w600, fontSize: 14.sp),
+        dividerColor: Colors.transparent,
+        tabs: [
+          Tab(text: l10n.bluetoothPrinter),
+          Tab(text: l10n.networkWifi),
+          Tab(text: l10n.usb),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildBluetoothTab(ThemeData theme, AppLocalizations l10n) {
+    final currentAddress = _printerService.address;
+    final isBT = _printerService.type == PrinterType.bluetooth;
+
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 24.w),
+      child: Column(
+        children: [
+          if (!_isScanning)
+            Align(
+              alignment: Alignment.centerRight,
+              child: TextButton.icon(
+                onPressed: _scanBluetoothDevices,
+                icon: const Icon(Icons.refresh_rounded),
+                label: Text(l10n.refreshList),
+                style: TextButton.styleFrom(
+                  foregroundColor: theme.primaryColor,
+                ),
+              ),
+            ),
+          SizedBox(height: 8.h),
+          Expanded(
+            child: _isScanning
+                ? Center(
+                    child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CircularProgressIndicator(color: theme.primaryColor),
+                      SizedBox(height: 16.h),
+                      Text(l10n.scanning,
+                          style: TextStyle(color: Colors.white54))
+                    ],
+                  ))
+                : _btDevices.isEmpty
+                    ? Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.bluetooth_disabled_rounded,
+                                size: 64.sp, color: Colors.white24),
+                            SizedBox(height: 16.h),
+                            Text(l10n.noDevicesFound,
+                                style: TextStyle(
+                                    color: Colors.white54, fontSize: 16.sp)),
+                          ],
+                        ),
+                      )
+                    : ListView.separated(
+                        itemCount: _btDevices.length,
+                        separatorBuilder: (_, __) => SizedBox(height: 12.h),
+                        itemBuilder: (context, index) {
+                          final device = _btDevices[index];
+                          final isSelected =
+                              isBT && device.address == currentAddress;
+                          return Container(
+                            decoration: BoxDecoration(
+                              color: isSelected
+                                  ? theme.primaryColor.withValues(alpha: 0.15)
+                                  : Colors.white.withValues(alpha: 0.03),
+                              borderRadius: BorderRadius.circular(16.r),
+                              border: Border.all(
+                                  color: isSelected
+                                      ? theme.primaryColor
+                                          .withValues(alpha: 0.5)
+                                      : Colors.white.withValues(alpha: 0.05)),
+                            ),
+                            child: ListTile(
+                              contentPadding: EdgeInsets.symmetric(
+                                  horizontal: 20.w, vertical: 8.h),
+                              leading: Container(
+                                padding: EdgeInsets.all(10.w),
+                                decoration: BoxDecoration(
+                                  color: Colors.blue.withValues(alpha: 0.1),
+                                  shape: BoxShape.circle,
+                                ),
+                                child: Icon(Icons.print_rounded,
+                                    color: Colors.blueAccent),
+                              ),
+                              title: Text(device.name ?? l10n.unknownDevice,
+                                  style: const TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w600)),
+                              subtitle: Text(device.address ?? l10n.noAddress,
+                                  style: TextStyle(color: Colors.white54)),
+                              trailing: isSelected
+                                  ? Icon(Icons.check_circle_rounded,
+                                      color: AppTheme.statusAvailable)
+                                  : ElevatedButton(
+                                      onPressed: () => _saveBluetooth(device),
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: Colors.white
+                                            .withValues(alpha: 0.05), // Glassy
+                                        foregroundColor: Colors.white,
+                                        elevation: 0,
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(8.r)),
+                                      ),
+                                      child: Text(l10n.connect),
+                                    ),
+                            ),
+                          );
+                        },
+                      ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildNetworkTab(ThemeData theme, AppLocalizations l10n) {
+    return SingleChildScrollView(
+      padding: EdgeInsets.all(24.w),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            padding: EdgeInsets.all(24.w),
+            decoration: BoxDecoration(
+              color: const Color(0xFF1E1E2C), // Premium Card bg
+              borderRadius: BorderRadius.circular(20.r),
+              border: Border.all(color: Colors.white.withValues(alpha: 0.05)),
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.black12,
+                    blurRadius: 20,
+                    offset: Offset(0, 10))
+              ],
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Icon(Icons.wifi_rounded,
+                        color: theme.primaryColor, size: 24.sp),
+                    SizedBox(width: 12.w),
+                    Text(l10n.networkConfiguration,
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18.sp,
+                            fontWeight: FontWeight.bold)),
+                  ],
+                ),
+                SizedBox(height: 24.h),
+                Row(
+                  children: [
+                    Expanded(
+                      flex: 3,
+                      child: _buildInputField(
+                        controller: _ipController,
+                        label: l10n.ipAddress,
+                        hint: '192.168.1.100',
+                        icon: Icons.router_outlined,
+                      ),
+                    ),
+                    SizedBox(width: 16.w),
+                    Expanded(
+                      flex: 1,
+                      child: _buildInputField(
+                        controller: _portController,
+                        label: l10n.port,
+                        hint: '9100',
+                        icon: Icons.numbers_rounded,
+                        isNumber: true,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 24.h),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: _saveNetwork,
+                    style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.symmetric(vertical: 18.h),
+                      backgroundColor: theme.primaryColor,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16.r)),
+                      shadowColor: theme.primaryColor.withValues(alpha: 0.4),
+                      elevation: 8,
+                    ),
+                    child: Text(l10n.saveAndConnect,
+                        style: TextStyle(
+                            fontSize: 16.sp,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold)),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(height: 24.h),
+          Container(
+            padding: EdgeInsets.all(16.w),
+            decoration: BoxDecoration(
+              color: Colors.amber.withValues(alpha: 0.1),
+              borderRadius: BorderRadius.circular(16.r),
+              border: Border.all(color: Colors.amber.withValues(alpha: 0.2)),
+            ),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Icon(Icons.info_rounded, color: Colors.amber, size: 20.sp),
+                SizedBox(width: 12.w),
+                Expanded(
+                    child: Text(l10n.printerNetworkInfo,
+                        style: TextStyle(
+                            color: Colors.amber.shade100,
+                            fontSize: 13.sp,
+                            height: 1.4))),
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _buildInputField({
+    required TextEditingController controller,
+    required String label,
+    required String hint,
+    required IconData icon,
+    bool isNumber = false,
+  }) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(label,
+            style: TextStyle(
+                color: Colors.white70,
+                fontSize: 13.sp,
+                fontWeight: FontWeight.w500)),
+        SizedBox(height: 8.h),
+        TextField(
+          controller: controller,
+          keyboardType: isNumber ? TextInputType.number : TextInputType.text,
+          style: TextStyle(color: Colors.white, fontSize: 15.sp),
+          decoration: InputDecoration(
+            hintText: hint,
+            hintStyle: TextStyle(color: Colors.white30),
+            prefixIcon: Icon(icon, color: Colors.white38),
+            filled: true,
+            fillColor: Colors.white.withValues(alpha: 0.05),
+            contentPadding:
+                EdgeInsets.symmetric(vertical: 16.h, horizontal: 16.w),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12.r),
+              borderSide:
+                  BorderSide(color: Colors.white.withValues(alpha: 0.1)),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12.r),
+              borderSide: BorderSide(color: Theme.of(context).primaryColor),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildUsbTab(ThemeData theme, AppLocalizations l10n) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            padding: EdgeInsets.all(24.w),
+            decoration: BoxDecoration(
+              color: Colors.white.withValues(alpha: 0.03),
+              shape: BoxShape.circle,
+            ),
+            child: Icon(Icons.usb_rounded, size: 48.sp, color: Colors.white24),
+          ),
+          SizedBox(height: 24.h),
+          Text(l10n.usbPrintingComingSoon,
+              style: TextStyle(
+                  color: Colors.white54,
+                  fontSize: 18.sp,
+                  fontWeight: FontWeight.w500)),
+        ],
+      ),
+    );
+  }
+}

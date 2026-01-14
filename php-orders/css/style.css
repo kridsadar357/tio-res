@@ -1,0 +1,115 @@
+/* TioRes Custom Styles */
+
+/* Scrollbar Hide */
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* Category Button Active State */
+.category-btn {
+    transition: all 0.2s ease;
+}
+.category-btn.active {
+    background: rgba(0, 217, 255, 0.2);
+    color: #00D9FF;
+    border-color: rgba(0, 217, 255, 0.3);
+}
+
+/* Menu Card Hover */
+.menu-card {
+    transition: all 0.2s ease;
+}
+.menu-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+.menu-card:active {
+    transform: scale(0.98);
+}
+
+/* Order Item Swipe to Delete */
+.order-item {
+    transition: transform 0.2s ease;
+}
+
+/* Pulse Animation for Cart */
+@keyframes pulse-glow {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(0, 217, 255, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(0, 217, 255, 0.5);
+    }
+}
+.cart-pulse {
+    animation: pulse-glow 2s infinite;
+}
+
+/* Toast Notification */
+.toast {
+    animation: slideUp 0.3s ease, fadeOut 0.3s ease 2.7s forwards;
+}
+@keyframes slideUp {
+    from { transform: translateY(100%); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+@keyframes fadeOut {
+    to { opacity: 0; transform: translateY(-20px); }
+}
+
+/* Skeleton Loading */
+.skeleton {
+    background: linear-gradient(90deg, #21262D 25%, #30363D 50%, #21262D 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+}
+@keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* Modal Animation */
+.modal-enter {
+    animation: modalEnter 0.3s ease;
+}
+@keyframes modalEnter {
+    from { 
+        opacity: 0; 
+        transform: scale(0.9);
+    }
+    to { 
+        opacity: 1; 
+        transform: scale(1);
+    }
+}
+
+/* Quantity Button Ripple */
+.qty-btn {
+    position: relative;
+    overflow: hidden;
+}
+.qty-btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle, rgba(255,255,255,0.3) 10%, transparent 10%);
+    transform: scale(10);
+    opacity: 0;
+    transition: transform 0.5s, opacity 0.3s;
+}
+.qty-btn:active::after {
+    transform: scale(0);
+    opacity: 1;
+    transition: 0s;
+}
+
+/* Glassmorphism Card */
+.glass-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}

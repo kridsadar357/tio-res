@@ -1,0 +1,179 @@
+2569-01-14T23:51:06.236+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'com.android.build.gradle.internal.tasks.MergeJavaResWorkAction'
+2569-01-14T23:51:06.236+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'com.android.build.gradle.internal.tasks.MergeJavaResWorkAction' completed
+2569-01-14T23:51:06.236+0700 [DEBUG] [org.gradle.internal.resources.AbstractTrackedResourceLock] WorkerExecutor Queue Thread 2: released lock on worker lease
+2569-01-14T23:51:06.236+0700 [DEBUG] [org.gradle.internal.resources.AbstractTrackedResourceLock] Execution worker Thread 8: acquired lock on worker lease
+2569-01-14T23:51:06.236+0700 [DEBUG] [org.gradle.internal.resources.AbstractTrackedResourceLock] Execution worker Thread 8: released lock on worker lease
+2569-01-14T23:51:06.236+0700 [DEBUG] [org.gradle.internal.resources.AbstractTrackedResourceLock] included builds: acquired lock on worker lease
+2569-01-14T23:51:06.236+0700 [DEBUG] [org.gradle.internal.resources.AbstractTrackedResourceLock] included builds: released lock on worker lease
+2569-01-14T23:51:06.236+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Execute taskAction for :app:mergeDebugJavaResource'
+2569-01-14T23:51:06.236+0700 [DEBUG] [org.gradle.internal.resources.AbstractTrackedResourceLock] Execution worker Thread 4: acquired lock on worker lease
+2569-01-14T23:51:06.236+0700 [DEBUG] [org.gradle.internal.resources.AbstractTrackedResourceLock] Execution worker Thread 4: released lock on worker lease
+2569-01-14T23:51:06.236+0700 [DEBUG] [org.gradle.internal.resources.AbstractTrackedResourceLock] Execution worker Thread 6: acquired lock on worker lease
+2569-01-14T23:51:06.236+0700 [DEBUG] [org.gradle.internal.resources.AbstractTrackedResourceLock] Execution worker Thread 6: released lock on worker lease
+2569-01-14T23:51:06.236+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Executing task ':app:mergeDebugJavaResource''
+2569-01-14T23:51:06.236+0700 [DEBUG] [org.gradle.internal.resources.AbstractTrackedResourceLock] Execution worker Thread 7: acquired lock on worker lease
+2569-01-14T23:51:06.236+0700 [DEBUG] [org.gradle.internal.resources.AbstractTrackedResourceLock] Execution worker Thread 7: released lock on worker lease
+2569-01-14T23:51:06.236+0700 [DEBUG] [org.gradle.internal.resources.AbstractTrackedResourceLock] Execution worker Thread 2: acquired lock on worker lease
+2569-01-14T23:51:06.236+0700 [DEBUG] [org.gradle.internal.resources.AbstractTrackedResourceLock] Execution worker Thread 2: released lock on worker lease
+2569-01-14T23:51:06.236+0700 [DEBUG] [org.gradle.internal.resources.AbstractTrackedResourceLock] Execution worker Thread 3: acquired lock on worker lease
+2569-01-14T23:51:06.236+0700 [DEBUG] [org.gradle.internal.resources.AbstractTrackedResourceLock] Execution worker Thread 3: released lock on worker lease
+2569-01-14T23:51:06.236+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Snapshot outputs after executing task ':app:mergeDebugJavaResource'' started
+2569-01-14T23:51:06.236+0700 [DEBUG] [org.gradle.internal.resources.AbstractTrackedResourceLock] Execution worker: acquired lock on worker lease
+2569-01-14T23:51:06.236+0700 [DEBUG] [org.gradle.internal.resources.AbstractTrackedResourceLock] Execution worker: released lock on worker lease
+2569-01-14T23:51:06.236+0700 [DEBUG] [org.gradle.internal.resources.AbstractTrackedResourceLock] Execution worker Thread 10: acquired lock on worker lease
+2569-01-14T23:51:06.236+0700 [DEBUG] [org.gradle.internal.resources.AbstractTrackedResourceLock] Execution worker Thread 10: released lock on worker lease
+2569-01-14T23:51:06.236+0700 [DEBUG] [org.gradle.internal.resources.AbstractTrackedResourceLock] Execution worker Thread 5: acquired lock on worker lease
+2569-01-14T23:51:06.236+0700 [DEBUG] [org.gradle.internal.resources.AbstractTrackedResourceLock] Execution worker Thread 5: released lock on worker lease
+2569-01-14T23:51:06.236+0700 [DEBUG] [org.gradle.internal.resources.AbstractTrackedResourceLock] Execution worker Thread 9: acquired lock on worker lease
+2569-01-14T23:51:06.236+0700 [DEBUG] [org.gradle.internal.resources.AbstractTrackedResourceLock] Execution worker Thread 9: released lock on worker lease
+2569-01-14T23:51:06.236+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Snapshot outputs after executing task ':app:mergeDebugJavaResource''
+2569-01-14T23:51:06.236+0700 [DEBUG] [org.gradle.internal.resources.AbstractTrackedResourceLock] Execution worker Thread 11: acquired lock on worker lease
+2569-01-14T23:51:06.236+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Execute taskAction for :app:mergeDebugJavaResource' completed
+2569-01-14T23:51:06.236+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Executing task ':app:mergeDebugJavaResource'' completed
+2569-01-14T23:51:06.236+0700 [DEBUG] [org.gradle.internal.vfs.impl.AbstractVirtualFileSystem] Invalidating VFS paths: [/Users/mac/develop/ResPOS/build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache, /Users/mac/develop/ResPOS/build/app/intermediates/merged_java_res/debug/base.jar]
+2569-01-14T23:51:06.236+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Snapshot outputs after executing task ':app:mergeDebugJavaResource'' completed
+2569-01-14T23:51:06.236+0700 [DEBUG] [org.gradle.api.internal.tasks.execution.ResolveTaskExecutionModeExecuter] Removed task artifact state for task ':app:mergeDebugJavaResource' from context.
+2569-01-14T23:51:06.237+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Task :app:mergeDebugJavaResource'
+2569-01-14T23:51:06.237+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Task :app:mergeDebugJavaResource' completed
+2569-01-14T23:51:06.237+0700 [DEBUG] [org.gradle.execution.plan.DefaultFinalizedExecutionPlan] Node :app:mergeDebugJavaResource completed, executed: true
+2569-01-14T23:51:06.237+0700 [DEBUG] [org.gradle.execution.plan.DefaultFinalizedExecutionPlan] Node :app:mergeDebugJavaResource failed
+2569-01-14T23:51:06.237+0700 [DEBUG] [org.gradle.internal.resources.AbstractTrackedResourceLock] Execution worker Thread 11: released lock on worker lease
+2569-01-14T23:51:06.237+0700 [DEBUG] [org.gradle.internal.resources.AbstractTrackedResourceLock] Execution worker Thread 8: acquired lock on worker lease
+2569-01-14T23:51:06.237+0700 [DEBUG] [org.gradle.internal.resources.AbstractTrackedResourceLock] Execution worker Thread 8: released lock on worker lease
+2569-01-14T23:51:06.237+0700 [DEBUG] [org.gradle.internal.resources.AbstractTrackedResourceLock] Execution worker Thread 9: acquired lock on worker lease
+2569-01-14T23:51:06.237+0700 [DEBUG] [org.gradle.internal.resources.AbstractTrackedResourceLock] Execution worker Thread 9: released lock on worker lease
+2569-01-14T23:51:06.237+0700 [DEBUG] [org.gradle.internal.resources.AbstractTrackedResourceLock] Execution worker Thread 5: acquired lock on worker lease
+2569-01-14T23:51:06.237+0700 [DEBUG] [org.gradle.internal.resources.AbstractTrackedResourceLock] Execution worker Thread 5: released lock on worker lease
+2569-01-14T23:51:06.237+0700 [DEBUG] [org.gradle.internal.resources.AbstractTrackedResourceLock] Execution worker Thread 10: acquired lock on worker lease
+2569-01-14T23:51:06.237+0700 [DEBUG] [org.gradle.internal.resources.AbstractTrackedResourceLock] Execution worker Thread 10: released lock on worker lease
+2569-01-14T23:51:06.237+0700 [DEBUG] [org.gradle.internal.resources.AbstractTrackedResourceLock] Execution worker: acquired lock on worker lease
+2569-01-14T23:51:06.237+0700 [DEBUG] [org.gradle.internal.resources.AbstractTrackedResourceLock] Execution worker: released lock on worker lease
+2569-01-14T23:51:06.237+0700 [DEBUG] [org.gradle.internal.resources.AbstractTrackedResourceLock] Execution worker Thread 3: acquired lock on worker lease
+2569-01-14T23:51:06.237+0700 [DEBUG] [org.gradle.internal.resources.AbstractTrackedResourceLock] Execution worker Thread 3: released lock on worker lease
+2569-01-14T23:51:06.237+0700 [DEBUG] [org.gradle.internal.resources.AbstractTrackedResourceLock] Execution worker Thread 2: acquired lock on worker lease
+2569-01-14T23:51:06.237+0700 [DEBUG] [org.gradle.internal.resources.AbstractTrackedResourceLock] Execution worker Thread 2: released lock on worker lease
+2569-01-14T23:51:06.237+0700 [DEBUG] [org.gradle.internal.resources.AbstractTrackedResourceLock] Execution worker Thread 7: acquired lock on worker lease
+2569-01-14T23:51:06.237+0700 [DEBUG] [org.gradle.internal.resources.AbstractTrackedResourceLock] Execution worker Thread 7: released lock on worker lease
+2569-01-14T23:51:06.237+0700 [DEBUG] [org.gradle.internal.resources.AbstractTrackedResourceLock] Execution worker Thread 6: acquired lock on worker lease
+2569-01-14T23:51:06.237+0700 [DEBUG] [org.gradle.internal.resources.AbstractTrackedResourceLock] Execution worker Thread 6: released lock on worker lease
+2569-01-14T23:51:06.237+0700 [DEBUG] [org.gradle.internal.resources.AbstractTrackedResourceLock] Execution worker Thread 4: acquired lock on worker lease
+2569-01-14T23:51:06.237+0700 [DEBUG] [org.gradle.internal.resources.AbstractTrackedResourceLock] Execution worker Thread 4: released lock on worker lease
+2569-01-14T23:51:06.237+0700 [DEBUG] [org.gradle.internal.resources.AbstractTrackedResourceLock] included builds: acquired lock on worker lease
+2569-01-14T23:51:06.237+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Run tasks'
+2569-01-14T23:51:06.237+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Run tasks' completed
+2569-01-14T23:51:06.237+0700 [DEBUG] [org.gradle.internal.resources.AbstractTrackedResourceLock] included builds: released lock on worker lease
+2569-01-14T23:51:06.237+0700 [DEBUG] [org.gradle.internal.resources.AbstractTrackedResourceLock] Execution worker Thread 11: acquired lock on worker lease
+2569-01-14T23:51:06.237+0700 [DEBUG] [org.gradle.internal.resources.AbstractTrackedResourceLock] Execution worker Thread 11: released lock on worker lease
+2569-01-14T23:51:06.237+0700 [DEBUG] [org.gradle.internal.resources.AbstractTrackedResourceLock] Daemon worker Thread 5: acquired lock on worker lease
+2569-01-14T23:51:06.237+0700 [DEBUG] [org.gradle.internal.resources.AbstractTrackedResourceLock] Execution worker Thread 4: acquired lock on worker lease
+2569-01-14T23:51:06.237+0700 [DEBUG] [org.gradle.internal.resources.AbstractTrackedResourceLock] Execution worker Thread 4: released lock on worker lease
+2569-01-14T23:51:06.237+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Run main tasks'
+2569-01-14T23:51:06.238+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Run main tasks' completed
+2569-01-14T23:51:06.237+0700 [DEBUG] [org.gradle.internal.resources.AbstractTrackedResourceLock] Execution worker Thread 6: acquired lock on worker lease
+2569-01-14T23:51:06.238+0700 [DEBUG] [org.gradle.internal.resources.AbstractTrackedResourceLock] Execution worker Thread 6: released lock on worker lease
+2569-01-14T23:51:06.238+0700 [DEBUG] [org.gradle.internal.resources.AbstractTrackedResourceLock] Execution worker Thread 7: acquired lock on worker lease
+2569-01-14T23:51:06.238+0700 [DEBUG] [org.gradle.internal.resources.AbstractTrackedResourceLock] Execution worker Thread 7: released lock on worker lease
+2569-01-14T23:51:06.238+0700 [DEBUG] [org.gradle.internal.resources.AbstractTrackedResourceLock] Execution worker Thread 2: acquired lock on worker lease
+2569-01-14T23:51:06.238+0700 [DEBUG] [org.gradle.internal.resources.AbstractTrackedResourceLock] Execution worker Thread 2: released lock on worker lease
+2569-01-14T23:51:06.238+0700 [DEBUG] [org.gradle.internal.resources.AbstractTrackedResourceLock] Execution worker Thread 3: acquired lock on worker lease
+2569-01-14T23:51:06.238+0700 [DEBUG] [org.gradle.internal.resources.AbstractTrackedResourceLock] Execution worker Thread 3: released lock on worker lease
+2569-01-14T23:51:06.238+0700 [DEBUG] [org.gradle.internal.resources.AbstractTrackedResourceLock] Execution worker: acquired lock on worker lease
+2569-01-14T23:51:06.238+0700 [DEBUG] [org.gradle.internal.resources.AbstractTrackedResourceLock] Execution worker: released lock on worker lease
+2569-01-14T23:51:06.238+0700 [DEBUG] [org.gradle.internal.resources.AbstractTrackedResourceLock] Execution worker Thread 10: acquired lock on worker lease
+2569-01-14T23:51:06.238+0700 [DEBUG] [org.gradle.internal.resources.AbstractTrackedResourceLock] Execution worker Thread 10: released lock on worker lease
+2569-01-14T23:51:06.238+0700 [DEBUG] [org.gradle.internal.resources.AbstractTrackedResourceLock] Execution worker Thread 5: acquired lock on worker lease
+2569-01-14T23:51:06.238+0700 [DEBUG] [org.gradle.internal.resources.AbstractTrackedResourceLock] Execution worker Thread 5: released lock on worker lease
+2569-01-14T23:51:06.238+0700 [DEBUG] [org.gradle.internal.resources.AbstractTrackedResourceLock] Execution worker Thread 9: acquired lock on worker lease
+2569-01-14T23:51:06.238+0700 [DEBUG] [org.gradle.internal.resources.AbstractTrackedResourceLock] Execution worker Thread 9: released lock on worker lease
+2569-01-14T23:51:06.238+0700 [DEBUG] [org.gradle.internal.resources.AbstractTrackedResourceLock] Execution worker Thread 8: acquired lock on worker lease
+2569-01-14T23:51:06.238+0700 [DEBUG] [org.gradle.internal.resources.AbstractTrackedResourceLock] Execution worker Thread 8: released lock on worker lease
+2569-01-14T23:51:06.238+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Finish root build tree' started
+2569-01-14T23:51:06.238+0700 [DEBUG] [org.jetbrains.kotlin.gradle.plugin.statistics.BuildFusService$Inject] Executing [reportGlobalMetrics]
+2569-01-14T23:51:06.238+0700 [DEBUG] [org.jetbrains.kotlin.gradle.plugin.statistics.BuildFusService$Inject] Executing [reportBuildFinish]
+2569-01-14T23:51:06.238+0700 [DEBUG] [org.jetbrains.kotlin.gradle.plugin.statistics.KotlinBuildStatsLoggerService] Executing [class org.jetbrains.kotlin.gradle.plugin.statistics.KotlinBuildStatsLoggerService.initSessionLogger]
+2569-01-14T23:51:06.238+0700 [DEBUG] [org.jetbrains.kotlin.gradle.plugin.statistics.KotlinBuildStatsLoggerService] Executing [class org.jetbrains.kotlin.gradle.plugin.statistics.KotlinBuildStatsLoggerService.reportBuildFinish]
+2569-01-14T23:51:06.240+0700 [DEBUG] [org.jetbrains.kotlin.gradle.plugin.statistics.KotlinBuildStatsBeanService] Executing [class org.jetbrains.kotlin.gradle.plugin.statistics.KotlinBuildStatsBeanService.buildFinished]
+2569-01-14T23:51:06.240+0700 [DEBUG] [org.jetbrains.kotlin.gradle.plugin.statistics.KotlinBuildStatsBeanService] Unregistered org.jetbrains.kotlin.gradle.plugin.statistics.old.Pre232IdeaKotlinBuildStatsBeanService@3441103a
+2569-01-14T23:51:06.240+0700 [DEBUG] [org.jetbrains.kotlin.gradle.plugin.statistics.KotlinBuildStatsBeanService] Executing [class org.jetbrains.kotlin.gradle.plugin.statistics.KotlinBuildStatsBeanService.buildFinished]
+2569-01-14T23:51:06.240+0700 [DEBUG] [org.jetbrains.kotlin.gradle.plugin.statistics.KotlinBuildStatsBeanService] Unregistered org.jetbrains.kotlin.gradle.plugin.statistics.DefaultKotlinBuildStatsBeanService@524926d
+2569-01-14T23:51:06.240+0700 [DEBUG] [org.jetbrains.kotlin.gradle.plugin.statistics.BuildFusService$Inject] [KOTLIN] Close BuildFusService$Inject
+2569-01-14T23:51:06.240+0700 [DEBUG] [org.jetbrains.kotlin.gradle.plugin.KotlinGradleBuildServices$Inject] [KOTLIN] Disposed KotlinGradleBuildServices
+2569-01-14T23:51:06.241+0700 [DEBUG] [org.jetbrains.kotlin.gradle.plugin.statistics.BuildFlowService$Inject] [KOTLIN] Initialize BuildFlowService$Inject
+2569-01-14T23:51:06.241+0700 [DEBUG] [org.jetbrains.kotlin.gradle.plugin.statistics.KotlinBuildStatHandler] Executing [report metric STATISTICS_COLLECT_METRICS_OVERHEAD]
+2569-01-14T23:51:06.241+0700 [INFO] [org.jetbrains.kotlin.gradle.plugin.statistics.KotlinBuildStatHandler] Could not execute [report metric STATISTICS_COLLECT_METRICS_OVERHEAD]
+2569-01-14T23:51:06.241+0700 [DEBUG] [org.jetbrains.kotlin.gradle.plugin.statistics.KotlinBuildStatHandler] org.jetbrains.kotlin.gradle.plugin.statistics:type=StatsService,name=v2
+2569-01-14T23:51:06.241+0700 [DEBUG] [org.jetbrains.kotlin.gradle.plugin.statistics.KotlinBuildStatHandler] Executing [report metric STATISTICS_COLLECT_METRICS_OVERHEAD]
+2569-01-14T23:51:06.241+0700 [INFO] [org.jetbrains.kotlin.gradle.plugin.statistics.KotlinBuildStatHandler] Could not execute [report metric STATISTICS_COLLECT_METRICS_OVERHEAD]
+2569-01-14T23:51:06.241+0700 [DEBUG] [org.jetbrains.kotlin.gradle.plugin.statistics.KotlinBuildStatHandler] org.jetbrains.kotlin.gradle.plugin.statistics:type=StatsService,name=v2
+2569-01-14T23:51:06.242+0700 [DEBUG] [org.jetbrains.kotlin.gradle.plugin.statistics.BuildFlowService$Inject] [KOTLIN] Close BuildFlowService$Inject
+2569-01-14T23:51:06.242+0700 [DEBUG] [org.jetbrains.kotlin.gradle.plugin.KotlinGradleBuildServices$Inject] [KOTLIN] Disposed KotlinGradleBuildServices
+2569-01-14T23:51:06.242+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Finish root build tree'
+2569-01-14T23:51:06.242+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Finish root build tree' completed
+2569-01-14T23:51:06.243+0700 [WARN] [org.gradle.problems.internal.impl.DefaultProblemsReportCreator] 
+2569-01-14T23:51:06.243+0700 [ERROR] [org.gradle.internal.buildevents.BuildExceptionReporter] 
+2569-01-14T23:51:06.243+0700 [ERROR] [org.gradle.internal.buildevents.BuildExceptionReporter] FAILURE: Build failed with an exception.
+2569-01-14T23:51:06.243+0700 [ERROR] [org.gradle.internal.buildevents.BuildExceptionReporter] 
+2569-01-14T23:51:06.243+0700 [ERROR] [org.gradle.internal.buildevents.BuildExceptionReporter] * What went wrong:
+2569-01-14T23:51:06.243+0700 [ERROR] [org.gradle.internal.buildevents.BuildExceptionReporter] Execution failed for task ':app:mergeDebugJavaResource'.
+2569-01-14T23:51:06.243+0700 [ERROR] [org.gradle.internal.buildevents.BuildExceptionReporter] > A failure occurred while executing com.android.build.gradle.internal.tasks.MergeJavaResWorkAction
+2569-01-14T23:51:06.243+0700 [ERROR] [org.gradle.internal.buildevents.BuildExceptionReporter]    > com.google.common.base.VerifyException (no error message)
+2569-01-14T23:51:06.243+0700 [ERROR] [org.gradle.internal.buildevents.BuildExceptionReporter] 
+2569-01-14T23:51:06.243+0700 [ERROR] [org.gradle.internal.buildevents.BuildExceptionReporter] * Try:
+2569-01-14T23:51:06.243+0700 [ERROR] [org.gradle.internal.buildevents.BuildExceptionReporter] > Run with --stacktrace option to get the stack trace.
+2569-01-14T23:51:06.243+0700 [ERROR] [org.gradle.internal.buildevents.BuildExceptionReporter] > Run with --scan to get full insights.
+2569-01-14T23:51:06.243+0700 [ERROR] [org.gradle.internal.buildevents.BuildExceptionReporter] > Get more help at https://help.gradle.org.
+2569-01-14T23:51:06.243+0700 [WARN] [org.gradle.internal.featurelifecycle.LoggingDeprecatedFeatureHandler] 
+2569-01-14T23:51:06.243+0700 [ERROR] [org.gradle.internal.buildevents.BuildResultLogger] 
+2569-01-14T23:51:06.243+0700 [ERROR] [org.gradle.internal.buildevents.BuildResultLogger] BUILD FAILED in 4s
+2569-01-14T23:51:06.243+0700 [LIFECYCLE] [org.gradle.internal.buildevents.TaskExecutionStatisticsReporter] 112 actionable tasks: 6 executed, 106 up-to-date
+2569-01-14T23:51:06.243+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Build finished for file system watching' started
+2569-01-14T23:51:06.252+0700 [INFO] [org.gradle.internal.watch.registry.impl.HierarchicalFileWatcherUpdater] Watched directory hierarchies: [/Users/mac/develop/flutter/packages/flutter_tools/gradle, /Users/mac/develop/ResPOS/android]
+2569-01-14T23:51:06.256+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Build finished for file system watching'
+2569-01-14T23:51:06.256+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Build finished for file system watching' completed
+2569-01-14T23:51:06.257+0700 [DEBUG] [org.gradle.cache.internal.LockOnDemandCrossProcessCacheAccess] Releasing file lock for Build Output Cleanup Cache (/Users/mac/develop/ResPOS/android/.gradle/buildOutputCleanup)
+2569-01-14T23:51:06.257+0700 [DEBUG] [org.gradle.cache.internal.btree.BTreePersistentIndexedCache] Closing cache outputFiles.bin (/Users/mac/develop/ResPOS/android/.gradle/buildOutputCleanup/outputFiles.bin)
+2569-01-14T23:51:06.257+0700 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on Build Output Cleanup Cache (/Users/mac/develop/ResPOS/android/.gradle/buildOutputCleanup).
+2569-01-14T23:51:06.257+0700 [DEBUG] [org.gradle.cache.internal.LockOnDemandCrossProcessCacheAccess] Releasing file lock for execution history cache (/Users/mac/develop/ResPOS/android/.gradle/8.13/executionHistory)
+2569-01-14T23:51:06.257+0700 [DEBUG] [org.gradle.cache.internal.btree.BTreePersistentIndexedCache] Closing cache executionHistory.bin (/Users/mac/develop/ResPOS/android/.gradle/8.13/executionHistory/executionHistory.bin)
+2569-01-14T23:51:06.257+0700 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on execution history cache (/Users/mac/develop/ResPOS/android/.gradle/8.13/executionHistory).
+2569-01-14T23:51:06.258+0700 [DEBUG] [org.gradle.cache.internal.LockOnDemandCrossProcessCacheAccess] Releasing file lock for cache directory md-supplier (/Users/mac/.gradle/caches/8.13/md-supplier)
+2569-01-14T23:51:06.258+0700 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on cache directory md-supplier (/Users/mac/.gradle/caches/8.13/md-supplier).
+2569-01-14T23:51:06.258+0700 [DEBUG] [org.gradle.cache.internal.LockOnDemandCrossProcessCacheAccess] Releasing file lock for Build Output Cleanup Cache (/Users/mac/develop/flutter/packages/flutter_tools/gradle/.gradle/buildOutputCleanup)
+2569-01-14T23:51:06.258+0700 [DEBUG] [org.gradle.cache.internal.btree.BTreePersistentIndexedCache] Closing cache outputFiles.bin (/Users/mac/develop/flutter/packages/flutter_tools/gradle/.gradle/buildOutputCleanup/outputFiles.bin)
+2569-01-14T23:51:06.258+0700 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on Build Output Cleanup Cache (/Users/mac/develop/flutter/packages/flutter_tools/gradle/.gradle/buildOutputCleanup).
+2569-01-14T23:51:06.258+0700 [DEBUG] [org.gradle.cache.internal.LockOnDemandCrossProcessCacheAccess] Releasing file lock for execution history cache (/Users/mac/develop/flutter/packages/flutter_tools/gradle/.gradle/8.13/executionHistory)
+2569-01-14T23:51:06.258+0700 [DEBUG] [org.gradle.cache.internal.btree.BTreePersistentIndexedCache] Closing cache executionHistory.bin (/Users/mac/develop/flutter/packages/flutter_tools/gradle/.gradle/8.13/executionHistory/executionHistory.bin)
+2569-01-14T23:51:06.258+0700 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on execution history cache (/Users/mac/develop/flutter/packages/flutter_tools/gradle/.gradle/8.13/executionHistory).
+2569-01-14T23:51:06.259+0700 [DEBUG] [org.gradle.cache.internal.LockOnDemandCrossProcessCacheAccess] Releasing file lock for cache directory md-rule (/Users/mac/.gradle/caches/8.13/md-rule)
+2569-01-14T23:51:06.259+0700 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on cache directory md-rule (/Users/mac/.gradle/caches/8.13/md-rule).
+2569-01-14T23:51:06.259+0700 [DEBUG] [org.gradle.api.internal.artifacts.ivyservice.resolveengine.store.CachedStoreFactory] Resolution result cache closed. Cache reads: 0, disk reads: 0 (avg: 0.0 secs, total: 0.0 secs)
+2569-01-14T23:51:06.259+0700 [DEBUG] [org.gradle.api.internal.artifacts.ivyservice.resolveengine.store.CachedStoreFactory] Resolution result cache closed. Cache reads: 24, disk reads: 14 (avg: 0.0 secs, total: 0.0 secs)
+2569-01-14T23:51:06.260+0700 [DEBUG] [org.gradle.api.internal.artifacts.ivyservice.resolveengine.store.ResolutionResultsStoreFactory] Deleted 6 resolution results binary files in 0.0 secs
+2569-01-14T23:51:06.260+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Run build'
+2569-01-14T23:51:06.260+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Run build' completed
+2569-01-14T23:51:06.260+0700 [DEBUG] [org.gradle.internal.resources.AbstractTrackedResourceLock] Daemon worker Thread 5: released lock on worker lease
+2569-01-14T23:51:06.262+0700 [DEBUG] [org.gradle.deployment.internal.DefaultDeploymentRegistry] Stopping 0 deployment handles
+2569-01-14T23:51:06.262+0700 [DEBUG] [org.gradle.deployment.internal.DefaultDeploymentRegistry] Stopped deployment handles
+2569-01-14T23:51:06.262+0700 [DEBUG] [org.gradle.cache.internal.LockOnDemandCrossProcessCacheAccess] Releasing file lock for file hash cache (/Users/mac/develop/ResPOS/android/.gradle/8.13/fileHashes)
+2569-01-14T23:51:06.262+0700 [DEBUG] [org.gradle.cache.internal.btree.BTreePersistentIndexedCache] Closing cache fileHashes.bin (/Users/mac/develop/ResPOS/android/.gradle/8.13/fileHashes/fileHashes.bin)
+2569-01-14T23:51:06.262+0700 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on file hash cache (/Users/mac/develop/ResPOS/android/.gradle/8.13/fileHashes).
+2569-01-14T23:51:06.263+0700 [DEBUG] [org.gradle.cache.internal.LockOnDemandCrossProcessCacheAccess] Releasing file lock for checksums cache (/Users/mac/develop/ResPOS/android/.gradle/8.13/checksums)
+2569-01-14T23:51:06.263+0700 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on checksums cache (/Users/mac/develop/ResPOS/android/.gradle/8.13/checksums).
+2569-01-14T23:51:06.263+0700 [DEBUG] [org.gradle.cache.internal.DefaultCacheCleanupExecutor] VCS Checkout Cache (/Users/mac/develop/ResPOS/android/.gradle/vcs-1) has last been fully cleaned up 0 hours ago
+2569-01-14T23:51:06.263+0700 [DEBUG] [org.gradle.cache.internal.DefaultCacheCleanupExecutor] Skipping cleanup for VCS Checkout Cache (/Users/mac/develop/ResPOS/android/.gradle/vcs-1) as it is not yet due
+2569-01-14T23:51:06.263+0700 [DEBUG] [org.gradle.cache.internal.DefaultCacheCoordinator] Cache VCS Checkout Cache (/Users/mac/develop/ResPOS/android/.gradle/vcs-1) was closed 0 times.
+2569-01-14T23:51:06.263+0700 [DEBUG] [org.gradle.cache.internal.DefaultCacheCoordinator] Cache VCS metadata (/Users/mac/develop/ResPOS/android/.gradle/8.13/vcsMetadata) was closed 0 times.
+2569-01-14T23:51:06.263+0700 [DEBUG] [org.gradle.cache.internal.DefaultCacheCoordinator] Cache Compressed Files Expansion Cache (/Users/mac/develop/ResPOS/android/.gradle/8.13/expanded) was closed 0 times.
+2569-01-14T23:51:06.263+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Deleting unused version-specific caches in /Users/mac/develop/ResPOS/android/.gradle' started
+2569-01-14T23:51:06.263+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Completing Build operation 'Deleting unused version-specific caches in /Users/mac/develop/ResPOS/android/.gradle'
+2569-01-14T23:51:06.263+0700 [DEBUG] [org.gradle.internal.operations.DefaultBuildOperationRunner] Build operation 'Deleting unused version-specific caches in /Users/mac/develop/ResPOS/android/.gradle' completed
+2569-01-14T23:51:06.263+0700 [DEBUG] [org.gradle.cache.internal.DefaultCacheCleanupExecutor] dependencies-accessors (/Users/mac/.gradle/caches/8.13/dependencies-accessors) has last been fully cleaned up 1 hours ago
+2569-01-14T23:51:06.263+0700 [DEBUG] [org.gradle.cache.internal.DefaultCacheCleanupExecutor] Skipping cleanup for dependencies-accessors (/Users/mac/.gradle/caches/8.13/dependencies-accessors) as it is not yet due
+2569-01-14T23:51:06.263+0700 [DEBUG] [org.gradle.cache.internal.DefaultCacheCoordinator] Cache dependencies-accessors (/Users/mac/.gradle/caches/8.13/dependencies-accessors) was closed 0 times.
+2569-01-14T23:51:06.274+0700 [DEBUG] [org.gradle.launcher.daemon.server.exec.ExecuteBuild] The daemon has finished executing the build.
+2569-01-14T23:51:06.289+0700 [DEBUG] [org.gradle.launcher.daemon.client.DaemonClientConnection] thread 1: dispatching class org.gradle.launcher.daemon.protocol.CloseInput
+2569-01-14T23:51:06.290+0700 [DEBUG] [org.gradle.launcher.daemon.client.DaemonClient] Received result Success[value=org.gradle.launcher.exec.BuildActionResult@61a002b1] from daemon DaemonInfo{pid=65147, address=[af5d6394-291c-45a4-87e7-83649fcc2b5d port:62609, addresses:[/127.0.0.1]], state=Idle, lastBusy=1768409418986, context=DefaultDaemonContext[uid=ea081b5a-121e-4fcc-9a8d-6517be71a886,javaHome=/Applications/Android Studio.app/Contents/jbr/Contents/Home,javaVersion=21,javaVendor=JetBrains s.r.o.,daemonRegistryDir=/Users/mac/.gradle/daemon,pid=65147,idleTimeout=10800000,priority=NORMAL,applyInstrumentationAgent=true,nativeServicesMode=ENABLED,daemonOpts=-XX:MaxMetaspaceSize=4G,-XX:ReservedCodeCacheSize=512m,-XX:+HeapDumpOnOutOfMemoryError,-Xmx8G,-Dfile.encoding=UTF-8,-Duser.country=TH,-Duser.language=th,-Duser.variant]} (build should be done).
+2569-01-14T23:51:06.290+0700 [DEBUG] [org.gradle.launcher.daemon.client.DaemonClientConnection] thread 1: dispatching class org.gradle.launcher.daemon.protocol.Finished
+2569-01-14T23:51:06.290+0700 [DEBUG] [org.gradle.launcher.daemon.client.DaemonClientConnection] thread 1: connection stop
+2569-01-14T23:51:06.291+0700 [DEBUG] [org.gradle.cache.internal.DefaultCacheCoordinator] Cache cache directory jvms (/Users/mac/.gradle/caches/8.13/jvms) was closed 0 times.
+2569-01-14T23:51:06.291+0700 [LIFECYCLE] [org.gradle.launcher.cli.DebugLoggerWarningAction] 
