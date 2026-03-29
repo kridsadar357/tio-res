@@ -162,7 +162,7 @@ class _ManageItemScreenState extends State<ManageItemScreen> {
             Row(
               children: [
                 IconButton(
-                  icon: const Icon(Icons.arrow_back, color: Colors.white),
+                  icon: Icon(Icons.arrow_back, color: Theme.of(context).colorScheme.onSurface),
                   onPressed: () => Navigator.pop(context),
                   style: IconButton.styleFrom(
                     backgroundColor: Colors.white.withValues(alpha: 0.1),
@@ -176,7 +176,7 @@ class _ManageItemScreenState extends State<ManageItemScreen> {
                   style: TextStyle(
                     fontSize: 20.sp,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                    color: Theme.of(context).colorScheme.onSurface,
                   ),
                 ),
               ],
@@ -216,10 +216,10 @@ class _ManageItemScreenState extends State<ManageItemScreen> {
                             width: 100.w,
                             height: 100.w,
                             decoration: BoxDecoration(
-                              color: Colors.white.withValues(alpha: 0.05),
+                              color: Theme.of(context).brightness == Brightness.dark ? Colors.white.withValues(alpha: 0.05) : Colors.black.withValues(alpha: 0.05),
                               borderRadius: BorderRadius.circular(16.r),
                               border: Border.all(
-                                  color: Colors.white.withValues(alpha: 0.1)),
+                                  color: Theme.of(context).brightness == Brightness.dark ? Colors.white.withValues(alpha: 0.1) : Colors.black.withValues(alpha: 0.1)),
                             ),
                             child: _imageFile != null
                                 ? ClipRRect(
@@ -231,13 +231,14 @@ class _ManageItemScreenState extends State<ManageItemScreen> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Icon(Icons.add_a_photo,
-                                          size: 24.sp, color: Colors.white54),
+                                          size: 24.sp, color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6)),
                                       SizedBox(height: 4.h),
                                       Text(l10n.addImage,
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                               fontSize: 10.sp,
-                                              color: Colors.white54)),
+                                              color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6)),
+                                    ),
                                     ],
                                   ),
                           ),
@@ -257,11 +258,11 @@ class _ManageItemScreenState extends State<ManageItemScreen> {
                                             child: LinearProgressIndicator()));
                                   }
                                   return DropdownButtonFormField<int>(
-                                    initialValue: _selectedCategoryId,
+                                    value: _selectedCategoryId,
                                     dropdownColor: const Color(
                                         0xFF252836), // Dark dropdown
                                     style: TextStyle(
-                                        color: Colors.white, fontSize: 14.sp),
+                                        color: Theme.of(context).colorScheme.onSurface, fontSize: 14.sp),
                                     decoration:
                                         _inputDecoration(l10n.categoryLabel),
                                     items: snapshot.data!.map((c) {
@@ -283,7 +284,7 @@ class _ManageItemScreenState extends State<ManageItemScreen> {
                               TextFormField(
                                 controller: _skuController,
                                 style: TextStyle(
-                                    color: Colors.white, fontSize: 14.sp),
+                                    color: Theme.of(context).colorScheme.onSurface, fontSize: 14.sp),
                                 decoration: _inputDecoration(l10n.codeSku),
                               ),
                             ],
@@ -368,14 +369,13 @@ class _ManageItemScreenState extends State<ManageItemScreen> {
                                   const Color(0xFF252836), // Match input fill
                               borderRadius: BorderRadius.circular(12.r),
                               border: Border.all(
-                                  color: Colors.white.withValues(alpha: 0.1)),
+                                  color: Theme.of(context).brightness == Brightness.dark ? Colors.white.withValues(alpha: 0.1) : Colors.black.withValues(alpha: 0.1)),
                             ),
                             child: SwitchListTile(
                               contentPadding: EdgeInsets.zero,
-                              activeThumbColor: Theme.of(context).primaryColor,
                               title: Text(l10n.buffetIncluded,
                                   style: TextStyle(
-                                      color: Colors.white,
+                                      color: Theme.of(context).colorScheme.onSurface,
                                       fontSize: 13.sp,
                                       fontWeight: FontWeight.bold)),
                               subtitle: Text(l10n.priceZeroForBuffet,
@@ -425,7 +425,6 @@ class _ManageItemScreenState extends State<ManageItemScreen> {
                         subtitle: Text(l10n.markAsSoldOut,
                             style: TextStyle(
                                 fontSize: 11.sp, color: Colors.white54)),
-                        activeThumbColor: Colors.greenAccent,
                         value: _isActive,
                         onChanged: (val) => setState(() => _isActive = val),
                       ),
@@ -442,21 +441,21 @@ class _ManageItemScreenState extends State<ManageItemScreen> {
       {IconData? icon, String? prefix}) {
     return InputDecoration(
       labelText: label,
-      labelStyle: TextStyle(color: Colors.white70, fontSize: 13.sp),
+      labelStyle: TextStyle(color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7), fontSize: 13.sp),
       prefixIcon:
-          icon != null ? Icon(icon, color: Colors.white54, size: 18.sp) : null,
+          icon != null ? Icon(icon, color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6), size: 18.sp) : null,
       prefixText: prefix,
       prefixStyle: TextStyle(
-          color: Colors.white, fontSize: 14.sp, fontWeight: FontWeight.bold),
+          color: Theme.of(context).colorScheme.onSurface, fontSize: 14.sp, fontWeight: FontWeight.bold),
       filled: true,
       fillColor: const Color(0xFF252836), // Darker surface
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(12.r),
-        borderSide: BorderSide(color: Colors.white.withValues(alpha: 0.1)),
+        borderSide: BorderSide(color: Theme.of(context).brightness == Brightness.dark ? Colors.white.withValues(alpha: 0.1) : Colors.black.withValues(alpha: 0.1)),
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(12.r),
-        borderSide: BorderSide(color: Colors.white.withValues(alpha: 0.1)),
+        borderSide: BorderSide(color: Theme.of(context).brightness == Brightness.dark ? Colors.white.withValues(alpha: 0.1) : Colors.black.withValues(alpha: 0.1)),
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(12.r),

@@ -1,5 +1,20 @@
 /* TioRes Custom Styles */
 
+/* Prevent double-tap zoom on mobile */
+* {
+    touch-action: manipulation;
+}
+html {
+    touch-action: manipulation;
+    -ms-touch-action: manipulation;
+}
+button, a, .menu-card, .qty-btn, .category-btn {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
 /* Scrollbar Hide */
 .scrollbar-hide::-webkit-scrollbar {
     display: none;

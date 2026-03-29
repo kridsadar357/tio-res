@@ -262,8 +262,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get uploadYourPromptPayQr => 'Upload your PromptPay QR code image';
 
   @override
-  String get paymentSettingsSavedSuccessfully =>
-      'Payment settings saved successfully';
+  String get paymentSettingsSavedSuccessfully => 'Payment settings saved successfully';
 
   @override
   String get save => 'Save';
@@ -522,8 +521,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get port => 'Port';
 
   @override
-  String get printerNetworkInfo =>
-      'Most thermal printers use Port 9100 for network printing. Ensure your device is on the same WiFi network.';
+  String get printerNetworkInfo => 'Most thermal printers use Port 9100 for network printing. Ensure your device is on the same WiFi network.';
 
   @override
   String get usbPrintingComingSoon => 'USB Printing Coming Soon';
@@ -536,6 +534,72 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get refreshList => 'Refresh List';
+
+  @override
+  String get scanForNew => 'Scan for New';
+
+  @override
+  String get stopScan => 'Stop Scan';
+
+  @override
+  String get pairedDevices => 'Paired Devices';
+
+  @override
+  String get nearbyDevices => 'Nearby Devices';
+
+  @override
+  String get tapToPairConnect => 'Tap to Pair & Connect';
+
+  @override
+  String get notPaired => 'Not paired';
+
+  @override
+  String get scanningForDevices => 'Scanning for nearby devices...';
+
+  @override
+  String get noPrintersFound => 'No printers found';
+
+  @override
+  String get howToConnectPrinter => 'How to connect your printer:';
+
+  @override
+  String get putPrinterPairingMode => 'Put your printer in pairing mode (check printer manual)';
+
+  @override
+  String get openBluetoothSettings => 'Open Android Bluetooth Settings';
+
+  @override
+  String get findAndPair => 'Find and pair your printer name';
+
+  @override
+  String get returnAndRefresh => 'Return to this app and tap Refresh';
+
+  @override
+  String get openBluetoothSettingsButton => 'Open Bluetooth Settings';
+
+  @override
+  String get connectionFailed => 'Connection failed';
+
+  @override
+  String get devicePairedButNotConnected => 'Device is paired but connection failed. Please try connecting again.';
+
+  @override
+  String get connectionFailedDetails => 'Connection failed. Please make sure:\n1. Printer is turned on and in range\n2. You accepted the pairing request if it appeared\n3. Try connecting again';
+
+  @override
+  String get bluetoothPermissionsRequired => 'Bluetooth permissions are required. Please grant permissions in app settings.';
+
+  @override
+  String get bluetoothNotAvailable => 'Bluetooth is not available. Please enable Bluetooth on your device.';
+
+  @override
+  String get errorLoadingDevices => 'Error loading devices';
+
+  @override
+  String get availablePrinters => 'Available Printers';
+
+  @override
+  String get refreshPairedDevices => 'Refresh Paired Devices';
 
   @override
   String get apiSettings => 'API Settings';
@@ -798,9 +862,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get connectionSuccess => 'Connection successful';
 
   @override
-  String get connectionFailed => 'Connection failed';
-
-  @override
   String get waitingForCard => 'Please insert or tap card';
 
   @override
@@ -916,4 +977,229 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get selectItem => 'Select an item';
+
+  @override
+  String get receiptBuffetCharges => 'BUFFET CHARGES';
+
+  @override
+  String get receiptExtraItems => 'EXTRA ITEMS';
+
+  @override
+  String get receiptBuffetSubtotal => 'Buffet Subtotal';
+
+  @override
+  String get receiptExtrasSubtotal => 'Extras Subtotal';
+
+  @override
+  String get receiptGrandTotal => 'GRAND TOTAL';
+
+  @override
+  String get receiptThankYou => 'Thank you for dining with us!';
+
+  @override
+  String get receiptAdult => 'Adult';
+
+  @override
+  String get receiptChild => 'Child';
+
+  @override
+  String get receiptTable => 'Table';
+
+  @override
+  String get receiptOrder => 'Order';
+
+  @override
+  String get receiptDate => 'Date';
+
+  @override
+  String get receiptTime => 'Time';
+
+  @override
+  String get receiptGuests => 'Guests';
+
+  @override
+  String get receiptPayment => 'Payment';
+
+  @override
+  String get backupRestore => 'Backup & Restore';
+
+  @override
+  String get backupDescription => 'Backup your database, images, and settings to transfer to another device or restore later.';
+
+  @override
+  String get createBackup => 'Create Backup';
+
+  @override
+  String get restoreBackup => 'Restore Backup';
+
+  @override
+  String get backupIncludes => 'Backup includes:';
+
+  @override
+  String get database => 'Database (orders, menu, tables, etc.)';
+
+  @override
+  String get menuImages => 'Menu Images';
+
+  @override
+  String get appSettings => 'App Settings';
+
+  @override
+  String get receiptLayouts => 'Receipt Layouts';
+
+  @override
+  String get createBackupNow => 'Create Backup Now';
+
+  @override
+  String get selectBackupFile => 'Select a backup file to restore from:';
+
+  @override
+  String get browseFiles => 'Browse Files';
+
+  @override
+  String get availableBackups => 'Available Backups';
+
+  @override
+  String get backupWarning => 'Restoring a backup will replace ALL current data. Make sure to backup your current data first if needed.';
+
+  @override
+  String get qrCodeOrdering => 'QR Code Ordering';
+
+  @override
+  String get qrOrderingEnabled => 'Customers can scan QR to order';
+
+  @override
+  String get qrOrderingDisabled => 'QR ordering is disabled';
+
+  @override
+  String get qrUrlConfig => 'QR URL Configuration';
+
+  @override
+  String get qrBaseUrl => 'Base URL';
+
+  @override
+  String get qrUrlStructure => 'URL Structure';
+
+  @override
+  String get openTableQrDesc => 'Open Table QR';
+
+  @override
+  String get menuPageDesc => 'Menu Page';
+
+  @override
+  String get storeInfo => 'Store Info';
+
+  @override
+  String get shopLogo => 'Shop Logo';
+
+  @override
+  String get shopAddress => 'Shop Address';
+
+  @override
+  String get shopTel => 'Shop Tel';
+
+  @override
+  String get completed => 'completed';
+
+  @override
+  String get receiptPrintedSuccessfully => 'Receipt printed successfully';
+
+  @override
+  String get errorOccurred => 'Error occurred';
+
+  @override
+  String get earned => 'Earned';
+
+  @override
+  String get points => 'points';
+
+  @override
+  String get insufficientFunds => 'Insufficient funds! Please enter at least';
+
+  @override
+  String get takeAway => 'Take Away';
+
+  @override
+  String get takeAwayDescription => 'Orders for customers who are not dining in';
+
+  @override
+  String get newTakeAwayOrder => 'New Take Away Order';
+
+  @override
+  String get takeAwayComingSoon => 'Take Away feature coming soon!';
+
+  @override
+  String get todayOrders => 'Today\'s Orders';
+
+  @override
+  String get pendingOrders => 'Pending Orders';
+
+  @override
+  String get completedOrders => 'Completed';
+
+  @override
+  String get orderItems => 'Order Items';
+
+  @override
+  String get syncAllData => 'Sync All Data';
+
+  @override
+  String get syncAllDataDesc => 'Send all POS data to server (first-time setup)';
+
+  @override
+  String get sendAllData => 'Send All Data';
+
+  @override
+  String get syncing => 'Syncing...';
+
+  @override
+  String get buffetTiers => 'Buffet Tiers';
+
+  @override
+  String get tables => 'Tables';
+
+  @override
+  String get apiNotEnabled => 'Please enable API and save settings first';
+
+  @override
+  String get apiConnectionFailed => 'Connection failed. Please check URL and API key.';
+
+  @override
+  String get apiSyncSuccess => 'All data synced successfully!';
+
+  @override
+  String get apiSyncPartialFail => 'Some data failed to sync';
+
+  @override
+  String get printToKitchen => 'Print to Kitchen';
+
+  @override
+  String get served => 'Served';
+
+  @override
+  String get printSuccess => 'Sent to printer';
+
+  @override
+  String get orderServed => 'Order marked as served';
+
+  @override
+  String get noPendingOrders => 'No pending orders';
+
+  @override
+  String get moveTable => 'Move Table';
+
+  @override
+  String get cancelTable => 'Cancel Table';
+
+  @override
+  String get confirmCancelTable => 'Are you sure you want to cancel this table? The order will be voided.';
+
+  @override
+  String get selectDestinationTable => 'Select New Table';
+
+  @override
+  String get tableMoved => 'Table moved successfully';
+
+  @override
+  String get tableCancelled => 'Table cancelled';
 }

@@ -11,7 +11,7 @@ import '../../providers/settings_provider.dart';
 
 class CustomersScreen extends StatefulWidget {
   final bool isSelectionMode;
-  final Function(Customer)? onSelect;
+  final void Function(Customer)? onSelect;
 
   const CustomersScreen({
     super.key,
@@ -105,35 +105,41 @@ class _CustomersScreenState extends State<CustomersScreen> {
     final result = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: const Color(0xFF252836),
-        title: Text(
+        backgroundColor: Theme.of(context).cardTheme.color,
+          title: Text(
           customer == null ? l10n.addCustomer : l10n.editCustomer,
-          style: const TextStyle(color: Colors.white),
+          style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
         ),
+        contentPadding: const EdgeInsets.fromLTRB(24.0, 20.0, 24.0, 24.0),
         content: SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              TextField(
-                controller: nameController,
-                style: const TextStyle(color: Colors.white),
-                decoration: _inputDecoration(l10n.nameLabel),
-              ),
-              SizedBox(height: 16.h),
-              TextField(
-                controller: phoneController,
-                style: const TextStyle(color: Colors.white),
-                keyboardType: TextInputType.phone,
-                decoration: _inputDecoration(l10n.phoneLabel),
-              ),
-              SizedBox(height: 16.h),
-              TextField(
-                controller: emailController,
-                style: const TextStyle(color: Colors.white),
-                keyboardType: TextInputType.emailAddress,
-                decoration: _inputDecoration(l10n.emailLabel),
-              ),
-            ],
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+              maxHeight: MediaQuery.of(context).size.height * 0.5,
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                TextField(
+                  controller: nameController,
+                  style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
+                  decoration: _inputDecoration(l10n.nameLabel),
+                ),
+                SizedBox(height: 16.h),
+                TextField(
+                  controller: phoneController,
+                  style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
+                  keyboardType: TextInputType.phone,
+                  decoration: _inputDecoration(l10n.phoneLabel),
+                ),
+                SizedBox(height: 16.h),
+                TextField(
+                  controller: emailController,
+                  style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
+                  keyboardType: TextInputType.emailAddress,
+                  decoration: _inputDecoration(l10n.emailLabel),
+                ),
+              ],
+            ),
           ),
         ),
         actions: [
@@ -188,7 +194,7 @@ class _CustomersScreenState extends State<CustomersScreen> {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: const Color(0xFF252836),
+        backgroundColor: Theme.of(context).cardTheme.color,
         title: Text(l10n.deleteCustomer,
             style: const TextStyle(color: Colors.white)),
         content: Text('${l10n.deleteCustomer} "${customer.name}"?',
@@ -236,7 +242,7 @@ class _CustomersScreenState extends State<CustomersScreen> {
     final result = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: const Color(0xFF252836),
+        backgroundColor: Theme.of(context).cardTheme.color,
         title: Text(l10n.loyaltyPointsRule,
             style: const TextStyle(color: Colors.white)),
         content: Column(
@@ -418,7 +424,7 @@ class _CustomersScreenState extends State<CustomersScreen> {
                             color: widget.isSelectionMode
                                 ? Theme.of(context)
                                     .primaryColor
-                                    .withOpacity(0.5)
+                                    .withValues(alpha: 0.5)
                                 : Colors.white.withValues(alpha: 0.1)),
                       ),
                       child: ListTile(

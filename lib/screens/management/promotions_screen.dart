@@ -46,68 +46,73 @@ class _PromotionsScreenState extends State<PromotionsScreen> {
       context: context,
       builder: (context) => StatefulBuilder(
         builder: (context, setDialogState) => AlertDialog(
-          backgroundColor: const Color(0xFF252836),
+          backgroundColor: Theme.of(context).cardTheme.color,
           title: Text(
             promotion == null ? l10n.addPromotion : l10n.editPromotion,
-            style: const TextStyle(color: Colors.white),
+            style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
           ),
+          contentPadding: const EdgeInsets.fromLTRB(24.0, 20.0, 24.0, 24.0),
           content: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                TextField(
-                  controller: nameController,
-                  style: const TextStyle(color: Colors.white),
-                  decoration: _inputDecoration(l10n.nameLabel),
-                ),
-                SizedBox(height: 16.h),
-                Row(
-                  children: [
-                    Expanded(
-                      child: TextField(
-                        controller: valueController,
-                        keyboardType: TextInputType.number,
-                        style: const TextStyle(color: Colors.white),
-                        decoration: _inputDecoration(l10n.discountValue),
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                maxHeight: MediaQuery.of(context).size.height * 0.4,
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  TextField(
+                    controller: nameController,
+                    style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
+                    decoration: _inputDecoration(l10n.nameLabel),
+                  ),
+                  SizedBox(height: 16.h),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: TextField(
+                          controller: valueController,
+                          keyboardType: TextInputType.number,
+                          style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
+                          decoration: _inputDecoration(l10n.discountValue),
+                        ),
                       ),
-                    ),
-                    SizedBox(width: 12.w),
-                    Container(
-                      padding: EdgeInsets.symmetric(horizontal: 12.w),
-                      decoration: BoxDecoration(
-                        color: const Color(0xFF1A1F2C),
-                        borderRadius: BorderRadius.circular(12.r),
+                      SizedBox(width: 12.w),
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: 12.w),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF1A1F2C),
+                          borderRadius: BorderRadius.circular(12.r),
+                        ),
+                        child: DropdownButton<String>(
+                          value: discountType,
+                          dropdownColor: const Color(0xFF252836),
+                          style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
+                          underline: const SizedBox(),
+                          items: [
+                            const DropdownMenuItem(
+                                value: 'PERCENT', child: Text('%')),
+                            DropdownMenuItem(
+                                value: 'FIXED',
+                                child: Text(CurrencyHelper.symbol(context))),
+                          ],
+                          onChanged: (val) {
+                            if (val != null) {
+                              setDialogState(() => discountType = val);
+                            }
+                          },
+                        ),
                       ),
-                      child: DropdownButton<String>(
-                        value: discountType,
-                        dropdownColor: const Color(0xFF252836),
-                        style: const TextStyle(color: Colors.white),
-                        underline: const SizedBox(),
-                        items: [
-                          const DropdownMenuItem(
-                              value: 'PERCENT', child: Text('%')),
-                          DropdownMenuItem(
-                              value: 'FIXED',
-                              child: Text(CurrencyHelper.symbol(context))),
-                        ],
-                        onChanged: (val) {
-                          if (val != null) {
-                            setDialogState(() => discountType = val);
-                          }
-                        },
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 16.h),
-                SwitchListTile(
-                  title: Text(l10n.activeStatus,
-                      style: const TextStyle(color: Colors.white)),
-                  value: isActive,
-                  activeThumbColor: Theme.of(context).primaryColor,
-                  onChanged: (val) => setDialogState(() => isActive = val),
-                ),
-              ],
+                    ],
+                  ),
+                  SizedBox(height: 16.h),
+                  SwitchListTile(
+                    title: Text(l10n.activeStatus,
+                        style: const TextStyle(color: Colors.white)),
+                    value: isActive,
+                    onChanged: (val) => setDialogState(() => isActive = val),
+                  ),
+                ],
+              ),
             ),
           ),
           actions: [

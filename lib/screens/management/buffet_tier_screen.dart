@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../models/buffet_tier.dart';
+import '../../models/menu_category.dart';
+import 'dart:convert';
 import '../../services/database_helper.dart';
 import '../../widgets/premium_scaffold.dart';
 import '../../widgets/premium_toast.dart';
@@ -40,16 +42,22 @@ class _BuffetTierScreenState extends State<BuffetTierScreen> {
       text: tier?.price.toStringAsFixed(2) ?? '',
     );
     final descController = TextEditingController(text: tier?.description ?? '');
+
     bool isActive = tier?.isActive ?? true;
+    List<int> excludedIds = List.from(tier?.excludedCategoryIds ?? []);
+    
+    // Load categories
+    final categoryMaps = await DatabaseHelper().getAllMenuCategories();
+    final categories = categoryMaps.map((m) => MenuCategory.fromMap(m)).toList();
 
     final result = await showDialog<bool>(
       context: context,
       builder: (context) => StatefulBuilder(
         builder: (context, setDialogState) => AlertDialog(
-          backgroundColor: const Color(0xFF252836),
+          backgroundColor: Theme.of(context).cardTheme.color,
           title: Text(
             tier == null ? l10n.addBuffetTier : l10n.editBuffetTier,
-            style: const TextStyle(color: Colors.white),
+            style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
           ),
           content: SingleChildScrollView(
             child: Column(
@@ -57,21 +65,21 @@ class _BuffetTierScreenState extends State<BuffetTierScreen> {
               children: [
                 TextField(
                   controller: nameController,
-                  style: const TextStyle(color: Colors.white),
+                  style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
                   decoration: _inputDecoration(l10n.nameLabel),
                 ),
                 SizedBox(height: 16.h),
                 TextField(
                   controller: priceController,
                   keyboardType: TextInputType.number,
-                  style: const TextStyle(color: Colors.white),
+                  style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
                   decoration: _inputDecoration(l10n.price,
                       prefix: '${CurrencyHelper.symbol(context)} '),
                 ),
                 SizedBox(height: 16.h),
                 TextField(
                   controller: descController,
-                  style: const TextStyle(color: Colors.white),
+                  style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
                   decoration: _inputDecoration(l10n.descriptionOptional),
                   maxLines: 2,
                 ),
@@ -80,8 +88,42 @@ class _BuffetTierScreenState extends State<BuffetTierScreen> {
                   title: Text(l10n.activeStatus,
                       style: const TextStyle(color: Colors.white)),
                   value: isActive,
-                  activeThumbColor: Theme.of(context).primaryColor,
                   onChanged: (val) => setDialogState(() => isActive = val),
+                ),
+                SizedBox(height: 16.h),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'Excluded Categories (Hidden)',
+                    style: TextStyle(color: Colors.white70, fontSize: 14.sp),
+                  ),
+                ),
+                SizedBox(height: 8.h),
+                Wrap(
+                  spacing: 8.w,
+                  runSpacing: 8.h,
+                  children: categories.map((cat) {
+                    final isExcluded = excludedIds.contains(cat.id);
+                    return FilterChip(
+                      label: Text(cat.getLocalizedName('th')), // Show Thai name as default
+                      selected: isExcluded,
+                      onSelected: (selected) {
+                        setDialogState(() {
+                          if (selected) {
+                            excludedIds.add(cat.id!);
+                          } else {
+                            excludedIds.remove(cat.id);
+                          }
+                        });
+                      },
+                      selectedColor: Colors.red.withValues(alpha: 0.3),
+                      checkmarkColor: Colors.redAccent,
+                      labelStyle: TextStyle(
+                        color: isExcluded ? Colors.redAccent : Colors.white70,
+                      ),
+                      backgroundColor: const Color(0xFF1A1F2C),
+                    );
+                  }).toList(),
                 ),
               ],
             ),
@@ -105,6 +147,7 @@ class _BuffetTierScreenState extends State<BuffetTierScreen> {
                   'description':
                       descController.text.isEmpty ? null : descController.text,
                   'is_active': isActive ? 1 : 0,
+                  'excluded_category_ids': excludedIds.isEmpty ? null : jsonEncode(excludedIds),
                 };
                 if (tier == null) {
                   await DatabaseHelper().addBuffetTier(data);

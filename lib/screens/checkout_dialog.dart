@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'dart:ui';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:qr_flutter/qr_flutter.dart';
-// import 'package:flutter_tts/flutter_tts.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import '../models/order.dart';
 import '../models/customer.dart';
 import '../services/database_helper.dart';
@@ -14,6 +13,8 @@ import '../providers/settings_provider.dart';
 import '../l10n/app_localizations.dart';
 import 'management/customers_screen.dart';
 import '../widgets/premium_toast.dart';
+import '../services/printer_service.dart';
+import '../models/table_model.dart';
 
 /// CheckoutDialog: Handles payment and order completion
 ///
@@ -49,7 +50,7 @@ class _CheckoutDialogState extends State<CheckoutDialog> {
   Customer? _selectedCustomer;
 
   // Text-to-speech for Thai voice
-  // late FlutterTts _flutterTts;
+  late FlutterTts _flutterTts;
 
   @override
   void initState() {
@@ -58,17 +59,17 @@ class _CheckoutDialogState extends State<CheckoutDialog> {
   }
 
   void _initTts() {
-    // _flutterTts = FlutterTts();
-    // _flutterTts.setLanguage('th-TH');
-    // _flutterTts.setSpeechRate(0.5);
-    // _flutterTts.setVolume(1.0);
-    // _flutterTts.setPitch(1.0);
+    _flutterTts = FlutterTts();
+    _flutterTts.setLanguage('th-TH');
+    _flutterTts.setSpeechRate(0.5);
+    _flutterTts.setVolume(1.0);
+    _flutterTts.setPitch(1.0);
   }
 
   @override
   void dispose() {
+    _flutterTts.stop();
     _amountReceivedController.dispose();
-    // _flutterTts.stop();
     super.dispose();
   }
 
@@ -90,7 +91,6 @@ class _CheckoutDialogState extends State<CheckoutDialog> {
               borderRadius: BorderRadius.circular(20.r),
               border: Border.all(
                 color: Colors.white.withValues(alpha: 0.1),
-                width: 1,
               ),
             ),
             child: Column(
@@ -168,21 +168,21 @@ class _CheckoutDialogState extends State<CheckoutDialog> {
                   style: TextStyle(
                     fontSize: 20.sp,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                    color: Theme.of(context).colorScheme.onSurface,
                   ),
                 ),
                 Text(
                   '${AppLocalizations.of(context)!.order} #${widget.order.id} • ${widget.order.tableId != null ? "${AppLocalizations.of(context)!.table} ${widget.order.tableId}" : "Takeaway"}',
                   style: TextStyle(
                     fontSize: 12.sp,
-                    color: Colors.white70,
+                    color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
                   ),
                 ),
               ],
             ),
           ),
           IconButton(
-            icon: const Icon(Icons.close, color: Colors.white54),
+            icon: Icon(Icons.close, color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6)),
             onPressed: () => Navigator.pop(context),
             tooltip: AppLocalizations.of(context)!.cancel,
           ),
@@ -209,14 +209,14 @@ class _CheckoutDialogState extends State<CheckoutDialog> {
         children: [
           Row(
             children: [
-              Icon(Icons.receipt, size: 16.sp, color: Colors.white70),
+              Icon(Icons.receipt, size: 16.sp, color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7)),
               SizedBox(width: 8.w),
               Text(
                 AppLocalizations.of(context)!.orderSummary,
                 style: TextStyle(
                   fontSize: 16.sp,
                   fontWeight: FontWeight.bold,
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.onSurface,
                 ),
               ),
             ],
@@ -239,7 +239,7 @@ class _CheckoutDialogState extends State<CheckoutDialog> {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(
+                MaterialPageRoute<void>(
                   builder: (context) => CustomersScreen(
                     isSelectionMode: true,
                     onSelect: (customer) {
@@ -268,7 +268,7 @@ class _CheckoutDialogState extends State<CheckoutDialog> {
                     size: 20.sp,
                     color: _selectedCustomer != null
                         ? const Color(0xFF00E096)
-                        : Colors.white70,
+                        : Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
                   ),
                   SizedBox(width: 8.w),
                   Expanded(
@@ -290,7 +290,7 @@ class _CheckoutDialogState extends State<CheckoutDialog> {
                             '${_selectedCustomer!.points} pts',
                             style: TextStyle(
                               fontSize: 12.sp,
-                              color: Colors.white54,
+                              color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6),
                             ),
                           ),
                       ],
@@ -421,14 +421,15 @@ class _CheckoutDialogState extends State<CheckoutDialog> {
     return Container(
       padding: EdgeInsets.all(10.w),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.05),
+        color: Colors.white.withValues(alpha: 0.05),
         borderRadius: BorderRadius.circular(12.r),
-        border: Border.all(color: Colors.white.withOpacity(0.1)),
+        border: Border.all(color: Colors.white.withValues(alpha: 0.1)),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
           // Amount to pay row
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -453,10 +454,10 @@ class _CheckoutDialogState extends State<CheckoutDialog> {
           Container(
             padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
             decoration: BoxDecoration(
-              color: Colors.green.withOpacity(0.1),
+              color: Colors.green.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(10.r),
               border: Border.all(
-                  color: Colors.greenAccent.withOpacity(0.3), width: 2),
+                  color: Colors.greenAccent.withValues(alpha: 0.3), width: 2),
             ),
             child: Row(
               children: [
@@ -501,13 +502,13 @@ class _CheckoutDialogState extends State<CheckoutDialog> {
             padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
             decoration: BoxDecoration(
               color: _changeAmount >= 0
-                  ? Colors.greenAccent.withOpacity(0.1)
-                  : Colors.redAccent.withOpacity(0.1),
+                  ? Colors.greenAccent.withValues(alpha: 0.1)
+                  : Colors.redAccent.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(10.r),
               border: Border.all(
                 color: _changeAmount >= 0
-                    ? Colors.greenAccent.withOpacity(0.3)
-                    : Colors.redAccent.withOpacity(0.3),
+                    ? Colors.greenAccent.withValues(alpha: 0.3)
+                    : Colors.redAccent.withValues(alpha: 0.3),
               ),
             ),
             child: Row(
@@ -537,6 +538,7 @@ class _CheckoutDialogState extends State<CheckoutDialog> {
             ),
           ),
         ],
+        ),
       ),
     );
   }
@@ -559,8 +561,8 @@ class _CheckoutDialogState extends State<CheckoutDialog> {
         final isExact = item['value'] == -1;
         return Material(
           color: isExact
-              ? Colors.greenAccent.withOpacity(0.2)
-              : Colors.white.withOpacity(0.1),
+              ? Colors.greenAccent.withValues(alpha: 0.2)
+              : Colors.white.withValues(alpha: 0.1),
           borderRadius: BorderRadius.circular(8.r),
           child: InkWell(
             onTap: () {
@@ -599,7 +601,7 @@ class _CheckoutDialogState extends State<CheckoutDialog> {
   Widget _buildNumpad() {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.03),
+        color: Colors.white.withValues(alpha: 0.03),
         borderRadius: BorderRadius.circular(12.r),
       ),
       child: Column(
@@ -664,8 +666,8 @@ class _CheckoutDialogState extends State<CheckoutDialog> {
         padding: EdgeInsets.all(4.w),
         child: Material(
           color: isAction
-              ? (color ?? Colors.grey).withOpacity(0.8)
-              : Colors.white.withOpacity(0.1),
+              ? (color ?? Colors.grey).withValues(alpha: 0.8)
+              : Colors.white.withValues(alpha: 0.1),
           borderRadius: BorderRadius.circular(10.r),
           child: InkWell(
             onTap: () => _handleNumpadInput(label),
@@ -748,9 +750,10 @@ class _CheckoutDialogState extends State<CheckoutDialog> {
         borderRadius: BorderRadius.circular(12.r),
         border: Border.all(color: Colors.white.withValues(alpha: 0.1)),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -777,7 +780,6 @@ class _CheckoutDialogState extends State<CheckoutDialog> {
             child: qrData.isNotEmpty
                 ? QrImageView(
                     data: qrData,
-                    version: QrVersions.auto,
                     size: 200.w,
                     backgroundColor: Colors.white,
                   )
@@ -826,6 +828,7 @@ class _CheckoutDialogState extends State<CheckoutDialog> {
             ),
           ),
         ],
+        ),
       ),
     );
   }
@@ -915,11 +918,10 @@ class _CheckoutDialogState extends State<CheckoutDialog> {
       amountReceived = double.tryParse(receivedText);
       if (amountReceived == null || amountReceived < widget.total) {
         if (mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('จำนวนเงินไม่เพียงพอ'),
-              backgroundColor: Colors.red,
-            ),
+            PremiumToast.show(
+            context,
+            'Insufficient funds',
+            isError: true,
           );
         }
         return;
@@ -929,6 +931,8 @@ class _CheckoutDialogState extends State<CheckoutDialog> {
       final confirmed = await _showPaymentConfirmationDialog(amountReceived);
       if (!confirmed) return;
     }
+
+    if (!mounted) return;
 
     try {
       final settings = context.read<SettingsProvider>();
@@ -946,33 +950,85 @@ class _CheckoutDialogState extends State<CheckoutDialog> {
       );
 
       if (mounted) {
+        final l10n = AppLocalizations.of(context)!;
+        
+        // Print receipt after successful checkout
+        try {
+          // Get table and order items for printing
+          final dbHelper = DatabaseHelper();
+          TableModel? table;
+          if (widget.order.tableId != null) {
+            table = await dbHelper.getTable(widget.order.tableId!);
+          }
+          
+          // If table not found, create a dummy table for printing
+          table ??= TableModel(
+            id: widget.order.tableId ?? 0,
+            tableName: 'Table ${widget.order.tableId ?? 'N/A'}',
+            status: 1,
+            x: 0,
+            y: 0,
+            width: 100,
+            height: 100,
+          );
+          
+          final orderItems = await dbHelper.getOrderItems(widget.order.id);
+          
+          // Reload order to get updated total and payment method
+          final updatedOrder = await dbHelper.getOrder(widget.order.id);
+          final orderToPrint = updatedOrder ?? widget.order.copyWith(
+            totalAmount: widget.total,
+            paymentMethod: _paymentMethod,
+          );
+          
+          // Print receipt
+          await PrinterService().init();
+          final printSuccess = await PrinterService().printReceipt(
+            table: table,
+            order: orderToPrint,
+            orderItems: orderItems,
+          );
+          
+          if (printSuccess) {
+            // Receipt printed successfully - show message after a delay
+            Future.delayed(const Duration(milliseconds: 800), () {
+              if (mounted) {
+                PremiumToast.show(context, 'Receipt printed successfully');
+              }
+            });
+          }
+        } catch (e) {
+          debugPrint('Error printing receipt: $e');
+          // Don't block checkout if printing fails
+        }
+
         Navigator.pop(context); // Close dialog
         widget.onCheckoutSuccess();
 
         // Success Message
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('ออเดอร์ #${widget.order.id} สำเร็จแล้ว'),
-            backgroundColor: Colors.green,
-          ),
+        PremiumToast.show(
+          context,
+          '${l10n.order} #${widget.order.id} completed',
         );
 
         // Points Message
         if (pointsEarned > 0) {
-          Future.delayed(const Duration(milliseconds: 500), () {
+          Future.delayed(const Duration(milliseconds: 1500), () {
             if (mounted) {
-              PremiumToast.show(context, 'ได้รับ $pointsEarned คะแนน!');
+              PremiumToast.show(
+                context,
+                'Earned $pointsEarned points!',
+              );
             }
           });
         }
       }
     } catch (e) {
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('เกิดข้อผิดพลาด: $e'),
-            backgroundColor: Colors.red,
-          ),
+        PremiumToast.show(
+          context,
+          'Error: $e',
+          isError: true,
         );
       }
     }
@@ -984,6 +1040,8 @@ class _CheckoutDialogState extends State<CheckoutDialog> {
 
     // Speak the change amount in Thai
     await _speakChangeAmount(change);
+
+    if (!mounted) return false;
 
     final result = await showDialog<bool>(
       context: context,
@@ -1000,7 +1058,7 @@ class _CheckoutDialogState extends State<CheckoutDialog> {
               decoration: BoxDecoration(
                 color: Theme.of(context).cardTheme.color,
                 borderRadius: BorderRadius.circular(20.r),
-                border: Border.all(color: Colors.white.withOpacity(0.1)),
+                border: Border.all(color: Colors.white.withValues(alpha: 0.1)),
               ),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -1009,7 +1067,7 @@ class _CheckoutDialogState extends State<CheckoutDialog> {
                   Container(
                     padding: EdgeInsets.all(16.w),
                     decoration: BoxDecoration(
-                      color: Colors.green.withOpacity(0.2),
+                      color: Colors.green.withValues(alpha: 0.2),
                       shape: BoxShape.circle,
                     ),
                     child: Icon(
@@ -1036,17 +1094,17 @@ class _CheckoutDialogState extends State<CheckoutDialog> {
                   SizedBox(height: 8.h),
                   _buildConfirmRow('รับเงิน', amountReceived),
                   SizedBox(height: 8.h),
-                  Divider(color: Colors.white.withOpacity(0.2)),
+                  Divider(color: Colors.white.withValues(alpha: 0.2)),
                   SizedBox(height: 8.h),
 
                   // Change amount - highlighted
                   Container(
                     padding: EdgeInsets.all(16.w),
                     decoration: BoxDecoration(
-                      color: Colors.greenAccent.withOpacity(0.15),
+                      color: Colors.greenAccent.withValues(alpha: 0.15),
                       borderRadius: BorderRadius.circular(12.r),
                       border: Border.all(
-                          color: Colors.greenAccent.withOpacity(0.3)),
+                          color: Colors.greenAccent.withValues(alpha: 0.3)),
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -1081,7 +1139,7 @@ class _CheckoutDialogState extends State<CheckoutDialog> {
                           style: OutlinedButton.styleFrom(
                             padding: EdgeInsets.symmetric(vertical: 14.h),
                             side: BorderSide(
-                                color: Colors.white.withOpacity(0.3)),
+                                color: Colors.white.withValues(alpha: 0.3)),
                             foregroundColor: Colors.white,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(12.r),
@@ -1142,17 +1200,22 @@ class _CheckoutDialogState extends State<CheckoutDialog> {
 
   /// Speak the change amount in Thai
   Future<void> _speakChangeAmount(double change) async {
-    final changeInt = change.floor();
-    final changeSatang = ((change - changeInt) * 100).round();
+    try {
+      final changeInt = change.floor();
+      final changeSatang = ((change - changeInt) * 100).round();
 
-    String speechText;
-    if (changeSatang > 0) {
-      speechText = 'เงินทอน $changeInt บาท $changeSatang สตางค์';
-    } else {
-      speechText = 'เงินทอน $changeInt บาท';
+      String speechText;
+      if (changeSatang > 0) {
+        speechText = 'เงินทอน $changeInt บาท $changeSatang สตางค์';
+      } else {
+        speechText = 'เงินทอน $changeInt บาท';
+      }
+
+      await _flutterTts.speak(speechText);
+    } catch (e) {
+      // Silently handle TTS errors to not interrupt checkout flow
+      debugPrint('TTS Error: $e');
     }
-
-    // await _flutterTts.speak(speechText);
   }
 }
 

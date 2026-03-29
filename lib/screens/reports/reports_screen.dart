@@ -131,7 +131,7 @@ class _ReportsScreenState extends State<ReportsScreen> {
 
   Future<void> _showOrderDetails(int orderId) async {
     // Show loading
-    showDialog(
+    showDialog<void>(
       context: context,
       barrierDismissible: false,
       builder: (_) => const Center(child: CircularProgressIndicator()),
@@ -888,7 +888,7 @@ class _ReportsScreenState extends State<ReportsScreen> {
                       ),
                       SizedBox(width: 6.w),
                       Text(
-                        item['category_name'],
+                        item['category_name'] as String,
                         style: GoogleFonts.outfit(
                             color: Colors.white70, fontSize: 12.sp),
                       ),
@@ -943,7 +943,7 @@ class _ReportsScreenState extends State<ReportsScreen> {
           fontWeight: FontWeight.bold,
           color: Colors.white,
         ),
-        badgeWidget: isLarge ? _buildPieBadge(item['category_name']) : null,
+        badgeWidget: isLarge ? _buildPieBadge(item['category_name'] as String) : null,
         badgePositionPercentageOffset: 1.5,
       );
     });
@@ -1001,7 +1001,7 @@ class _ReportsScreenState extends State<ReportsScreen> {
         final time = DateFormat('HH:mm')
             .format(DateTime.fromMillisecondsSinceEpoch(timeMs));
         final id = tx['order_id']; // Use order_id instead of transaction id
-        final paymentMethod = tx['payment_method'] ?? 'CASH';
+        final paymentMethod = (tx['payment_method'] as String?) ?? 'CASH';
 
         final tableName = tx['table_name'];
         final orderType = tableName == null ? 'Takeaway' : 'Table $tableName';

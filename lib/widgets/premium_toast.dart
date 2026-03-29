@@ -19,7 +19,7 @@ class PremiumToast {
     overlay.insert(overlayEntry);
 
     // Auto-remove after duration
-    Future.delayed(const Duration(seconds: 3)).then((_) {
+    Future<void>.delayed(const Duration(seconds: 3)).then((_) {
       if (overlayEntry.mounted) {
         overlayEntry.remove();
       }
@@ -114,13 +114,13 @@ class _ToastWidgetState extends State<_ToastWidget>
                         color: const Color(0xFF252836).withValues(alpha: 0.98),
                         border: Border(
                           top: BorderSide(
-                              color: Colors.white.withValues(alpha: 0.1),
+                              color: Theme.of(context).brightness == Brightness.dark ? Colors.white.withValues(alpha: 0.1) : Colors.black.withValues(alpha: 0.1),
                               width: 1),
                           right: BorderSide(
-                              color: Colors.white.withValues(alpha: 0.1),
+                              color: Theme.of(context).brightness == Brightness.dark ? Colors.white.withValues(alpha: 0.1) : Colors.black.withValues(alpha: 0.1),
                               width: 1),
                           bottom: BorderSide(
-                              color: Colors.white.withValues(alpha: 0.1),
+                              color: Theme.of(context).brightness == Brightness.dark ? Colors.white.withValues(alpha: 0.1) : Colors.black.withValues(alpha: 0.1),
                               width: 1),
                         ),
                       ),
@@ -150,7 +150,7 @@ class _ToastWidgetState extends State<_ToastWidget>
                                 Text(
                                   widget.isError ? 'Error' : 'Success',
                                   style: TextStyle(
-                                    color: Colors.white,
+                                    color: Theme.of(context).colorScheme.onSurface,
                                     fontWeight: FontWeight.bold,
                                     fontSize: 14.sp,
                                   ),
@@ -159,7 +159,7 @@ class _ToastWidgetState extends State<_ToastWidget>
                                 Text(
                                   widget.message,
                                   style: TextStyle(
-                                    color: Colors.white70,
+                                    color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
                                     fontSize: 12.sp,
                                   ),
                                   maxLines: 2,

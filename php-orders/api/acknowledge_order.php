@@ -1,14 +1,14 @@
 <?php
 /**
  * POST /api/acknowledge_order.php
- * Marks an order as acknowledged by POS
+ * Marks an order as acknowledged by POS (store-specific)
  * 
  * Request body (JSON):
  * {"order_id": 123}
  */
 
 require_once 'config.php';
-validateApiKey();
+$storeId = validateApiKey();
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     sendResponse(['error' => 'Method not allowed'], 405);
@@ -24,12 +24,19 @@ try {
 
     $orderId = (int)$input['order_id'];
 
+    // Verify order belongs to this store
+    $checkStmt = $pdo->prepare("SELECT id FROM orders WHERE id = :order_id AND store_id = :store_id");
+    $checkStmt->execute([':order_id' => $orderId, ':store_id' => $storeId]);
+    if (!$checkStmt->fetch()) {
+        sendResponse(['error' => 'Order not found or access denied'], 404);
+    }
+
     $stmt = $pdo->prepare("
         UPDATE orders 
         SET acknowledged = 1, acknowledged_at = NOW() 
-        WHERE id = :order_id
+        WHERE id = :order_id AND store_id = :store_id
     ");
-    $stmt->execute([':order_id' => $orderId]);
+    $stmt->execute([':order_id' => $orderId, ':store_id' => $storeId]);
 
     // Also mark all pending items as acknowledged
     $itemsStmt = $pdo->prepare("

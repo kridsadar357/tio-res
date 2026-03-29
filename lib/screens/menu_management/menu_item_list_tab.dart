@@ -26,7 +26,7 @@ class _MenuItemListTabState extends State<MenuItemListTab> {
       children: [
         // Category Filter
         _buildCategoryFilter(),
-        const Divider(height: 1, thickness: 1, color: Colors.white10),
+        Divider(height: 1, thickness: 1, color: Theme.of(context).brightness == Brightness.dark ? Colors.white.withOpacity(0.1) : Colors.black.withOpacity(0.1)),
         // Grid
         Expanded(
           child: FutureBuilder<List<MenuItem>>(
@@ -54,11 +54,11 @@ class _MenuItemListTabState extends State<MenuItemListTab> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Icon(Icons.fastfood_outlined,
-                          size: 64.sp, color: Colors.white12),
+                          size: 64.sp, color: Theme.of(context).colorScheme.onSurface.withOpacity(0.3)),
                       SizedBox(height: 16.h),
                       Text('No items found',
                           style: TextStyle(
-                              fontSize: 16.sp, color: Colors.white38)),
+                              fontSize: 16.sp, color: Theme.of(context).colorScheme.onSurface.withOpacity(0.5))),
                     ],
                   ),
                 );
@@ -195,7 +195,7 @@ class _MenuItemListTabState extends State<MenuItemListTab> {
         onTap: () async {
           await Navigator.push(
             context,
-            MaterialPageRoute(
+            MaterialPageRoute<void>(
                 builder: (context) => ManageItemScreen(item: item)),
           );
           setState(() {});
@@ -212,7 +212,7 @@ class _MenuItemListTabState extends State<MenuItemListTab> {
                 offset: const Offset(0, 4),
               ),
             ],
-            border: Border.all(color: Colors.white.withValues(alpha: 0.05)),
+            border: Border.all(color: Theme.of(context).brightness == Brightness.dark ? Colors.white.withValues(alpha: 0.05) : Colors.black.withValues(alpha: 0.05)),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -249,8 +249,8 @@ class _MenuItemListTabState extends State<MenuItemListTab> {
                             decoration: BoxDecoration(
                               color: Colors.black.withValues(alpha: 0.6),
                               shape: BoxShape.circle,
-                              border: Border.all(
-                                  color: Colors.white.withValues(alpha: 0.2)),
+                                  border: Border.all(
+                                  color: Theme.of(context).brightness == Brightness.dark ? Colors.white.withValues(alpha: 0.2) : Colors.black.withValues(alpha: 0.2)),
                             ),
                             child: Icon(Icons.close,
                                 size: 14.sp, color: Colors.redAccent),
@@ -328,7 +328,7 @@ class _MenuItemListTabState extends State<MenuItemListTab> {
                                   overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
                                     fontSize: 11.sp,
-                                    color: Colors.white54,
+                                    color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
                                     height: 1.2,
                                   ),
                                 ),
@@ -393,15 +393,15 @@ class _MenuItemListTabState extends State<MenuItemListTab> {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: const Color(0xFF252836),
-        title: const Text('Delete Item', style: TextStyle(color: Colors.white)),
+        backgroundColor: Theme.of(context).cardTheme.color,
+        title: Text('Delete Item', style: TextStyle(color: Theme.of(context).colorScheme.onSurface)),
         content: Text('Are you sure you want to delete "${item.name}"?',
-            style: const TextStyle(color: Colors.white70)),
+            style: TextStyle(color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7))),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
             child:
-                const Text('Cancel', style: TextStyle(color: Colors.white54)),
+                Text('Cancel', style: TextStyle(color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6))),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, true),

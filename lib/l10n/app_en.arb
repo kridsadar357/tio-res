@@ -30,7 +30,9 @@
   "startedAt": "Started at {time}",
   "@startedAt": {
     "placeholders": {
-        "time": {}
+        "time": {
+          "type": "Object"
+        }
     }
   },
   "startingCashFloat": "Starting Cash Float",
@@ -50,6 +52,13 @@
   "currentOrder": "Current Order",
   "buffetHeadcount": "Buffet Headcount",
   "tierPricePerson": "Tier Price: {price} / person",
+  "@tierPricePerson": {
+    "placeholders": {
+      "price": {
+        "type": "Object"
+      }
+    }
+  },
   
   "shopInformation": "Shop Information",
   "shopDetails": "Shop Details",
@@ -132,7 +141,9 @@
   "cleaningTable": "Cleaning {name}",
   "@cleaningTable": {
     "placeholders": {
-      "name": {}
+      "name": {
+        "type": "Object"
+      }
     }
   },
   "tableBeingCleaned": "Table is currently being cleaned.",
@@ -141,7 +152,9 @@
   "tableNowAvailable": "{name} is now Available",
   "@tableNowAvailable": {
     "placeholders": {
-      "name": {}
+      "name": {
+        "type": "Object"
+      }
     }
   },
   
@@ -200,6 +213,28 @@
   "unknownDevice": "Unknown Device",
   "noAddress": "No Address",
   "refreshList": "Refresh List",
+  "scanForNew": "Scan for New",
+  "stopScan": "Stop Scan",
+  "pairedDevices": "Paired Devices",
+  "nearbyDevices": "Nearby Devices",
+  "tapToPairConnect": "Tap to Pair & Connect",
+  "notPaired": "Not paired",
+  "scanningForDevices": "Scanning for nearby devices...",
+  "noPrintersFound": "No printers found",
+  "howToConnectPrinter": "How to connect your printer:",
+  "putPrinterPairingMode": "Put your printer in pairing mode (check printer manual)",
+  "openBluetoothSettings": "Open Android Bluetooth Settings",
+  "findAndPair": "Find and pair your printer name",
+  "returnAndRefresh": "Return to this app and tap Refresh",
+  "openBluetoothSettingsButton": "Open Bluetooth Settings",
+  "connectionFailed": "Connection failed",
+  "devicePairedButNotConnected": "Device is paired but connection failed. Please try connecting again.",
+  "connectionFailedDetails": "Connection failed. Please make sure:\n1. Printer is turned on and in range\n2. You accepted the pairing request if it appeared\n3. Try connecting again",
+  "bluetoothPermissionsRequired": "Bluetooth permissions are required. Please grant permissions in app settings.",
+  "bluetoothNotAvailable": "Bluetooth is not available. Please enable Bluetooth on your device.",
+  "errorLoadingDevices": "Error loading devices",
+  "availablePrinters": "Available Printers",
+  "refreshPairedDevices": "Refresh Paired Devices",
 
   "apiSettings": "API Settings",
   "endpointsConfig": "Endpoints Config",
@@ -267,7 +302,7 @@
   "orderListComponent": "Order List",
   "totalsComponent": "Totals",
   "dynamicData": "Dynamic Data",
-  "@errorSavingLayout": { "placeholders": { "error": {} } },
+  "@errorSavingLayout": { "placeholders": { "error": { "type": "Object" } } },
   "nameLabel": "Name",
   "phoneLabel": "Phone",
   "emailLabel": "Email",
@@ -341,5 +376,88 @@
   "cashier": "Cashier",
   "none": "None",
   "object": "Object",
-  "selectItem": "Select an item"
+  "selectItem": "Select an item",
+  
+  "receiptBuffetCharges": "BUFFET CHARGES",
+  "receiptExtraItems": "EXTRA ITEMS",
+  "receiptBuffetSubtotal": "Buffet Subtotal",
+  "receiptExtrasSubtotal": "Extras Subtotal",
+  "receiptGrandTotal": "GRAND TOTAL",
+  "receiptThankYou": "Thank you for dining with us!",
+  "receiptAdult": "Adult",
+  "receiptChild": "Child",
+  "receiptTable": "Table",
+  "receiptOrder": "Order",
+  "receiptDate": "Date",
+  "receiptTime": "Time",
+  "receiptGuests": "Guests",
+  "receiptPayment": "Payment",
+  
+  "backupRestore": "Backup & Restore",
+  "backupDescription": "Backup your database, images, and settings to transfer to another device or restore later.",
+  "createBackup": "Create Backup",
+  "restoreBackup": "Restore Backup",
+  "backupIncludes": "Backup includes:",
+  "database": "Database (orders, menu, tables, etc.)",
+  "menuImages": "Menu Images",
+  "appSettings": "App Settings",
+  "receiptLayouts": "Receipt Layouts",
+  "createBackupNow": "Create Backup Now",
+  "selectBackupFile": "Select a backup file to restore from:",
+  "browseFiles": "Browse Files",
+  "availableBackups": "Available Backups",
+  "backupWarning": "Restoring a backup will replace ALL current data. Make sure to backup your current data first if needed.",
+  
+  "qrCodeOrdering": "QR Code Ordering",
+  "qrOrderingEnabled": "Customers can scan QR to order",
+  "qrOrderingDisabled": "QR ordering is disabled",
+  "qrUrlConfig": "QR URL Configuration",
+  "qrBaseUrl": "Base URL",
+  "qrUrlStructure": "URL Structure",
+  "openTableQrDesc": "Open Table QR",
+  "menuPageDesc": "Menu Page",
+  "storeInfo": "Store Info",
+  "shopLogo": "Shop Logo",
+  "shopAddress": "Shop Address",
+  "shopTel": "Shop Tel",
+  "completed": "completed",
+  "receiptPrintedSuccessfully": "Receipt printed successfully",
+  "errorOccurred": "Error occurred",
+  "earned": "Earned",
+  "points": "points",
+  "insufficientFunds": "Insufficient funds! Please enter at least",
+  
+  "takeAway": "Take Away",
+  "takeAwayDescription": "Orders for customers who are not dining in",
+  "newTakeAwayOrder": "New Take Away Order",
+  "takeAwayComingSoon": "Take Away feature coming soon!",
+  "todayOrders": "Today's Orders",
+  "pendingOrders": "Pending",
+  "completedOrders": "Completed",
+  "orderItems": "ORDER ITEMS",
+  
+  "syncAllData": "Sync All Data",
+  "syncAllDataDesc": "Send all POS data to server (first-time setup)",
+  "sendAllData": "Send All Data",
+  "syncing": "Syncing...",
+  "buffetTiers": "Buffet Tiers",
+  "tables": "Tables",
+  "apiNotEnabled": "Please enable API and save settings first",
+  "apiConnectionFailed": "Connection failed. Please check URL and API key.",
+  "apiSyncSuccess": "All data synced successfully!",
+  "apiSyncPartialFail": "Some data failed to sync",
+  
+  "pendingOrders": "Pending Orders",
+  "orderItems": "Order Items",
+  "printToKitchen": "Print to Kitchen",
+  "served": "Served",
+  "printSuccess": "Sent to printer",
+  "orderServed": "Order marked as served",
+  "noPendingOrders": "No pending orders",
+  "moveTable": "Move Table",
+  "cancelTable": "Cancel Table",
+  "confirmCancelTable": "Are you sure you want to cancel this table? The order will be voided.",
+  "selectDestinationTable": "Select New Table",
+  "tableMoved": "Table moved successfully",
+  "tableCancelled": "Table cancelled"
 }

@@ -38,9 +38,9 @@ class BlueThermalPrinter {
 
   ///onStateChanged()
   Stream<int?> onStateChanged() async* {
-    yield await _channel.invokeMethod('state').then((buffer) => buffer);
+    yield await _channel.invokeMethod('state').then((buffer) => buffer as int?);
 
-    yield* _stateChannel.receiveBroadcastStream().map((buffer) => buffer);
+    yield* _stateChannel.receiveBroadcastStream().map((buffer) => buffer as int?);
   }
 
   ///onRead()
@@ -60,8 +60,30 @@ class BlueThermalPrinter {
 
   ///getBondedDevices()
   Future<List<BluetoothDevice>> getBondedDevices() async {
-    final List list = await (_channel.invokeMethod('getBondedDevices'));
-    return list.map((map) => BluetoothDevice.fromMap(map)).toList();
+    final dynamic result = await _channel.invokeMethod('getBondedDevices');
+    if (result is List) {
+      final List<dynamic> list = result;
+      return list.map((map) => BluetoothDevice.fromMap(map as Map<dynamic, dynamic>)).toList();
+    }
+    return [];
+  }
+
+  ///startDiscovery() - Start discovering nearby Bluetooth devices
+  Future<bool?> startDiscovery() async =>
+      await _channel.invokeMethod('startDiscovery');
+
+  ///stopDiscovery() - Stop discovering Bluetooth devices
+  Future<bool?> stopDiscovery() async =>
+      await _channel.invokeMethod('stopDiscovery');
+
+  ///getDiscoveredDevices() - Get list of discovered devices
+  Future<List<BluetoothDevice>> getDiscoveredDevices() async {
+    final dynamic result = await _channel.invokeMethod('getDiscoveredDevices');
+    if (result is List) {
+      final List<dynamic> list = result;
+      return list.map((map) => BluetoothDevice.fromMap(map as Map<dynamic, dynamic>)).toList();
+    }
+    return [];
   }
 
   ///isDeviceConnected(BluetoothDevice device)
@@ -170,9 +192,9 @@ class BluetoothDevice {
 
   BluetoothDevice(this.name, this.address);
 
-  BluetoothDevice.fromMap(Map map)
-      : name = map['name'],
-        address = map['address'];
+  BluetoothDevice.fromMap(Map<dynamic, dynamic> map)
+      : name = map['name'] as String?,
+        address = map['address'] as String?;
 
   Map<String, dynamic> toMap() => {
         'name': name,

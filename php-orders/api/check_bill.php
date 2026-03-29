@@ -1,7 +1,8 @@
 <?php
 /**
  * GET /api/check_bill.php
- * Returns bill summary for a table
+ * Returns bill summary for a table (store-specific)
+ * PUBLIC ACCESS - Customers can check their bill
  * 
  * Query params:
  * - table_id: Table ID (required)
@@ -9,7 +10,7 @@
  */
 
 require_once 'config.php';
-validateApiKey();
+$storeId = validatePublicAccess();
 
 try {
     $pdo = getConnection();
@@ -21,13 +22,20 @@ try {
     $tableId = (int)$_GET['table_id'];
     $orderId = $_GET['order_id'] ?? null;
 
-    // Get order
+    // Get order (with store filter)
     if ($orderId) {
-        $stmt = $pdo->prepare("SELECT * FROM orders WHERE id = :order_id");
-        $stmt->execute([':order_id' => $orderId]);
+        $stmt = $pdo->prepare("
+            SELECT * FROM orders 
+            WHERE id = :order_id AND store_id = :store_id
+        ");
+        $stmt->execute([':order_id' => $orderId, ':store_id' => $storeId]);
     } else {
-        $stmt = $pdo->prepare("SELECT * FROM orders WHERE table_id = :table_id AND status = 'open' ORDER BY created_at DESC LIMIT 1");
-        $stmt->execute([':table_id' => $tableId]);
+        $stmt = $pdo->prepare("
+            SELECT * FROM orders 
+            WHERE table_id = :table_id AND store_id = :store_id AND status = 'open' 
+            ORDER BY created_at DESC LIMIT 1
+        ");
+        $stmt->execute([':table_id' => $tableId, ':store_id' => $storeId]);
     }
 
     $order = $stmt->fetch();
@@ -39,9 +47,9 @@ try {
     // Get order items with details
     $itemsStmt = $pdo->prepare("
         SELECT 
-            oi.id, oi.quantity, oi.notes, oi.status,
-            mi.name, mi.price,
-            (oi.quantity * mi.price) as subtotal
+            oi.id, oi.quantity, oi.notes, oi.status, oi.price_at_moment,
+            mi.name, mi.name_th,
+            (oi.quantity * oi.price_at_moment) as subtotal
         FROM order_items oi
         JOIN menu_items mi ON oi.menu_item_id = mi.id
         WHERE oi.order_id = :order_id
@@ -50,27 +58,43 @@ try {
     $itemsStmt->execute([':order_id' => $order['id']]);
     $items = $itemsStmt->fetchAll();
 
+    // Get store info for tax calculation
+    $store = getStoreInfo();
+    $taxRate = (float)($store['tax_rate'] ?? 0);
+
     // Calculate totals
     $subtotal = array_sum(array_column($items, 'subtotal'));
-    $discount = $order['discount_amount'] ?? 0;
-    $tax = 0; // Add tax calculation if needed
+    $discount = (float)($order['discount_amount'] ?? 0);
+    $tax = ($subtotal - $discount) * ($taxRate / 100);
     $grandTotal = $subtotal - $discount + $tax;
 
     // Get table info
-    $tableStmt = $pdo->prepare("SELECT table_name, seats FROM tables WHERE id = :table_id");
-    $tableStmt->execute([':table_id' => $tableId]);
+    $tableStmt = $pdo->prepare("
+        SELECT table_name, seats 
+        FROM tables 
+        WHERE id = :table_id AND store_id = :store_id
+    ");
+    $tableStmt->execute([':table_id' => $tableId, ':store_id' => $storeId]);
     $table = $tableStmt->fetch();
 
     sendResponse([
         'success' => true,
+        'store' => [
+            'name' => $store['name'],
+            'name_th' => $store['name_th'],
+            'address' => $store['address'],
+            'tel' => $store['tel'],
+            'promptpay_id' => $store['promptpay_id']
+        ],
         'order_id' => $order['id'],
         'table' => $table,
         'items' => $items,
         'summary' => [
-            'subtotal' => $subtotal,
-            'discount' => $discount,
-            'tax' => $tax,
-            'grand_total' => $grandTotal,
+            'subtotal' => round($subtotal, 2),
+            'discount' => round($discount, 2),
+            'tax_rate' => $taxRate,
+            'tax' => round($tax, 2),
+            'grand_total' => round($grandTotal, 2),
             'item_count' => count($items)
         ],
         'status' => $order['status'],

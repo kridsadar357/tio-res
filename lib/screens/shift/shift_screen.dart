@@ -151,7 +151,7 @@ class _ShiftScreenState extends State<ShiftScreen> {
         ? l10n.shiftOpen.toUpperCase()
         : l10n.shiftClosed.toUpperCase();
     String subText = isShiftOpen
-        ? l10n.startedAt(_formatTime(_currentShift!['start_time']))
+        ? l10n.startedAt(_formatTime(_currentShift!['start_time'] as int))
         : l10n.readyToStartNewShift;
 
     return Container(

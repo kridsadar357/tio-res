@@ -152,6 +152,47 @@ class PrinterService extends ChangeNotifier {
     }
   }
 
+  /// Print Test Open Table Receipt (uses custom layout if available)
+  Future<bool> printTestOpenTable() async {
+    if (!_isConnected || _adapter == null) {
+      final reconnected = await connect();
+      if (!reconnected) return false;
+    }
+
+    try {
+      // Create dummy table and order for testing
+      final testTable = TableModel(
+        id: 1,
+        tableName: 'TEST',
+        status: 1,
+        x: 0,
+        y: 0,
+        width: 100,
+        height: 100,
+      );
+      final testOrder = Order(
+        id: 999,
+        tableId: 1,
+        startTime: DateTime.now().millisecondsSinceEpoch,
+        adultHeadcount: 2,
+        childHeadcount: 1,
+        buffetTierPrice: 299.0,
+        totalAmount: 0.0,
+        status: 'OPEN',
+      );
+      
+      final bytes = await ReceiptGenerator.generateOpenTableReceipt(
+        table: testTable,
+        order: testOrder,
+        qrPayload: 'test:order:999|table:TEST',
+      );
+      return await _adapter!.print(bytes);
+    } catch (e) {
+      debugPrint('Print Test Open Table Error: $e');
+      return false;
+    }
+  }
+
   /// Print Open Table Receipt (QR)
   Future<bool> printOpenTableReceipt({
     required TableModel table,
@@ -188,6 +229,28 @@ class PrinterService extends ChangeNotifier {
       return await _adapter!.print(bytes);
     } catch (e) {
       debugPrint('Print Open Table Receipt Error: $e');
+      return false;
+    }
+  }
+
+  /// Print Kitchen Order (for web orders)
+  Future<bool> printKitchenOrder({
+    required String tableName,
+    required List<Map<String, dynamic>> items,
+  }) async {
+    if (!_isConnected || _adapter == null) {
+      final reconnected = await connect();
+      if (!reconnected) return false;
+    }
+
+    try {
+      final bytes = await ReceiptGenerator.generateKitchenOrder(
+        tableName: tableName,
+        items: items,
+      );
+      return await _adapter!.print(bytes);
+    } catch (e) {
+      debugPrint('Print Kitchen Order Error: $e');
       return false;
     }
   }

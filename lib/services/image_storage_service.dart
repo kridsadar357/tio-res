@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/foundation.dart';
+import '../core/utils/logger.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -63,7 +64,7 @@ class ImageStorageService {
       return File(photo.path);
     } catch (e) {
       if (kDebugMode) {
-        print('Error picking image from camera: $e');
+        Logger.error('Error picking image from camera', error: e);
       }
       return null;
     }
@@ -85,7 +86,7 @@ class ImageStorageService {
       return File(image.path);
     } catch (e) {
       if (kDebugMode) {
-        print('Error picking image from gallery: $e');
+        Logger.error('Error picking image from gallery', error: e);
       }
       return null;
     }
@@ -116,7 +117,7 @@ class ImageStorageService {
       return '$_imageDirectoryName/$filename';
     } catch (e) {
       if (kDebugMode) {
-        print('Error saving image: $e');
+        Logger.error('Error saving image', error: e);
       }
       return null;
     }
@@ -135,7 +136,7 @@ class ImageStorageService {
       return null;
     } catch (e) {
       if (kDebugMode) {
-        print('Error getting image file: $e');
+        Logger.error('Error getting image file', error: e);
       }
       return null;
     }
@@ -155,7 +156,7 @@ class ImageStorageService {
       return false;
     } catch (e) {
       if (kDebugMode) {
-        print('Error deleting image: $e');
+        Logger.error('Error deleting image', error: e);
       }
       return false;
     }
@@ -180,7 +181,7 @@ class ImageStorageService {
       return deleteCount;
     } catch (e) {
       if (kDebugMode) {
-        print('Error deleting all images: $e');
+        Logger.error('Error deleting all images', error: e);
       }
       return 0;
     }
@@ -203,7 +204,7 @@ class ImageStorageService {
       return totalSize;
     } catch (e) {
       if (kDebugMode) {
-        print('Error calculating images size: $e');
+        Logger.error('Error calculating images size', error: e);
       }
       return 0;
     }
@@ -224,7 +225,7 @@ class ImageStorageService {
       return count;
     } catch (e) {
       if (kDebugMode) {
-        print('Error counting images: $e');
+        Logger.error('Error counting images', error: e);
       }
       return 0;
     }
@@ -253,7 +254,7 @@ class ImageStorageService {
       return await saveImage(newImageFile, itemId: itemId, itemName: itemName);
     } catch (e) {
       if (kDebugMode) {
-        print('Error replacing image: $e');
+        Logger.error('Error replacing image', error: e);
       }
       return null;
     }
@@ -274,7 +275,7 @@ class ImageStorageService {
       return '$_imageDirectoryName/$filename';
     } catch (e) {
       if (kDebugMode) {
-        print('Error copying image: $e');
+        Logger.error('Error copying image', error: e);
       }
       return null;
     }

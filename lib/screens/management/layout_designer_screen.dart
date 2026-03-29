@@ -19,6 +19,7 @@ class LayoutDesignerScreen extends StatefulWidget {
 
 class _LayoutDesignerScreenState extends State<LayoutDesignerScreen> {
   // Grid settings
+  // Grid settings
   final double gridSize = 20.0;
 
   List<TableModel> _tables = [];
@@ -34,6 +35,10 @@ class _LayoutDesignerScreenState extends State<LayoutDesignerScreen> {
 
   bool _isLoading = true;
 
+  // Track deletions for batch save
+  final List<int> _deletedTableIds = [];
+  final List<int> _deletedObjectIds = [];
+
   @override
   void initState() {
     super.initState();
@@ -47,6 +52,11 @@ class _LayoutDesignerScreenState extends State<LayoutDesignerScreen> {
     setState(() {
       _tables = tables;
       _objects = objects;
+      _deletedTableIds.clear();
+      _deletedObjectIds.clear();
+      // Clear selection to avoid stale references causing RangeError
+      _selectedTable = null;
+      _selectedObject = null;
       _isLoading = false;
     });
   }
@@ -54,27 +64,22 @@ class _LayoutDesignerScreenState extends State<LayoutDesignerScreen> {
   Future<void> _saveChanges() async {
     final l10n = AppLocalizations.of(context)!;
     try {
-      // Save all tables (only layout props might have changed)
-      for (var table in _tables) {
-        await DatabaseHelper().updateTableLayout(table);
-      }
-
-      // Save all objects
-      for (var obj in _objects) {
-        if (obj.id == null) {
-          await DatabaseHelper().addLayoutObject(obj);
-        } else {
-          await DatabaseHelper().updateLayoutObject(obj);
-        }
-      }
+      // Use batch save for atomic operation
+      await DatabaseHelper().saveLayoutBatch(
+        tables: _tables,
+        objects: _objects,
+        deletedTableIds: _deletedTableIds,
+        deletedObjectIds: _deletedObjectIds,
+      );
 
       if (mounted) PremiumToast.show(context, l10n.layoutSaved);
-      // Reload to get IDs for new objects
+      // Reload to reflect changes and get new IDs
       _loadData();
     } catch (e) {
-      if (mounted)
+      if (mounted) {
         PremiumToast.show(context, l10n.errorSavingLayout(e.toString()),
             isError: true);
+      }
     }
   }
 
@@ -108,7 +113,7 @@ class _LayoutDesignerScreenState extends State<LayoutDesignerScreen> {
       child: Row(
         children: [
           IconButton(
-            icon: const Icon(Icons.arrow_back, color: Colors.white),
+            icon: Icon(Icons.arrow_back, color: Theme.of(context).colorScheme.onSurface),
             onPressed: () => Navigator.pop(context),
             style: IconButton.styleFrom(
               backgroundColor: Colors.white.withValues(alpha: 0.1),
@@ -123,7 +128,7 @@ class _LayoutDesignerScreenState extends State<LayoutDesignerScreen> {
             style: TextStyle(
                 fontSize: 24.sp,
                 fontWeight: FontWeight.bold,
-                color: Colors.white),
+                color: Theme.of(context).colorScheme.onSurface),
           ),
           const Spacer(),
           ElevatedButton.icon(
@@ -164,14 +169,20 @@ class _LayoutDesignerScreenState extends State<LayoutDesignerScreen> {
         _selectedObject = obj;
         _selectedTable = null;
       }),
-      onTablePanStart: (table) => setState(() {
-        _selectedTable = table;
-        _selectedObject = null;
-      }),
-      onObjectPanStart: (obj) => setState(() {
-        _selectedObject = obj;
-        _selectedTable = null;
-      }),
+      onTablePanStart: (table) {
+        FocusScope.of(context).unfocus();
+        setState(() {
+          _selectedTable = table;
+          _selectedObject = null;
+        });
+      },
+      onObjectPanStart: (obj) {
+        FocusScope.of(context).unfocus();
+        setState(() {
+          _selectedObject = obj;
+          _selectedTable = null;
+        });
+      },
       onTableDragUpdate: (table, details) {
         setState(() {
           final idx = _tables.indexWhere((t) => t.id == table.id);
@@ -180,10 +191,6 @@ class _LayoutDesignerScreenState extends State<LayoutDesignerScreen> {
             final scale = _transformationController.value.getMaxScaleOnAxis();
             double newX = table.x + (details.delta.dx / scale);
             double newY = table.y + (details.delta.dy / scale);
-
-            // Snap to grid removed for smoothness
-            // newX = (newX / gridSize).round() * gridSize;
-            // newY = (newY / gridSize).round() * gridSize;
 
             _tables[idx] = table.copyWith(
               x: newX,
@@ -196,14 +203,9 @@ class _LayoutDesignerScreenState extends State<LayoutDesignerScreen> {
         setState(() {
           final idx = _objects.indexOf(obj);
           if (idx != -1) {
-            // Adjust delta by current zoom scale
             final scale = _transformationController.value.getMaxScaleOnAxis();
             double newX = obj.x + (details.delta.dx / scale);
             double newY = obj.y + (details.delta.dy / scale);
-
-            // Snap to grid removed for smoothness
-            // newX = (newX / gridSize).round() * gridSize;
-            // newY = (newY / gridSize).round() * gridSize;
 
             _objects[idx] = obj.copyWith(
               x: newX,
@@ -213,13 +215,65 @@ class _LayoutDesignerScreenState extends State<LayoutDesignerScreen> {
           }
         });
       },
+      // New Geometry Callbacks
+      onTableResize: (table, w, h) {
+        setState(() {
+           final idx = _tables.indexWhere((t) => t.id == table.id);
+           if (idx != -1) {
+             _tables[idx] = table.copyWith(width: w, height: h);
+             _selectedTable = _tables[idx];
+           }
+        });
+      },
+      onObjectResize: (obj, w, h) {
+        setState(() {
+           final idx = _objects.indexOf(obj);
+           if (idx != -1) {
+             _objects[idx] = obj.copyWith(width: w, height: h);
+             _selectedObject = _objects[idx];
+           }
+        });
+      },
+      onTableRotate: (table, angle) {
+         setState(() {
+           final idx = _tables.indexWhere((t) => t.id == table.id);
+           if (idx != -1) {
+             _tables[idx] = table.copyWith(rotation: angle);
+             _selectedTable = _tables[idx];
+           }
+        });
+      },
+      onObjectRotate: (obj, angle) {
+        setState(() {
+           final idx = _objects.indexOf(obj);
+           if (idx != -1) {
+             _objects[idx] = obj.copyWith(rotation: angle);
+             _selectedObject = _objects[idx];
+           }
+        });
+      },
     );
   }
 
   void _addNewTable(double x, double y) async {
     final l10n = AppLocalizations.of(context)!;
-    final id =
-        await DatabaseHelper().addTable('${l10n.table} ${_tables.length + 1}');
+    // For batch save, new tables need a temporary negative ID or similar if we wanted to avoid immediate DB insert.
+    // However, DatabaseHelper.addTable returns an int ID.
+    // To be consistent with "Save" button philosophy, we should ideally NOT insert yet.
+    // But `TableModel` usually expects an ID.
+    // Compromise: We insert immediately for Tables (since they are more strict entities), or we handle null/temp ID.
+    // Existing code did immediate insert.
+    // If we want to fix "missing original", maybe we should just rely on the batch helper for *updates*.
+    // But `saveLayoutBatch` handles inserts for objects.
+    // Let's defer table insert too? `TableModel` id is `int`. If we make it nullable or allow 0/negative?
+    // `TableModel` definition: `final int id;` (required).
+    // Changing `TableModel` is risky.
+    // Let's stick to immediate insert for Tables for now (as before), but batch update for positions.
+    // ACTUALLY, checking `_addNewObject` logic: it creates `LayoutObjectModel` with null ID.
+    // `TableModel` ID is required.
+    // I'll keep `_addNewTable` as is (immediate insert). But `_addNewObject` is fine with batch.
+    
+    final id = await DatabaseHelper().addTable('${l10n.table} ${_tables.length + 1}');
     final newTable = TableModel(
       id: id,
       tableName: '${l10n.table} ${_tables.length + 1}',
@@ -231,8 +285,6 @@ class _LayoutDesignerScreenState extends State<LayoutDesignerScreen> {
   }
 
   void _addNewObject(String type, double x, double y) {
-    // Map localized type back to internal key if needed, or better, pass internal key from draggables
-    // The Palette draggables pass the internal key (unlocalized logic in Palette widget)
     final width = type == 'Wall' ? 10.0 : 80.0;
     final height = type == 'Wall' ? 100.0 : 80.0;
 
@@ -242,7 +294,7 @@ class _LayoutDesignerScreenState extends State<LayoutDesignerScreen> {
       y: y - (height / 2),
       width: width,
       height: height,
-      color: Colors.grey.value,
+      color: 0xFF9E9E9E,
     );
     setState(() => _objects.add(newObj));
   }
@@ -276,27 +328,44 @@ class _LayoutDesignerScreenState extends State<LayoutDesignerScreen> {
             Text('${l10n.table}: ${_selectedTable!.tableName}',
                 style: const TextStyle(color: Colors.white)),
             SizedBox(height: 10.h),
-            _buildSlider(l10n.width, _selectedTable!.width, 20, 300, (val) {
-              setState(() {
-                final idx = _tables.indexOf(_selectedTable!);
-                _tables[idx] = _selectedTable!.copyWith(width: val);
-                _selectedTable = _tables[idx];
-              });
-            }),
-            _buildSlider(l10n.height, _selectedTable!.height, 20, 300, (val) {
-              setState(() {
-                final idx = _tables.indexOf(_selectedTable!);
-                _tables[idx] = _selectedTable!.copyWith(height: val);
-                _selectedTable = _tables[idx];
-              });
-            }),
+            // Width/Height controls removed or kept as fine-tuning?
+            // Keeping them as "Fine Tuning"
+            _PropertyInput(
+              label: l10n.width,
+              value: _selectedTable!.width,
+              onChanged: (val) {
+                setState(() {
+                  final idx = _tables.indexWhere((t) => t.id == _selectedTable!.id);
+                  if (idx != -1) {
+                    _tables[idx] = _selectedTable!.copyWith(width: val);
+                    _selectedTable = _tables[idx];
+                  }
+                });
+              },
+            ),
+            SizedBox(height: 10.h),
+            _PropertyInput(
+              label: l10n.height,
+              value: _selectedTable!.height,
+              onChanged: (val) {
+                setState(() {
+                  final idx = _tables.indexWhere((t) => t.id == _selectedTable!.id);
+                  if (idx != -1) {
+                    _tables[idx] = _selectedTable!.copyWith(height: val);
+                    _selectedTable = _tables[idx];
+                  }
+                });
+              },
+            ),
             _buildSlider(l10n.rotation, _selectedTable!.rotation, 0, 6.28,
                 (val) {
               // Radians
               setState(() {
-                final idx = _tables.indexOf(_selectedTable!);
-                _tables[idx] = _selectedTable!.copyWith(rotation: val);
-                _selectedTable = _tables[idx];
+                final idx = _tables.indexWhere((t) => t.id == _selectedTable!.id);
+                if (idx != -1) {
+                  _tables[idx] = _selectedTable!.copyWith(rotation: val);
+                  _selectedTable = _tables[idx];
+                }
               });
             }),
             SizedBox(height: 10.h),
@@ -316,26 +385,41 @@ class _LayoutDesignerScreenState extends State<LayoutDesignerScreen> {
                 '${l10n.object}: ${_getObjectName(l10n, _selectedObject!.type)}',
                 style: const TextStyle(color: Colors.white)),
             SizedBox(height: 10.h),
-            _buildSlider(l10n.width, _selectedObject!.width, 10, 500, (val) {
-              setState(() {
-                final idx = _objects.indexOf(_selectedObject!);
-                _objects[idx] = _selectedObject!.copyWith(width: val);
-                _selectedObject = _objects[idx];
-              });
-            }),
-            _buildSlider(l10n.height, _selectedObject!.height, 10, 500, (val) {
-              setState(() {
-                final idx = _objects.indexOf(_selectedObject!);
-                _objects[idx] = _selectedObject!.copyWith(height: val);
-                _selectedObject = _objects[idx];
-              });
-            }),
+            _PropertyInput(
+              label: l10n.width,
+              value: _selectedObject!.width,
+              onChanged: (val) {
+                setState(() {
+                  final idx = _objects.indexOf(_selectedObject!);
+                  if (idx != -1) {
+                    _objects[idx] = _selectedObject!.copyWith(width: val);
+                    _selectedObject = _objects[idx];
+                  }
+                });
+              },
+            ),
+            SizedBox(height: 10.h),
+            _PropertyInput(
+              label: l10n.height,
+              value: _selectedObject!.height,
+              onChanged: (val) {
+                setState(() {
+                  final idx = _objects.indexOf(_selectedObject!);
+                  if (idx != -1) {
+                    _objects[idx] = _selectedObject!.copyWith(height: val);
+                    _selectedObject = _objects[idx];
+                  }
+                });
+              },
+            ),
             _buildSlider(l10n.rotation, _selectedObject!.rotation, 0, 6.28,
                 (val) {
               setState(() {
                 final idx = _objects.indexOf(_selectedObject!);
-                _objects[idx] = _selectedObject!.copyWith(rotation: val);
-                _selectedObject = _objects[idx];
+                if (idx != -1) {
+                  _objects[idx] = _selectedObject!.copyWith(rotation: val);
+                  _selectedObject = _objects[idx];
+                }
               });
             }),
             SizedBox(height: 10.h),
@@ -364,9 +448,11 @@ class _LayoutDesignerScreenState extends State<LayoutDesignerScreen> {
                   onTap: () {
                     setState(() {
                       final idx = _objects.indexOf(_selectedObject!);
-                      _objects[idx] = _selectedObject!
-                          .copyWith(iconPoint: iconData?.codePoint ?? 0);
-                      _selectedObject = _objects[idx];
+                      if (idx != -1) {
+                        _objects[idx] = _selectedObject!
+                            .copyWith(iconPoint: iconData?.codePoint ?? 0);
+                        _selectedObject = _objects[idx];
+                      }
                     });
                   },
                   child: Container(
@@ -457,7 +543,7 @@ class _LayoutDesignerScreenState extends State<LayoutDesignerScreen> {
   }
 
   Widget _buildSlider(String label, double value, double min, double max,
-      Function(double) onChanged) {
+      void Function(double) onChanged) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -480,13 +566,17 @@ class _LayoutDesignerScreenState extends State<LayoutDesignerScreen> {
       onTap: () {
         setState(() {
           if (isTable) {
-            final idx = _tables.indexOf(_selectedTable!);
-            _tables[idx] = _selectedTable!.copyWith(color: value);
-            _selectedTable = _tables[idx];
+            final idx = _tables.indexWhere((t) => t.id == _selectedTable!.id);
+            if (idx != -1) {
+              _tables[idx] = _selectedTable!.copyWith(color: value);
+              _selectedTable = _tables[idx];
+            }
           } else {
             final idx = _objects.indexOf(_selectedObject!);
-            _objects[idx] = _selectedObject!.copyWith(color: value);
-            _selectedObject = _objects[idx];
+            if (idx != -1) {
+              _objects[idx] = _selectedObject!.copyWith(color: value);
+              _selectedObject = _objects[idx];
+            }
           }
         });
       },
@@ -504,20 +594,29 @@ class _LayoutDesignerScreenState extends State<LayoutDesignerScreen> {
 
   void _deleteSelectedItem() {
     if (_selectedTable != null) {
-      DatabaseHelper().deleteTable(_selectedTable!.id).then((_) {
-        setState(() {
+      // For tables, we might defer to save, but table IDs are strict.
+      // If we immediately delete from DB, we can't 'Cancel'.
+      // But we are in "Designer" mode where "Save" suggests commit.
+      // Let's defer delete.
+      setState(() {
+          _deletedTableIds.add(_selectedTable!.id);
           _tables.remove(_selectedTable);
           _selectedTable = null;
-        });
       });
     } else if (_selectedObject != null) {
       if (_selectedObject!.id != null) {
-        DatabaseHelper().deleteLayoutObject(_selectedObject!.id!);
+         setState(() {
+            _deletedObjectIds.add(_selectedObject!.id!);
+            _objects.remove(_selectedObject);
+            _selectedObject = null;
+         });
+      } else {
+        // Not in DB yet
+        setState(() {
+          _objects.remove(_selectedObject);
+          _selectedObject = null;
+        });
       }
-      setState(() {
-        _objects.remove(_selectedObject);
-        _selectedObject = null;
-      });
     }
   }
 
@@ -648,6 +747,85 @@ class ToolsPalette extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class _PropertyInput extends StatefulWidget {
+  final String label;
+  final double value;
+  final ValueChanged<double> onChanged;
+
+  const _PropertyInput({
+    required this.label,
+    required this.value,
+    required this.onChanged,
+  });
+
+  @override
+  State<_PropertyInput> createState() => _PropertyInputState();
+}
+
+class _PropertyInputState extends State<_PropertyInput> {
+  late TextEditingController _controller;
+  final FocusNode _focusNode = FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = TextEditingController(text: widget.value.toStringAsFixed(1));
+    _focusNode.addListener(() {
+      if (!_focusNode.hasFocus) {
+        // on blur, reset text to current formatted value (cleans up partial inputs)
+        _controller.text = widget.value.toStringAsFixed(1);
+      }
+    });
+  }
+
+  @override
+  void didUpdateWidget(_PropertyInput oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    // Only update text validation if NOT focused (user is not typing)
+    if (!_focusNode.hasFocus &&
+        (widget.value - double.parse(_controller.text)).abs() > 0.1) {
+      _controller.text = widget.value.toStringAsFixed(1);
+    }
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    _focusNode.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(widget.label, style: const TextStyle(color: Colors.white70)),
+        SizedBox(height: 4.h),
+        TextField(
+          controller: _controller,
+          focusNode: _focusNode,
+          keyboardType: const TextInputType.numberWithOptions(decimal: true),
+          style: const TextStyle(color: Colors.white),
+          decoration: InputDecoration(
+              isDense: true,
+              filled: true,
+              fillColor: Colors.white.withValues(alpha: 0.1),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(4.r),
+                borderSide: BorderSide.none,
+              ),
+              contentPadding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h)),
+          onChanged: (val) {
+            final d = double.tryParse(val);
+            if (d != null) widget.onChanged(d);
+          },
+        ),
+      ],
     );
   }
 }

@@ -2,6 +2,36 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
+  // Helper method to get appropriate font based on locale
+  static TextTheme _getTextTheme(Locale? locale) {
+    // Use Sarabun for Thai, Poppins for English and others
+    if (locale?.languageCode == 'th') {
+      return GoogleFonts.sarabunTextTheme();
+    } else {
+      return GoogleFonts.poppinsTextTheme();
+    }
+  }
+
+  // Helper method to get font for specific text style
+  static TextStyle _getTextStyle(Locale? locale, {
+    double? fontSize,
+    FontWeight? fontWeight,
+    Color? color,
+  }) {
+    if (locale?.languageCode == 'th') {
+      return GoogleFonts.sarabun(
+        fontSize: fontSize,
+        fontWeight: fontWeight,
+        color: color,
+      );
+    } else {
+      return GoogleFonts.poppins(
+        fontSize: fontSize,
+        fontWeight: fontWeight,
+        color: color,
+      );
+    }
+  }
   // Premium Dark Palette
   static const Color background = Color.fromARGB(255, 64, 69, 81); // Deep Navy
   static const Color surface =
@@ -25,17 +55,25 @@ class AppTheme {
   static const Color backgroundLight = Colors.white;
   static const Color textMainLight = Color(0xFF1D1D35);
 
-  static ThemeData get lightTheme {
+  static ThemeData lightTheme([Locale? locale]) {
+    final colorScheme = ColorScheme.fromSeed(
+      seedColor: primaryLight,
+      brightness: Brightness.light,
+      surface: Colors.white,
+    );
+    
     return ThemeData(
       useMaterial3: true,
       brightness: Brightness.light,
       scaffoldBackgroundColor: surfaceLight,
-      colorScheme: ColorScheme.fromSeed(
-        seedColor: primaryLight,
-        brightness: Brightness.light,
-        surface: Colors.white,
+      colorScheme: colorScheme.copyWith(
+        onSurface: textMainLight,
+        onBackground: textMainLight,
+        onPrimary: Colors.white,
+        onSecondary: Colors.white,
+        onError: Colors.white,
       ),
-      textTheme: GoogleFonts.poppinsTextTheme().apply(
+      textTheme: _getTextTheme(locale).apply(
         bodyColor: textMainLight,
         displayColor: textMainLight,
       ),
@@ -52,7 +90,7 @@ class AppTheme {
         elevation: 0,
         centerTitle: true,
         iconTheme: const IconThemeData(color: textMainLight),
-        titleTextStyle: GoogleFonts.poppins(
+        titleTextStyle: _getTextStyle(locale,
           fontSize: 20,
           fontWeight: FontWeight.w600,
           color: textMainLight,
@@ -62,14 +100,14 @@ class AppTheme {
     );
   }
 
-  static ThemeData get darkTheme {
+  static ThemeData darkTheme([Locale? locale]) {
     return ThemeData(
       brightness: Brightness.dark,
       scaffoldBackgroundColor: background,
       primaryColor: const Color.fromARGB(255, 217, 192, 49),
 
-      // Use Poppins as requested for modern look
-      textTheme: GoogleFonts.poppinsTextTheme().apply(
+      // Use Sarabun for Thai, Poppins for English
+      textTheme: _getTextTheme(locale).apply(
         bodyColor: textPrimary,
         displayColor: textPrimary,
       ),
@@ -92,11 +130,10 @@ class AppTheme {
         backgroundColor: Colors.transparent, // Transparent for seamless feel
         elevation: 0,
         centerTitle: false,
-        titleTextStyle: GoogleFonts.poppins(
+        titleTextStyle: _getTextStyle(locale,
           fontSize: 24,
           fontWeight: FontWeight.w600,
           color: textPrimary,
-          letterSpacing: 0.5,
         ),
         iconTheme: const IconThemeData(color: Colors.white),
       ),

@@ -52,7 +52,7 @@ class _MenuManagementScreenState extends State<MenuManagementScreen>
             decoration: BoxDecoration(
               color: const Color(0xFF252836), // Dark surface for tab track
               borderRadius: BorderRadius.circular(50.r), // Full pill shape
-              border: Border.all(color: Colors.white.withValues( alpha : 0.05)),
+              border: Border.all(color: Theme.of(context).brightness == Brightness.dark ? Colors.white.withValues(alpha: 0.05) : Colors.black.withValues(alpha: 0.05)),
             ),
             child: TabBar(
               controller: _tabController,
@@ -135,7 +135,7 @@ class _MenuManagementScreenState extends State<MenuManagementScreen>
         children: [
           IconButton(
             onPressed: () => Navigator.pop(context),
-            icon: const Icon(Icons.arrow_back, color: Colors.white),
+            icon: Icon(Icons.arrow_back, color: Theme.of(context).colorScheme.onSurface),
             style: IconButton.styleFrom(
               backgroundColor: Colors.white.withValues( alpha : 0.1),
               shape: RoundedRectangleBorder(
@@ -148,13 +148,13 @@ class _MenuManagementScreenState extends State<MenuManagementScreen>
                 ? TextField(
                     controller: _searchController,
                     autofocus: true,
-                    style: TextStyle(color: Colors.white, fontSize: 20.sp),
+                    style: TextStyle(color: Theme.of(context).colorScheme.onSurface, fontSize: 20.sp),
                     decoration: InputDecoration(
                       hintText: AppLocalizations.of(context)!.searchItems,
-                      hintStyle: const TextStyle(color: Colors.white54),
+                      hintStyle: TextStyle(color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6)),
                       border: InputBorder.none,
                       suffixIcon: IconButton(
-                        icon: const Icon(Icons.close, color: Colors.white54),
+                        icon: Icon(Icons.close, color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6)),
                         onPressed: () {
                           _searchController.clear();
                           setState(() {
@@ -175,7 +175,7 @@ class _MenuManagementScreenState extends State<MenuManagementScreen>
                     style: TextStyle(
                       fontSize: 24.sp,
                       fontWeight: FontWeight.bold,
-                      color: Colors.white,
+                      color: Theme.of(context).colorScheme.onSurface,
                       letterSpacing: 0.5,
                     ),
                   ),
@@ -187,7 +187,7 @@ class _MenuManagementScreenState extends State<MenuManagementScreen>
                   _isSearching = true;
                 });
               },
-              icon: const Icon(Icons.search, color: Colors.white),
+              icon: Icon(Icons.search, color: Theme.of(context).colorScheme.onSurface),
               style: IconButton.styleFrom(
                 backgroundColor: Colors.white.withValues( alpha : 0.1),
                 shape: RoundedRectangleBorder(
@@ -227,11 +227,11 @@ class _MenuManagementScreenState extends State<MenuManagementScreen>
       // Add Item
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => const ManageItemScreen()),
+        MaterialPageRoute<void>(builder: (context) => const ManageItemScreen()),
       ).then((_) => setState(() {}));
     } else {
       // Add Category
-      showDialog(
+      showDialog<void>(
         context: context,
         builder: (context) => const ManageCategoryDialog(),
       ).then((_) => setState(() {}));

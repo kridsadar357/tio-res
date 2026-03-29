@@ -262,8 +262,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get uploadYourPromptPayQr => 'อัพโหลดรูป QR พร้อมเพย์ของคุณ';
 
   @override
-  String get paymentSettingsSavedSuccessfully =>
-      'บันทึกตั้งค่าการชำระเงินสำเร็จแล้ว';
+  String get paymentSettingsSavedSuccessfully => 'บันทึกตั้งค่าการชำระเงินสำเร็จแล้ว';
 
   @override
   String get save => 'บันทึก';
@@ -522,8 +521,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get port => 'Port';
 
   @override
-  String get printerNetworkInfo =>
-      'เครื่องพิมพ์ความร้อนส่วนใหญ่ใช้ Port 9100 สำหรับระบบเครือข่าย ตรวจสอบให้แน่ใจว่าอุปกรณ์เชื่อมต่อ WiFi เดียวกัน';
+  String get printerNetworkInfo => 'เครื่องพิมพ์ความร้อนส่วนใหญ่ใช้ Port 9100 สำหรับระบบเครือข่าย ตรวจสอบให้แน่ใจว่าอุปกรณ์เชื่อมต่อ WiFi เดียวกัน';
 
   @override
   String get usbPrintingComingSoon => 'ระบบพิมพ์ผ่าน USB จะเปิดใช้งานเร็วๆ นี้';
@@ -536,6 +534,72 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get refreshList => 'รีเฟรชรายการ';
+
+  @override
+  String get scanForNew => 'สแกนหาอุปกรณ์ใหม่';
+
+  @override
+  String get stopScan => 'หยุดสแกน';
+
+  @override
+  String get pairedDevices => 'อุปกรณ์ที่จับคู่แล้ว';
+
+  @override
+  String get nearbyDevices => 'อุปกรณ์ใกล้เคียง';
+
+  @override
+  String get tapToPairConnect => 'แตะเพื่อจับคู่และเชื่อมต่อ';
+
+  @override
+  String get notPaired => 'ยังไม่ได้จับคู่';
+
+  @override
+  String get scanningForDevices => 'กำลังสแกนหาอุปกรณ์ใกล้เคียง...';
+
+  @override
+  String get noPrintersFound => 'ไม่พบเครื่องพิมพ์';
+
+  @override
+  String get howToConnectPrinter => 'วิธีเชื่อมต่อเครื่องพิมพ์:';
+
+  @override
+  String get putPrinterPairingMode => 'เปิดโหมดจับคู่ของเครื่องพิมพ์ (ดูคู่มือเครื่องพิมพ์)';
+
+  @override
+  String get openBluetoothSettings => 'เปิดการตั้งค่าบลูทูธของ Android';
+
+  @override
+  String get findAndPair => 'ค้นหาและจับคู่ชื่อเครื่องพิมพ์ของคุณ';
+
+  @override
+  String get returnAndRefresh => 'กลับมาที่แอปนี้และแตะรีเฟรช';
+
+  @override
+  String get openBluetoothSettingsButton => 'เปิดการตั้งค่าบลูทูธ';
+
+  @override
+  String get connectionFailed => 'เชื่อมต่อไม่สำเร็จ';
+
+  @override
+  String get devicePairedButNotConnected => 'อุปกรณ์จับคู่แล้วแต่เชื่อมต่อไม่สำเร็จ กรุณาลองเชื่อมต่ออีกครั้ง';
+
+  @override
+  String get connectionFailedDetails => 'การเชื่อมต่อล้มเหลว กรุณาตรวจสอบ:\n1. เครื่องพิมพ์เปิดอยู่และอยู่ในระยะ\n2. คุณยอมรับคำขอจับคู่หากปรากฏ\n3. ลองเชื่อมต่ออีกครั้ง';
+
+  @override
+  String get bluetoothPermissionsRequired => 'ต้องการสิทธิ์บลูทูธ กรุณาอนุญาตสิทธิ์ในการตั้งค่าแอป';
+
+  @override
+  String get bluetoothNotAvailable => 'บลูทูธไม่พร้อมใช้งาน กรุณาเปิดบลูทูธบนอุปกรณ์ของคุณ';
+
+  @override
+  String get errorLoadingDevices => 'เกิดข้อผิดพลาดในการโหลดอุปกรณ์';
+
+  @override
+  String get availablePrinters => 'เครื่องพิมพ์ที่มี';
+
+  @override
+  String get refreshPairedDevices => 'รีเฟรชอุปกรณ์ที่จับคู่แล้ว';
 
   @override
   String get apiSettings => 'ตั้งค่า API';
@@ -798,9 +862,6 @@ class AppLocalizationsTh extends AppLocalizations {
   String get connectionSuccess => 'เชื่อมต่อสำเร็จ';
 
   @override
-  String get connectionFailed => 'เชื่อมต่อไม่สำเร็จ';
-
-  @override
   String get waitingForCard => 'กรุณาเสียบหรือแตะบัตร';
 
   @override
@@ -916,4 +977,229 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get selectItem => 'เลือกรายการ';
+
+  @override
+  String get receiptBuffetCharges => 'ค่าบุฟเฟต์';
+
+  @override
+  String get receiptExtraItems => 'รายการเพิ่มเติม';
+
+  @override
+  String get receiptBuffetSubtotal => 'รวมค่าบุฟเฟต์';
+
+  @override
+  String get receiptExtrasSubtotal => 'รวมค่าเพิ่มเติม';
+
+  @override
+  String get receiptGrandTotal => 'ยอดรวมทั้งหมด';
+
+  @override
+  String get receiptThankYou => 'ขอบคุณที่มาใช้บริการ!';
+
+  @override
+  String get receiptAdult => 'ผู้ใหญ่';
+
+  @override
+  String get receiptChild => 'เด็ก';
+
+  @override
+  String get receiptTable => 'โต๊ะ';
+
+  @override
+  String get receiptOrder => 'ออเดอร์';
+
+  @override
+  String get receiptDate => 'วันที่';
+
+  @override
+  String get receiptTime => 'เวลา';
+
+  @override
+  String get receiptGuests => 'จำนวนลูกค้า';
+
+  @override
+  String get receiptPayment => 'การชำระเงิน';
+
+  @override
+  String get backupRestore => 'สำรองและกู้คืน';
+
+  @override
+  String get backupDescription => 'สำรองฐานข้อมูล รูปภาพ และการตั้งค่า เพื่อย้ายไปเครื่องอื่นหรือกู้คืนในภายหลัง';
+
+  @override
+  String get createBackup => 'สร้างข้อมูลสำรอง';
+
+  @override
+  String get restoreBackup => 'กู้คืนข้อมูล';
+
+  @override
+  String get backupIncludes => 'ข้อมูลสำรองประกอบด้วย:';
+
+  @override
+  String get database => 'ฐานข้อมูล (ออเดอร์, เมนู, โต๊ะ ฯลฯ)';
+
+  @override
+  String get menuImages => 'รูปภาพเมนู';
+
+  @override
+  String get appSettings => 'การตั้งค่าแอป';
+
+  @override
+  String get receiptLayouts => 'รูปแบบใบเสร็จ';
+
+  @override
+  String get createBackupNow => 'สร้างข้อมูลสำรองเดี๋ยวนี้';
+
+  @override
+  String get selectBackupFile => 'เลือกไฟล์สำรองเพื่อกู้คืน:';
+
+  @override
+  String get browseFiles => 'เรียกดูไฟล์';
+
+  @override
+  String get availableBackups => 'ข้อมูลสำรองที่มี';
+
+  @override
+  String get backupWarning => 'การกู้คืนข้อมูลจะแทนที่ข้อมูลปัจจุบันทั้งหมด กรุณาสำรองข้อมูลปัจจุบันก่อนหากต้องการ';
+
+  @override
+  String get qrCodeOrdering => 'สั่งอาหารผ่าน QR Code';
+
+  @override
+  String get qrOrderingEnabled => 'ลูกค้าสามารถสแกน QR เพื่อสั่งอาหาร';
+
+  @override
+  String get qrOrderingDisabled => 'ปิดการสั่งอาหารผ่าน QR';
+
+  @override
+  String get qrUrlConfig => 'ตั้งค่า URL สำหรับ QR';
+
+  @override
+  String get qrBaseUrl => 'URL หลัก';
+
+  @override
+  String get qrUrlStructure => 'โครงสร้าง URL';
+
+  @override
+  String get openTableQrDesc => 'QR เปิดโต๊ะ';
+
+  @override
+  String get menuPageDesc => 'หน้าเมนู';
+
+  @override
+  String get storeInfo => 'ข้อมูลร้าน';
+
+  @override
+  String get shopLogo => 'โลโก้ร้าน';
+
+  @override
+  String get shopAddress => 'ที่อยู่ร้าน';
+
+  @override
+  String get shopTel => 'เบอร์โทรร้าน';
+
+  @override
+  String get completed => 'เสร็จสมบูรณ์';
+
+  @override
+  String get receiptPrintedSuccessfully => 'พิมพ์ใบเสร็จสำเร็จ';
+
+  @override
+  String get errorOccurred => 'เกิดข้อผิดพลาด';
+
+  @override
+  String get earned => 'ได้รับ';
+
+  @override
+  String get points => 'คะแนน';
+
+  @override
+  String get insufficientFunds => 'เงินไม่พอ! กรุณาใส่อย่างน้อย';
+
+  @override
+  String get takeAway => 'สั่งกลับบ้าน';
+
+  @override
+  String get takeAwayDescription => 'ออเดอร์สำหรับลูกค้าที่ไม่ได้นั่งทานในร้าน';
+
+  @override
+  String get newTakeAwayOrder => 'สั่งกลับบ้านใหม่';
+
+  @override
+  String get takeAwayComingSoon => 'ฟีเจอร์สั่งกลับบ้านเร็วๆ นี้!';
+
+  @override
+  String get todayOrders => 'ออเดอร์วันนี้';
+
+  @override
+  String get pendingOrders => 'รอดำเนินการ';
+
+  @override
+  String get completedOrders => 'เสร็จสมบูรณ์';
+
+  @override
+  String get orderItems => 'รายการสั่ง';
+
+  @override
+  String get syncAllData => 'ซิงค์ข้อมูลทั้งหมด';
+
+  @override
+  String get syncAllDataDesc => 'ส่งข้อมูล POS ทั้งหมดไปยังเซิร์ฟเวอร์ (สำหรับการตั้งค่าครั้งแรก)';
+
+  @override
+  String get sendAllData => 'ส่งข้อมูลทั้งหมด';
+
+  @override
+  String get syncing => 'กำลังซิงค์...';
+
+  @override
+  String get buffetTiers => 'แพ็กเกจบุฟเฟ่ต์';
+
+  @override
+  String get tables => 'โต๊ะ';
+
+  @override
+  String get apiNotEnabled => 'กรุณาเปิดใช้งาน API และบันทึกการตั้งค่าก่อน';
+
+  @override
+  String get apiConnectionFailed => 'เชื่อมต่อไม่สำเร็จ กรุณาตรวจสอบ URL และ API key';
+
+  @override
+  String get apiSyncSuccess => 'ซิงค์ข้อมูลทั้งหมดสำเร็จ!';
+
+  @override
+  String get apiSyncPartialFail => 'บางรายการซิงค์ไม่สำเร็จ';
+
+  @override
+  String get printToKitchen => 'พิมพ์ส่งครัว';
+
+  @override
+  String get served => 'เสิร์ฟแล้ว';
+
+  @override
+  String get printSuccess => 'ส่งไปยังเครื่องพิมพ์แล้ว';
+
+  @override
+  String get orderServed => 'รับออเดอร์แล้ว';
+
+  @override
+  String get noPendingOrders => 'ไม่มีออเดอร์รอดำเนินการ';
+
+  @override
+  String get moveTable => 'ย้ายโต๊ะ';
+
+  @override
+  String get cancelTable => 'ยกเลิกโต๊ะ';
+
+  @override
+  String get confirmCancelTable => 'คุณแน่ใจหรือไม่ว่าต้องการยกเลิกโต๊ะนี้? ออเดอร์จะถูกล้าง';
+
+  @override
+  String get selectDestinationTable => 'เลือกโต๊ะปลายทาง';
+
+  @override
+  String get tableMoved => 'ย้ายโต๊ะเรียบร้อย';
+
+  @override
+  String get tableCancelled => 'ยกเลิกโต๊ะเรียบร้อย';
 }

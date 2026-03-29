@@ -156,7 +156,7 @@ class POSScreenState extends ConsumerState<POSScreen> {
       child: Row(
         children: [
           IconButton(
-            icon: const Icon(Icons.arrow_back_ios_new, color: Colors.white),
+            icon: Icon(Icons.arrow_back_ios_new, color: Theme.of(context).colorScheme.onSurface),
             onPressed: () => Navigator.pop(context),
             tooltip: 'Back to Tables',
           ),
@@ -167,10 +167,10 @@ class POSScreenState extends ConsumerState<POSScreen> {
           ),
           const Spacer(),
           IconButton(
-            icon: const Icon(Icons.print, color: Colors.white),
+            icon: Icon(Icons.print, color: Theme.of(context).colorScheme.onSurface),
             onPressed: () => Navigator.push(
               context,
-              MaterialPageRoute(
+              MaterialPageRoute<void>(
                 builder: (context) => const BluetoothPrinterScreen(),
               ),
             ),
@@ -314,9 +314,12 @@ class POSScreenState extends ConsumerState<POSScreen> {
               childAspectRatio: 0.85, // Adjusted for better fit
             ),
             itemCount: items.length,
+            cacheExtent: 500, // Cache more items for smoother scrolling
             itemBuilder: (context, index) {
               final item = items[index];
-              return _buildMenuItemCard(item, order);
+              return RepaintBoundary(
+                child: _buildMenuItemCard(item, order),
+              );
             },
           ),
         );
@@ -328,9 +331,7 @@ class POSScreenState extends ConsumerState<POSScreen> {
   Widget _buildMenuItemCard(MenuItem item, Order order) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(16.r),
-      child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-        child: Container(
+      child: Container(
           decoration: BoxDecoration(
             color: Theme.of(context).cardTheme.color,
             borderRadius: BorderRadius.circular(16.r),
@@ -372,6 +373,8 @@ class POSScreenState extends ConsumerState<POSScreen> {
                                   child: Image.file(
                                     snapshot.data!,
                                     fit: BoxFit.cover,
+                                    cacheWidth: 200, // Limit image cache size for performance
+                                    cacheHeight: 200,
                                     errorBuilder: (context, error, stackTrace) {
                                       return _buildImagePlaceholder(item.name);
                                     },
@@ -400,7 +403,7 @@ class POSScreenState extends ConsumerState<POSScreen> {
                           style: TextStyle(
                             fontSize: 14.sp,
                             fontWeight: FontWeight.w600,
-                            color: Colors.white,
+                            color: Theme.of(context).colorScheme.onSurface,
                           ),
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
@@ -479,7 +482,6 @@ class POSScreenState extends ConsumerState<POSScreen> {
             ),
           ),
         ),
-      ),
     );
   }
 
@@ -525,9 +527,7 @@ class POSScreenState extends ConsumerState<POSScreen> {
       padding: EdgeInsets.fromLTRB(0, 0, 16.w, 16.h),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(20.r),
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-          child: Container(
+        child: Container(
             decoration: BoxDecoration(
               color: Theme.of(context).cardTheme.color,
               borderRadius: BorderRadius.circular(20.r),
@@ -554,7 +554,6 @@ class POSScreenState extends ConsumerState<POSScreen> {
             ),
           ),
         ),
-      ),
     );
   }
 
@@ -585,7 +584,7 @@ class POSScreenState extends ConsumerState<POSScreen> {
                       Icons.local_offer,
                       color: order.promotionId != null
                           ? Theme.of(context).primaryColor
-                          : Colors.white54,
+                          : Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
                       size: 20.sp,
                     ),
                     onPressed: () => _showPromotionDialog(order),
@@ -659,7 +658,7 @@ class POSScreenState extends ConsumerState<POSScreen> {
           return Center(
             child: Text(
               'Error loading items',
-              style: TextStyle(fontSize: 14.sp, color: Colors.white70),
+              style: TextStyle(fontSize: 14.sp, color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7)),
             ),
           );
         }
@@ -697,9 +696,12 @@ class POSScreenState extends ConsumerState<POSScreen> {
         return ListView.builder(
           padding: EdgeInsets.symmetric(vertical: 8.h),
           itemCount: orderItems.length,
+          cacheExtent: 300, // Cache more items for smoother scrolling
           itemBuilder: (context, index) {
             final orderItem = orderItems[index];
-            return _buildOrderItemTile(orderItem);
+            return RepaintBoundary(
+              child: _buildOrderItemTile(orderItem),
+            );
           },
         );
       },
@@ -1000,7 +1002,7 @@ class POSScreenState extends ConsumerState<POSScreen> {
 
   /// Show checkout dialog
   void _showCheckoutDialog(Order order, double total) {
-    showDialog(
+    showDialog<void>(
       context: context,
       barrierDismissible: false,
       builder: (context) => CheckoutDialog(
@@ -1044,7 +1046,7 @@ class POSScreenState extends ConsumerState<POSScreen> {
   }
 
   void _showPromotionDialog(Order order) {
-    showDialog(
+    showDialog<void>(
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: const Color(0xFF252836),
@@ -1075,12 +1077,12 @@ class POSScreenState extends ConsumerState<POSScreen> {
                         : Colors.white.withValues(alpha: 0.05),
                     margin: EdgeInsets.symmetric(vertical: 4.h),
                     child: ListTile(
-                      title: Text(promo['name'],
+                      title: Text(promo['name'] as String,
                           style: const TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold)),
                       subtitle: Text(
-                        promo['discount_type'] == 'PERCENT'
+                        (promo['discount_type'] as String) == 'PERCENT'
                             ? '${promo['discount_value']}% Off'
                             : '${CurrencyHelper.symbol(context)}${promo['discount_value']} Off',
                         style: const TextStyle(color: Colors.white70),
@@ -1089,7 +1091,7 @@ class POSScreenState extends ConsumerState<POSScreen> {
                           ? Icon(Icons.check_circle,
                               color: Theme.of(context).primaryColor)
                           : null,
-                      onTap: () => _applyPromotion(order, promo['id']),
+                      onTap: () => _applyPromotion(order, promo['id'] as int),
                     ),
                   );
                 },

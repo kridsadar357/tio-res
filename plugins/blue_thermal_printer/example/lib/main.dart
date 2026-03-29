@@ -234,11 +234,11 @@ class _MyAppState extends State<MyApp> {
     setState(() => _connected = false);
   }
 
-  Future show(
+  Future<void> show(
     String message, {
     Duration duration = const Duration(seconds: 3),
   }) async {
-    await Future.delayed(const Duration(milliseconds: 100));
+    await Future<void>.delayed(const Duration(milliseconds: 100));
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(

@@ -30,7 +30,9 @@
   "startedAt": "เริ่มเมื่อ {time}",
   "@startedAt": {
     "placeholders": {
-        "time": {}
+        "time": {
+          "type": "Object"
+        }
     }
   },
   "startingCashFloat": "เงินทอนเริ่มต้น",
@@ -50,6 +52,13 @@
   "currentOrder": "รายการปัจจุบัน",
   "buffetHeadcount": "จำนวนลูกค้าบุฟเฟ่ต์",
   "tierPricePerson": "ราคา: {price} / ท่าน",
+  "@tierPricePerson": {
+    "placeholders": {
+      "price": {
+        "type": "Object"
+      }
+    }
+  },
   
   "shopInformation": "ข้อมูลร้าน",
   "shopDetails": "รายละเอียดร้าน",
@@ -130,9 +139,23 @@
   "scanToPay": "สแกนเพื่อจ่าย",
   "qrCode": "QR Code",
   "cleaningTable": "กำลังทำความสะอาด {name}",
+  "@cleaningTable": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
   "tableBeingCleaned": "โต๊ะกำลังอยู่ในระหว่างการทำความสะอาด",
   "finishCleaning": "เสร็จสิ้น",
   "tableNowAvailable": "{name} ว่างแล้ว",
+  "@tableNowAvailable": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
   
   "menuManagement": "จัดการเมนู",
   "categories": "หมวดหมู่",
@@ -189,6 +212,28 @@
   "unknownDevice": "อุปกรณ์ไม่ระบุชื่อ",
   "noAddress": "ไม่มีที่อยู่",
   "refreshList": "รีเฟรชรายการ",
+  "scanForNew": "สแกนหาอุปกรณ์ใหม่",
+  "stopScan": "หยุดสแกน",
+  "pairedDevices": "อุปกรณ์ที่จับคู่แล้ว",
+  "nearbyDevices": "อุปกรณ์ใกล้เคียง",
+  "tapToPairConnect": "แตะเพื่อจับคู่และเชื่อมต่อ",
+  "notPaired": "ยังไม่ได้จับคู่",
+  "scanningForDevices": "กำลังสแกนหาอุปกรณ์ใกล้เคียง...",
+  "noPrintersFound": "ไม่พบเครื่องพิมพ์",
+  "howToConnectPrinter": "วิธีเชื่อมต่อเครื่องพิมพ์:",
+  "putPrinterPairingMode": "เปิดโหมดจับคู่ของเครื่องพิมพ์ (ดูคู่มือเครื่องพิมพ์)",
+  "openBluetoothSettings": "เปิดการตั้งค่าบลูทูธของ Android",
+  "findAndPair": "ค้นหาและจับคู่ชื่อเครื่องพิมพ์ของคุณ",
+  "returnAndRefresh": "กลับมาที่แอปนี้และแตะรีเฟรช",
+  "openBluetoothSettingsButton": "เปิดการตั้งค่าบลูทูธ",
+  "connectionFailed": "การเชื่อมต่อล้มเหลว",
+  "devicePairedButNotConnected": "อุปกรณ์จับคู่แล้วแต่เชื่อมต่อไม่สำเร็จ กรุณาลองเชื่อมต่ออีกครั้ง",
+  "connectionFailedDetails": "การเชื่อมต่อล้มเหลว กรุณาตรวจสอบ:\n1. เครื่องพิมพ์เปิดอยู่และอยู่ในระยะ\n2. คุณยอมรับคำขอจับคู่หากปรากฏ\n3. ลองเชื่อมต่ออีกครั้ง",
+  "bluetoothPermissionsRequired": "ต้องการสิทธิ์บลูทูธ กรุณาอนุญาตสิทธิ์ในการตั้งค่าแอป",
+  "bluetoothNotAvailable": "บลูทูธไม่พร้อมใช้งาน กรุณาเปิดบลูทูธบนอุปกรณ์ของคุณ",
+  "errorLoadingDevices": "เกิดข้อผิดพลาดในการโหลดอุปกรณ์",
+  "availablePrinters": "เครื่องพิมพ์ที่มี",
+  "refreshPairedDevices": "รีเฟรชอุปกรณ์ที่จับคู่แล้ว",
 
   "apiSettings": "ตั้งค่า API",
   "endpointsConfig": "ตั้งค่า Endpoints",
@@ -255,7 +300,7 @@
   "orderListComponent": "รายการอาหาร",
   "totalsComponent": "ยอดรวม",
   "dynamicData": "ข้อมูลไดนามิก",
-  "@errorSavingLayout": { "placeholders": { "error": {} } },
+  "@errorSavingLayout": { "placeholders": { "error": { "type": "Object" } } },
   "nameLabel": "ชื่อ",
   "phoneLabel": "เบอร์โทร",
   "emailLabel": "อีเมล",
@@ -328,5 +373,86 @@
   "cashier": "แคชเชียร์",
   "none": "ไม่มี",
   "object": "วัตถุ",
-  "selectItem": "เลือกรายการ"
+  "selectItem": "เลือกรายการ",
+  
+  "receiptBuffetCharges": "ค่าบุฟเฟต์",
+  "receiptExtraItems": "รายการเพิ่มเติม",
+  "receiptBuffetSubtotal": "รวมค่าบุฟเฟต์",
+  "receiptExtrasSubtotal": "รวมค่าเพิ่มเติม",
+  "receiptGrandTotal": "ยอดรวมทั้งหมด",
+  "receiptThankYou": "ขอบคุณที่มาใช้บริการ!",
+  "receiptAdult": "ผู้ใหญ่",
+  "receiptChild": "เด็ก",
+  "receiptTable": "โต๊ะ",
+  "receiptOrder": "ออเดอร์",
+  "receiptDate": "วันที่",
+  "receiptTime": "เวลา",
+  "receiptGuests": "จำนวนลูกค้า",
+  "receiptPayment": "การชำระเงิน",
+  
+  "backupRestore": "สำรองและกู้คืน",
+  "backupDescription": "สำรองฐานข้อมูล รูปภาพ และการตั้งค่า เพื่อย้ายไปเครื่องอื่นหรือกู้คืนในภายหลัง",
+  "createBackup": "สร้างข้อมูลสำรอง",
+  "restoreBackup": "กู้คืนข้อมูล",
+  "backupIncludes": "ข้อมูลสำรองประกอบด้วย:",
+  "database": "ฐานข้อมูล (ออเดอร์, เมนู, โต๊ะ ฯลฯ)",
+  "menuImages": "รูปภาพเมนู",
+  "appSettings": "การตั้งค่าแอป",
+  "receiptLayouts": "รูปแบบใบเสร็จ",
+  "createBackupNow": "สร้างข้อมูลสำรองเดี๋ยวนี้",
+  "selectBackupFile": "เลือกไฟล์สำรองเพื่อกู้คืน:",
+  "browseFiles": "เรียกดูไฟล์",
+  "availableBackups": "ข้อมูลสำรองที่มี",
+  "backupWarning": "การกู้คืนข้อมูลจะแทนที่ข้อมูลปัจจุบันทั้งหมด กรุณาสำรองข้อมูลปัจจุบันก่อนหากต้องการ",
+  
+  "qrCodeOrdering": "สั่งอาหารผ่าน QR Code",
+  "qrOrderingEnabled": "ลูกค้าสามารถสแกน QR เพื่อสั่งอาหาร",
+  "qrOrderingDisabled": "ปิดการสั่งอาหารผ่าน QR",
+  "qrUrlConfig": "ตั้งค่า URL สำหรับ QR",
+  "qrBaseUrl": "URL หลัก",
+  "qrUrlStructure": "โครงสร้าง URL",
+  "openTableQrDesc": "QR เปิดโต๊ะ",
+  "menuPageDesc": "หน้าเมนู",
+  "storeInfo": "ข้อมูลร้าน",
+  "shopLogo": "โลโก้ร้าน",
+  "shopAddress": "ที่อยู่ร้าน",
+  "shopTel": "เบอร์โทรร้าน",
+  "completed": "เสร็จสมบูรณ์",
+  "receiptPrintedSuccessfully": "พิมพ์ใบเสร็จสำเร็จ",
+  "errorOccurred": "เกิดข้อผิดพลาด",
+  "earned": "ได้รับ",
+  "points": "คะแนน",
+  "insufficientFunds": "เงินไม่พอ! กรุณาใส่อย่างน้อย",
+  
+  "takeAway": "สั่งกลับบ้าน",
+  "takeAwayDescription": "ออเดอร์สำหรับลูกค้าที่ไม่ได้นั่งทานในร้าน",
+  "newTakeAwayOrder": "สั่งกลับบ้านใหม่",
+  "takeAwayComingSoon": "ฟีเจอร์สั่งกลับบ้านเร็วๆ นี้!",
+  "todayOrders": "ออเดอร์วันนี้",
+  "pendingOrders": "รอดำเนินการ",
+  "completedOrders": "เสร็จสมบูรณ์",
+  "orderItems": "รายการสั่ง",
+  
+  "syncAllData": "ซิงค์ข้อมูลทั้งหมด",
+  "syncAllDataDesc": "ส่งข้อมูล POS ทั้งหมดไปยังเซิร์ฟเวอร์ (สำหรับการตั้งค่าครั้งแรก)",
+  "sendAllData": "ส่งข้อมูลทั้งหมด",
+  "syncing": "กำลังซิงค์...",
+  "buffetTiers": "แพ็กเกจบุฟเฟ่ต์",
+  "tables": "โต๊ะ",
+  "apiNotEnabled": "กรุณาเปิดใช้งาน API และบันทึกการตั้งค่าก่อน",
+  "apiConnectionFailed": "เชื่อมต่อไม่สำเร็จ กรุณาตรวจสอบ URL และ API key",
+  "apiSyncSuccess": "ซิงค์ข้อมูลทั้งหมดสำเร็จ!",
+  "apiSyncPartialFail": "บางรายการซิงค์ไม่สำเร็จ",
+  
+  "printToKitchen": "พิมพ์ส่งครัว",
+  "served": "เสิร์ฟแล้ว",
+  "printSuccess": "ส่งไปยังเครื่องพิมพ์แล้ว",
+  "orderServed": "รับออเดอร์แล้ว",
+  "noPendingOrders": "ไม่มีออเดอร์รอดำเนินการ",
+  "moveTable": "ย้ายโต๊ะ",
+  "cancelTable": "ยกเลิกโต๊ะ",
+  "confirmCancelTable": "คุณแน่ใจหรือไม่ว่าต้องการยกเลิกโต๊ะนี้? ออเดอร์จะถูกล้าง",
+  "selectDestinationTable": "เลือกโต๊ะปลายทาง",
+  "tableMoved": "ย้ายโต๊ะเรียบร้อย",
+  "tableCancelled": "ยกเลิกโต๊ะเรียบร้อย"
 }

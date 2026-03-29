@@ -68,6 +68,18 @@ ResPOS is optimized for high-volume buffet environments where speed and reliabil
 *   **UI/UX**: `flutter_screenutil` (Responsive), `animate_do` (Animations), `google_fonts`
 *   **TTS**: `flutter_tts`
 
+## 🏗️ Project Architecture
+
+The project follows a clean architecture pattern with:
+
+*   **Core Module**: Centralized constants, utilities, error handling, and configuration (`lib/core/`)
+*   **Repository Pattern**: Base repository interface for data access layer
+*   **Result Type**: Functional error handling instead of exceptions
+*   **Centralized Logging**: Professional logging system with different log levels
+*   **Performance Monitoring**: Built-in utilities for tracking performance
+
+📚 **See [OPTIMIZATION_GUIDE.md](OPTIMIZATION_GUIDE.md) for detailed architecture documentation.**
+
 ## 🚀 Getting Started
 
 ### Prerequisites
@@ -98,6 +110,17 @@ ResPOS is optimized for high-volume buffet environments where speed and reliabil
         flutter run -d windows
         ```
 
+## 🛠️ Developer Notes & Troubleshooting
+
+### 1. Project Configuration (`local.properties`)
+The `local.properties` files are **ignored** by Git because they contain machine-specific paths to the Flutter SDK and Android SDK. 
+*   **New Clones**: When you run `flutter pub get` or `flutter run`, Flutter will automatically generate these files for your environment. You do NOT need to manually create them.
+
+### 2. Rendering Crash (Impeller)
+If you experience a crash on Android emulators with the error `FATAL:flutter/impeller/renderer/backend/gles/render_pass_gles.cc`, it is due to the new Impeller rendering engine's GLES backend.
+*   **Fix**: We have disabled Impeller by default in `android/app/src/main/AndroidManifest.xml`.
+*   **Re-enabling**: If testing on a high-end device that supports Vulkan, you can re-enable it by setting `io.flutter.embedding.android.EnableImpeller` to `true`.
+
 ### ⚠️ Android Build Note
 This project uses **AGP (Android Gradle Plugin) 8.2.1** and **Kotlin 1.9.22** to ensure maximum compatibility with the `blue_thermal_printer` plugin.
 *   If you encounter a `VerifyException` during build, ensure you are NOT using AGP 8.3+.
@@ -108,12 +131,19 @@ This project uses **AGP (Android Gradle Plugin) 8.2.1** and **Kotlin 1.9.22** to
 ```
 lib/
 ├── main.dart                  # Entry & App Config
+├── core/                      # Core infrastructure
+│   ├── constants/            # App-wide constants & colors
+│   ├── config/                # Configuration management
+│   ├── errors/                # Custom exceptions
+│   ├── utils/                 # Logger, Result type, Performance
+│   └── repositories/          # Base repository pattern
 ├── models/                    # Database Entities (Table, Order, Item)
 ├── screens/                   # UI Pages (POS, Settings, Dashboard)
 ├── services/
 │   ├── database_helper.dart   # SQLite Logic
 │   └── printer/               # Bluetooth & Receipt Logic
 ├── providers/                 # Riverpod State Providers
+├── widgets/                   # Reusable UI components
 └── utils/                     # Helpers (Currency formatting, Theme)
 ```
 

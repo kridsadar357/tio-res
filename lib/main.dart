@@ -5,9 +5,11 @@ import 'package:provider/provider.dart' as p;
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'l10n/app_localizations.dart';
 import 'screens/table_selection_screen.dart';
+import 'screens/splash_screen.dart';
 import 'services/database_helper.dart';
 import 'services/api_service.dart';
 import 'services/edc_service.dart';
+import 'services/printer_service.dart';
 import 'providers/settings_provider.dart';
 import 'theme/app_theme.dart';
 
@@ -28,6 +30,9 @@ void main() async {
 
   // Initialize EDC service
   await EdcService().init();
+
+  // Initialize Printer service (auto-connect to saved printer)
+  await PrinterService().init();
 
   runApp(
     ProviderScope(
@@ -62,6 +67,15 @@ class ResPOSApp extends StatelessWidget {
             return MaterialApp(
               title: 'ResPOS',
               debugShowCheckedModeBanner: false,
+              
+              // Performance optimizations
+              builder: (context, child) {
+                return MediaQuery(
+                  // Disable text scaling for better performance
+                  data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(1.0)),
+                  child: child!,
+                );
+              },
 
               // Localization
               localizationsDelegates: const [
@@ -76,15 +90,17 @@ class ResPOSApp extends StatelessWidget {
               ],
               locale: Locale(settings.language),
 
-              // Themes
-              theme: AppTheme.lightTheme,
-              darkTheme: AppTheme.darkTheme,
+              // Themes (locale-aware for Thai font support)
+              theme: AppTheme.lightTheme(Locale(settings.language)),
+              darkTheme: AppTheme.darkTheme(Locale(settings.language)),
 
               // Dynamic theme mode from settings
               themeMode: settings.themeModeEnum,
 
-              // Home screen
-              home: child,
+              // Home screen wrapped in splash screen
+              home: SplashScreen(
+                child: child!,
+              ),
             );
           },
         );

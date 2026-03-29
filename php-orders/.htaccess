@@ -1,0 +1,155 @@
+# TioRes - Customer Ordering System
+# Apache Rewrite Rules for Clean URLs
+
+# Enable RewriteEngine
+RewriteEngine On
+
+# Set base directory
+RewriteBase /
+
+# Redirect HTTP to HTTPS (uncomment if using SSL)
+# RewriteCond %{HTTPS} off
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# ============================================
+# FRIENDLY URL REWRITES
+# ============================================
+
+# Open Table: /open-table/{table_id} -> /?table={table_id}
+RewriteRule ^open-table/([0-9]+)/?$ index.html?table=$1 [L,QSA]
+
+# Menu Page with table: /menu/{table_id} -> /?table={table_id}
+RewriteRule ^menu/([0-9]+)/?$ index.html?table=$1 [L,QSA]
+
+# Orders Page: /orders -> orders.html
+RewriteRule ^orders/?$ orders.html [L,QSA]
+
+# Bill Page: /bill -> bill.html
+RewriteRule ^bill/?$ bill.html [L,QSA]
+
+# ============================================
+# API ENDPOINTS (clean URLs)
+# ============================================
+
+# /api/items -> api/get_items.php
+RewriteRule ^api/items/?$ api/get_items.php [L,QSA]
+
+# /api/orders -> api/send_orders.php (POST)
+RewriteRule ^api/orders/?$ api/send_orders.php [L,QSA]
+
+# /api/bill -> api/check_bill.php
+RewriteRule ^api/bill/?$ api/check_bill.php [L,QSA]
+
+# /api/table -> api/get_table_status.php
+RewriteRule ^api/table/?$ api/get_table_status.php [L,QSA]
+
+# /api/pending -> api/get_pending_orders.php
+RewriteRule ^api/pending/?$ api/get_pending_orders.php [L,QSA]
+
+# /api/acknowledge -> api/acknowledge_order.php
+RewriteRule ^api/acknowledge/?$ api/acknowledge_order.php [L,QSA]
+
+# /api/update -> api/update_items.php
+RewriteRule ^api/update/?$ api/update_items.php [L,QSA]
+
+# /api/delete -> api/delete_items.php
+RewriteRule ^api/delete/?$ api/delete_items.php [L,QSA]
+
+# ============================================
+# SYNC ENDPOINTS (from POS)
+# ============================================
+
+# /api/sync/categories -> api/sync_categories.php
+RewriteRule ^api/sync/categories/?$ api/sync_categories.php [L,QSA]
+
+# /api/sync/buffet-tiers -> api/sync_buffet_tiers.php
+RewriteRule ^api/sync/buffet-tiers/?$ api/sync_buffet_tiers.php [L,QSA]
+
+# /api/sync/tables -> api/sync_tables.php
+RewriteRule ^api/sync/tables/?$ api/sync_tables.php [L,QSA]
+
+# /api/sync/menu-items -> api/sync_menu_items.php
+RewriteRule ^api/sync/menu-items/?$ api/sync_menu_items.php [L,QSA]
+
+# /api/sync/store-info -> api/sync_store_info.php
+RewriteRule ^api/sync/store-info/?$ api/sync_store_info.php [L,QSA]
+
+# /api/upload-image -> api/upload_image.php
+RewriteRule ^api/upload-image/?$ api/upload_image.php [L,QSA]
+
+# ============================================
+# SECURITY RULES
+# ============================================
+
+# Block access to config.php directly
+<Files "config.php">
+    Order Allow,Deny
+    Deny from all
+</Files>
+
+# Block access to .htaccess
+<Files ".htaccess">
+    Order Allow,Deny
+    Deny from all
+</Files>
+
+# Prevent directory listing
+Options -Indexes
+
+# Block access to hidden files
+<FilesMatch "^\.">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# ============================================
+# CORS HEADERS (if not set in PHP)
+# ============================================
+
+<IfModule mod_headers.c>
+    # Allow requests from any origin
+    Header always set Access-Control-Allow-Origin "*"
+    Header always set Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
+    Header always set Access-Control-Allow-Headers "Content-Type, Authorization, X-API-Key"
+    
+    # Handle preflight OPTIONS requests
+    RewriteCond %{REQUEST_METHOD} OPTIONS
+    RewriteRule ^(.*)$ $1 [R=200,L]
+</IfModule>
+
+# ============================================
+# CACHING & PERFORMANCE
+# ============================================
+
+<IfModule mod_expires.c>
+    ExpiresActive On
+    
+    # HTML files - no cache
+    ExpiresByType text/html "access plus 0 seconds"
+    
+    # CSS & JS - cache for 1 day
+    ExpiresByType text/css "access plus 1 day"
+    ExpiresByType application/javascript "access plus 1 day"
+    
+    # Images - cache for 7 days
+    ExpiresByType image/jpeg "access plus 7 days"
+    ExpiresByType image/png "access plus 7 days"
+    ExpiresByType image/gif "access plus 7 days"
+    ExpiresByType image/webp "access plus 7 days"
+</IfModule>
+
+# ============================================
+# COMPRESSION
+# ============================================
+
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json
+</IfModule>
+
+# ============================================
+# ERROR PAGES (optional)
+# ============================================
+
+ErrorDocument 404 /index.html
+ErrorDocument 403 /index.html
+

@@ -26,10 +26,10 @@ class _MenuCategoryListTabState extends State<MenuCategoryListTab> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(Icons.category_outlined,
-                    size: 64.sp, color: Colors.white24),
+                    size: 64.sp, color: Theme.of(context).colorScheme.onSurface.withOpacity(0.4)),
                 SizedBox(height: 16.h),
                 Text('No categories found',
-                    style: TextStyle(color: Colors.white54, fontSize: 16.sp)),
+                    style: TextStyle(color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6), fontSize: 16.sp)),
               ],
             ),
           );
@@ -46,7 +46,7 @@ class _MenuCategoryListTabState extends State<MenuCategoryListTab> {
               decoration: BoxDecoration(
                 color: Theme.of(context).cardTheme.color,
                 borderRadius: BorderRadius.circular(16.r),
-                border: Border.all(color: Colors.white.withValues( alpha : 0.1)),
+                border: Border.all(color: Theme.of(context).brightness == Brightness.dark ? Colors.white.withValues(alpha: 0.1) : Colors.black.withValues(alpha: 0.1)),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withValues( alpha : 0.1),
@@ -90,7 +90,7 @@ class _MenuCategoryListTabState extends State<MenuCategoryListTab> {
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 16.sp,
-                      color: Colors.white,
+                      color: Theme.of(context).colorScheme.onSurface,
                     )),
                 trailing: Row(
                   mainAxisSize: MainAxisSize.min,
@@ -98,7 +98,7 @@ class _MenuCategoryListTabState extends State<MenuCategoryListTab> {
                     IconButton(
                       icon: const Icon(Icons.edit, color: Colors.blueAccent),
                       onPressed: () async {
-                        await showDialog(
+                        await showDialog<void>(
                           context: context,
                           builder: (ctx) =>
                               ManageCategoryDialog(category: category),
@@ -114,11 +114,11 @@ class _MenuCategoryListTabState extends State<MenuCategoryListTab> {
                           builder: (ctx) => AlertDialog(
                             backgroundColor: const Color(
                                 0xFF252836), // Manual dark bg for standard alert
-                            title: const Text('Delete Category',
-                                style: TextStyle(color: Colors.white)),
-                            content: const Text(
+                            title: Text('Delete Category',
+                                style: TextStyle(color: Theme.of(context).colorScheme.onSurface)),
+                            content: Text(
                                 'Are you sure? This is irreversible.',
-                                style: TextStyle(color: Colors.white70)),
+                                style: TextStyle(color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7))),
                             actions: [
                               TextButton(
                                   onPressed: () => Navigator.pop(ctx, false),

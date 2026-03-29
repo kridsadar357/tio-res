@@ -477,7 +477,7 @@ class _POSMainScreenState extends ConsumerState<POSMainScreen> {
                 icon: const Icon(Icons.print),
                 onPressed: () => Navigator.push(
                   context,
-                  MaterialPageRoute(
+                  MaterialPageRoute<void>(
                     builder: (context) => const BluetoothPrinterScreen(),
                   ),
                 ),

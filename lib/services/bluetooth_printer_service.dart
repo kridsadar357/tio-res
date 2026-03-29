@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-import 'dart:io' show Platform;
 import 'package:flutter/widgets.dart';
 import '../models/order.dart';
 import '../models/order_item.dart';

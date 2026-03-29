@@ -3,12 +3,16 @@
 /// Examples: Buffet Main, Appetizers, Main Course, Desserts, Drinks, Alcohol
 class MenuCategory {
   final int? id;
-  final String name;
+  final String name; // Primary name (Thai default)
+  final String? nameEn; // English name
+  final String? nameCn; // Chinese name
   final String? iconPath;
 
   MenuCategory({
     this.id,
     required this.name,
+    this.nameEn,
+    this.nameCn,
     this.iconPath,
   });
 
@@ -17,6 +21,8 @@ class MenuCategory {
     return MenuCategory(
       id: map['id'] as int,
       name: map['name'] as String,
+      nameEn: map['name_en'] as String?,
+      nameCn: map['name_cn'] as String?,
       iconPath: map['icon_path'] as String?,
     );
   }
@@ -26,6 +32,8 @@ class MenuCategory {
     return {
       'id': id,
       'name': name,
+      'name_en': nameEn,
+      'name_cn': nameCn,
       'icon_path': iconPath,
     };
   }
@@ -34,12 +42,30 @@ class MenuCategory {
   MenuCategory copyWith({
     int? id,
     String? name,
+    String? nameEn,
+    String? nameCn,
     String? iconPath,
   }) {
     return MenuCategory(
       id: id ?? this.id,
       name: name ?? this.name,
+      nameEn: nameEn ?? this.nameEn,
+      nameCn: nameCn ?? this.nameCn,
       iconPath: iconPath ?? this.iconPath,
     );
+  }
+
+  /// Get localized name based on language code
+  String getLocalizedName(String langCode) {
+    switch (langCode) {
+      case 'en':
+        return nameEn ?? name;
+      case 'cn':
+      case 'zh':
+        return nameCn ?? name;
+      case 'th':
+      default:
+        return name;
+    }
   }
 }

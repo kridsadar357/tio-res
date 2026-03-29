@@ -7,6 +7,7 @@
 class MenuItem {
   final int? id; // Null when creating new item
   final String name;
+  final String? nameEn;
   final String? nameTh;
   final String? nameCn;
   final int categoryId;
@@ -20,6 +21,7 @@ class MenuItem {
   MenuItem({
     this.id,
     required this.name,
+    this.nameEn,
     this.nameTh,
     this.nameCn,
     required this.categoryId,
@@ -36,6 +38,7 @@ class MenuItem {
     return MenuItem(
       id: map['id'] as int,
       name: map['name'] as String,
+      nameEn: map['name_en'] as String?,
       nameTh: map['name_th'] as String?,
       nameCn: map['name_cn'] as String?,
       categoryId: map['category_id'] as int,
@@ -54,6 +57,7 @@ class MenuItem {
     return {
       if (id != null) 'id': id,
       'name': name,
+      'name_en': nameEn,
       'name_th': nameTh,
       'name_cn': nameCn,
       'category_id': categoryId,
@@ -70,6 +74,7 @@ class MenuItem {
   MenuItem copyWith({
     int? id,
     String? name,
+    String? nameEn,
     String? nameTh,
     String? nameCn,
     int? categoryId,
@@ -84,6 +89,7 @@ class MenuItem {
     return MenuItem(
       id: id ?? this.id,
       name: name ?? this.name,
+      nameEn: nameEn ?? this.nameEn,
       nameTh: nameTh ?? this.nameTh,
       nameCn: nameCn ?? this.nameCn,
       categoryId: categoryId ?? this.categoryId,

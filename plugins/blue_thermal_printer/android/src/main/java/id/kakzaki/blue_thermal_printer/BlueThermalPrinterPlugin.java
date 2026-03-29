@@ -21,9 +21,10 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.util.Log;
-import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Looper;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -78,6 +79,13 @@ public class BlueThermalPrinterPlugin implements FlutterPlugin, ActivityAware,Me
   private BluetoothManager mBluetoothManager;
 
   private Activity activity;
+  
+  private ExecutorService executor;
+  
+  // Discovery support
+  private List<BluetoothDevice> discoveredDevices = new ArrayList<>();
+  private BroadcastReceiver discoveryReceiver;
+  private boolean isDiscovering = false;
 
   public BlueThermalPrinterPlugin() {
   }
@@ -134,6 +142,7 @@ public class BlueThermalPrinterPlugin implements FlutterPlugin, ActivityAware,Me
       readChannel.setStreamHandler(readResultsHandler);
       mBluetoothManager = (BluetoothManager) application.getSystemService(Context.BLUETOOTH_SERVICE);
       mBluetoothAdapter = mBluetoothManager.getAdapter();
+      executor = Executors.newCachedThreadPool();
       activityBinding.addRequestPermissionsResultListener(this);
     }
   }
@@ -150,6 +159,10 @@ public class BlueThermalPrinterPlugin implements FlutterPlugin, ActivityAware,Me
     stateChannel = null;
     mBluetoothAdapter = null;
     mBluetoothManager = null;
+    if (executor != null) {
+      executor.shutdown();
+      executor = null;
+    }
   }
 
   // MethodChannel.Result wrapper that responds on the platform thread.
@@ -264,6 +277,18 @@ public class BlueThermalPrinterPlugin implements FlutterPlugin, ActivityAware,Me
           result.error("Error", ex.getMessage(), exceptionToString(ex));
         }
 
+        break;
+
+      case "startDiscovery":
+        startDiscovery(result);
+        break;
+
+      case "stopDiscovery":
+        stopDiscovery(result);
+        break;
+
+      case "getDiscoveredDevices":
+        getDiscoveredDevices(result);
         break;
 
       case "connect":
@@ -469,7 +494,7 @@ public class BlueThermalPrinterPlugin implements FlutterPlugin, ActivityAware,Me
    */
   private void isDeviceConnected(Result result, String address) {
 
-    AsyncTask.execute(() -> {
+    executor.execute(() -> {
       try {
         BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(address);
 
@@ -508,7 +533,7 @@ public class BlueThermalPrinterPlugin implements FlutterPlugin, ActivityAware,Me
       result.error("connect_error", "already connected", null);
       return;
     }
-    AsyncTask.execute(() -> {
+    executor.execute(() -> {
       try {
         BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(address);
 
@@ -552,7 +577,7 @@ public class BlueThermalPrinterPlugin implements FlutterPlugin, ActivityAware,Me
       result.error("disconnection_error", "not connected", null);
       return;
     }
-    AsyncTask.execute(() -> {
+    executor.execute(() -> {
       try {
         THREAD.cancel();
         THREAD = null;
@@ -1048,4 +1073,117 @@ public class BlueThermalPrinterPlugin implements FlutterPlugin, ActivityAware,Me
       readSink = null;
     }
   };
+
+  /**
+   * Start Bluetooth device discovery
+   */
+  private void startDiscovery(Result result) {
+    try {
+      if (isDiscovering) {
+        result.success(false);
+        return;
+      }
+
+      // Check permissions
+      if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+        if (ContextCompat.checkSelfPermission(activity,
+                Manifest.permission.BLUETOOTH_SCAN) != PackageManager.PERMISSION_GRANTED ||
+                ContextCompat.checkSelfPermission(activity,
+                        Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+          result.error("no_permissions", "Bluetooth scan and location permissions required", null);
+          return;
+        }
+      } else {
+        if (ContextCompat.checkSelfPermission(activity,
+                Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED ||
+                ContextCompat.checkSelfPermission(activity,
+                        Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+          result.error("no_permissions", "Location permissions required for Bluetooth scanning", null);
+          return;
+        }
+      }
+
+      discoveredDevices.clear();
+      isDiscovering = true;
+
+      // Register receiver for discovered devices
+      discoveryReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+          String action = intent.getAction();
+          if (BluetoothDevice.ACTION_FOUND.equals(action)) {
+            BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+            if (device != null && !discoveredDevices.contains(device)) {
+              discoveredDevices.add(device);
+              Log.d(TAG, "Discovered device: " + device.getName() + " - " + device.getAddress());
+            }
+          } else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
+            isDiscovering = false;
+            Log.d(TAG, "Discovery finished. Found " + discoveredDevices.size() + " devices");
+          }
+        }
+      };
+
+      IntentFilter filter = new IntentFilter();
+      filter.addAction(BluetoothDevice.ACTION_FOUND);
+      filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
+      context.registerReceiver(discoveryReceiver, filter);
+
+      // Start discovery
+      boolean started = mBluetoothAdapter.startDiscovery();
+      result.success(started);
+    } catch (SecurityException e) {
+      result.error("security_error", e.getMessage(), null);
+      isDiscovering = false;
+    } catch (Exception e) {
+      result.error("discovery_error", e.getMessage(), null);
+      isDiscovering = false;
+    }
+  }
+
+  /**
+   * Stop Bluetooth device discovery
+   */
+  private void stopDiscovery(Result result) {
+    try {
+      if (!isDiscovering) {
+        result.success(true);
+        return;
+      }
+
+      mBluetoothAdapter.cancelDiscovery();
+      if (discoveryReceiver != null) {
+        try {
+          context.unregisterReceiver(discoveryReceiver);
+        } catch (Exception e) {
+          Log.e(TAG, "Error unregistering receiver", e);
+        }
+        discoveryReceiver = null;
+      }
+      isDiscovering = false;
+      result.success(true);
+    } catch (Exception e) {
+      result.error("stop_discovery_error", e.getMessage(), null);
+      isDiscovering = false;
+    }
+  }
+
+  /**
+   * Get discovered devices
+   */
+  private void getDiscoveredDevices(Result result) {
+    try {
+      List<Map<String, Object>> list = new ArrayList<>();
+      for (BluetoothDevice device : discoveredDevices) {
+        Map<String, Object> ret = new HashMap<>();
+        ret.put("address", device.getAddress());
+        ret.put("name", device.getName());
+        ret.put("type", device.getType());
+        list.add(ret);
+      }
+      result.success(list);
+    } catch (Exception e) {
+      result.error("get_discovered_error", e.getMessage(), null);
+    }
+  }
 }

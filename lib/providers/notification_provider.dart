@@ -29,6 +29,7 @@ class NotificationNotifier extends StateNotifier<NotificationState> {
 
   Timer? _timer;
   final ApiService _apiService = ApiService();
+  int _consecutiveErrors = 0;
 
   void _startPolling() {
     // Initial check
@@ -47,15 +48,26 @@ class NotificationNotifier extends StateNotifier<NotificationState> {
 
     try {
       final orders = await _apiService.fetchPendingOrders();
+      
+      // Reset error counter on success
+      if (_consecutiveErrors > 0) {
+        _consecutiveErrors = 0;
+      }
+      
+      // Always update state with current orders
+      state = NotificationState(
+        count: orders.length,
+        pendingOrders: orders,
+      );
       if (orders.isNotEmpty) {
-        state = NotificationState(
-          count: orders.length,
-          pendingOrders: orders,
-        );
         debugPrint('Found ${orders.length} pending web orders');
       }
     } catch (e) {
-      debugPrint('Error polling orders: $e');
+      _consecutiveErrors++;
+      // Only log errors occasionally to reduce log spam (every 5th error)
+      if (_consecutiveErrors == 1 || _consecutiveErrors % 5 == 0) {
+        debugPrint('Error polling orders (attempt $_consecutiveErrors): $e');
+      }
     }
   }
 

@@ -5,22 +5,28 @@ import '../models/table_model.dart';
 import '../models/layout_object_model.dart';
 import '../theme/app_theme.dart';
 import '../utils/icon_helper.dart';
+import 'transformable_box.dart';
 
 class VisualFloorPlan extends StatelessWidget {
   final List<TableModel> tables;
   final List<LayoutObjectModel> objects;
-  final Function(TableModel)? onTableTap;
-  final Function(LayoutObjectModel)? onObjectTap;
+  final void Function(TableModel)? onTableTap;
+  final void Function(LayoutObjectModel)? onObjectTap;
   final bool isEditable;
-  final Function(String, double, double)? onDrop; // type, x, y
+  final void Function(String, double, double)? onDrop; // type, x, y
   final TransformationController? transformationController;
   final GlobalKey? canvasKey;
-  // Drag callbacks for editable mode could be more complex, but for now we might keep drag logic in parent or move here?
-  // Moving drag logic here is better for encapsulation.
-  final Function(TableModel, DragUpdateDetails)? onTableDragUpdate;
-  final Function(LayoutObjectModel, DragUpdateDetails)? onObjectDragUpdate;
-  final Function(TableModel)? onTablePanStart;
-  final Function(LayoutObjectModel)? onObjectPanStart;
+  // Drag update callbacks
+  final void Function(TableModel, DragUpdateDetails)? onTableDragUpdate;
+  final void Function(LayoutObjectModel, DragUpdateDetails)? onObjectDragUpdate;
+  final void Function(TableModel)? onTablePanStart;
+  final void Function(LayoutObjectModel)? onObjectPanStart;
+  
+  // New callbacks for geometry changes
+  final void Function(TableModel, double width, double height)? onTableResize;
+  final void Function(LayoutObjectModel, double width, double height)? onObjectResize;
+  final void Function(TableModel, double angle)? onTableRotate;
+  final void Function(LayoutObjectModel, double angle)? onObjectRotate;
 
   final TableModel? selectedTable;
   final LayoutObjectModel? selectedObject;
@@ -39,6 +45,10 @@ class VisualFloorPlan extends StatelessWidget {
     this.onObjectDragUpdate,
     this.onTablePanStart,
     this.onObjectPanStart,
+    this.onTableResize,
+    this.onObjectResize,
+    this.onTableRotate,
+    this.onObjectRotate,
     this.selectedTable,
     this.selectedObject,
   });
@@ -47,54 +57,76 @@ class VisualFloorPlan extends StatelessWidget {
   Widget build(BuildContext context) {
     const double canvasWidth = 2000.0;
     const double canvasHeight = 1500.0;
+    
+    // Get current scale to keep handles separate size
+    // Note: If this doesn't rebuild on zoom, handles will shrink/grow. 
+    // Ideally parent should rebuild this widget on zoom change if perfect handle size is needed.
+    // For now we assume scale 1.0 or whatever is passed implicitly via controller value if we accessed it.
+    // We can try to peek at the controller value if available.
+    double currentScale = 1.0;
+    if (transformationController != null) {
+      currentScale = transformationController!.value.getMaxScaleOnAxis();
+    }
 
-    return Container(
-      color: Colors.transparent, // Allow parent gradient to show
-      child: InteractiveViewer(
-        transformationController: transformationController,
-        boundaryMargin: const EdgeInsets.all(double.infinity),
-        minScale: 0.1,
-        maxScale: 4.0,
-        child: DragTarget<String>(
-          onWillAcceptWithDetails: (_) => isEditable,
-          onAcceptWithDetails: (details) {
-            if (!isEditable || onDrop == null) return;
-            final renderBox =
-                canvasKey?.currentContext?.findRenderObject() as RenderBox?;
-            if (renderBox != null) {
-              final localPos = renderBox.globalToLocal(details.offset);
-              onDrop!(details.data, localPos.dx, localPos.dy);
-            }
-          },
-          builder: (context, candidateData, rejectedData) {
-            return Container(
-              key: canvasKey,
-              width: canvasWidth,
-              height: canvasHeight,
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.white.withValues(alpha: 0.1)),
-                image: const DecorationImage(
-                  image: AssetImage('assets/images/grid_pattern.png'),
-                  repeat: ImageRepeat.repeat,
-                  opacity: 0.1,
+    // Pre-build children lists to avoid recreating on every build
+    final objectWidgets = List<Widget>.generate(
+      objects.length,
+      (index) => _buildObject(context, objects[index], currentScale),
+    );
+    final tableWidgets = List<Widget>.generate(
+      tables.length,
+      (index) => _buildTable(context, tables[index], currentScale),
+    );
+
+    return RepaintBoundary(
+      child: Container(
+        color: Colors.transparent, // Allow parent gradient to show
+        child: InteractiveViewer(
+          transformationController: transformationController,
+          boundaryMargin: const EdgeInsets.all(double.infinity),
+          minScale: 0.1,
+          maxScale: 4.0,
+          child: DragTarget<String>(
+            onWillAcceptWithDetails: (_) => isEditable,
+            onAcceptWithDetails: (details) {
+              if (!isEditable || onDrop == null) return;
+              final renderBox =
+                  canvasKey?.currentContext?.findRenderObject() as RenderBox?;
+              if (renderBox != null) {
+                final localPos = renderBox.globalToLocal(details.offset);
+                onDrop!(details.data, localPos.dx, localPos.dy);
+              }
+            },
+            builder: (context, candidateData, rejectedData) {
+              return Container(
+                key: canvasKey,
+                width: canvasWidth,
+                height: canvasHeight,
+                decoration: BoxDecoration(
+                  border: Border.all(color: Theme.of(context).brightness == Brightness.dark ? Colors.white.withValues(alpha: 0.1) : Colors.black.withValues(alpha: 0.1)),
+                  image: const DecorationImage(
+                    image: AssetImage('assets/images/grid_pattern.png'),
+                    repeat: ImageRepeat.repeat,
+                    opacity: 0.1,
+                  ),
                 ),
-              ),
-              child: Stack(
-                clipBehavior: Clip.none, // Allow objects to extend slightly
-                children: [
-                  // Objects bottom, Tables top usually. Or sorted by z-index if managed.
-                  ...objects.map((obj) => _buildObject(obj)),
-                  ...tables.map((table) => _buildTable(table)),
-                ],
-              ),
-            );
-          },
+                child: Stack(
+                  clipBehavior: Clip.none, // Allow objects to extend slightly
+                  children: [
+                    // Objects bottom, Tables top usually. Or sorted by z-index if managed.
+                    ...objectWidgets,
+                    ...tableWidgets,
+                  ],
+                ),
+              );
+            },
+          ),
         ),
       ),
     );
   }
 
-  Widget _buildTable(TableModel table) {
+  Widget _buildTable(BuildContext context, TableModel table, double scale) {
     final isSelected = selectedTable?.id == table.id;
 
     Widget content = Container(
@@ -107,7 +139,6 @@ class VisualFloorPlan extends StatelessWidget {
           shape: table.shape == 'round' ? BoxShape.circle : BoxShape.rectangle,
           borderRadius:
               table.shape == 'rectangle' ? BorderRadius.circular(8) : null,
-          border: isSelected ? Border.all(color: Colors.white, width: 2) : null,
           boxShadow: [
             BoxShadow(
                 color: Colors.black.withValues(alpha: 0.2),
@@ -116,8 +147,8 @@ class VisualFloorPlan extends StatelessWidget {
           ]),
       child: Center(
         child: Text(table.tableName,
-            style: const TextStyle(
-                color: Colors.white, fontWeight: FontWeight.bold)),
+            style: TextStyle(
+                color: Theme.of(context).colorScheme.onSurface, fontWeight: FontWeight.bold)),
       ),
     );
 
@@ -125,39 +156,45 @@ class VisualFloorPlan extends StatelessWidget {
       return Positioned(
         left: table.x,
         top: table.y,
-        child: GestureDetector(
-          onPanStart: (details) => onTablePanStart?.call(table),
-          onPanUpdate: (details) => onTableDragUpdate?.call(table, details),
+        child: TransformableBox(
+          isSelected: isSelected,
+          width: table.width,
+          height: table.height,
+          rotation: table.rotation,
+          currentScale: scale,
           onTap: () => onTableTap?.call(table),
-          behavior: HitTestBehavior.translucent,
+          onDrag: (delta) {
+            // We need to construct a pseudo drag details
+             onTableDragUpdate?.call(table, DragUpdateDetails(
+               delta: delta, 
+               globalPosition: Offset.zero,
+             ));
+          },
+          onResize: (w, h) => onTableResize?.call(table, w, h),
+          onRotate: (angle) => onTableRotate?.call(table, table.rotation + angle),
           child: content,
         ),
       );
     } else {
+      // Logic for non-editable mode remains mostly same
+      Widget rotated = Transform.rotate(
+        angle: table.rotation,
+        child: content,
+      );
+      
       return Positioned(
         left: table.x,
         top: table.y,
         child: GestureDetector(
           onTap: () => onTableTap?.call(table),
-          child: content,
+          child: rotated,
         ),
       );
     }
   }
 
-  Widget _buildObject(LayoutObjectModel obj) {
+  Widget _buildObject(BuildContext context, LayoutObjectModel obj, double scale) {
     final isSelected = selectedObject == obj;
-    final double padding = 10.0; // Extend hit area by 10px each side
-
-    // Calculate dimensions including padding
-    final double realW = obj.width + (padding * 2);
-    final double realH = obj.height + (padding * 2);
-    // Bounding box size (diagonal) to accommodate any rotation
-    final double diag = sqrt((realW * realW) + (realH * realH));
-
-    // Center point of the object
-    final double cx = obj.x + (obj.width / 2);
-    final double cy = obj.y + (obj.height / 2);
 
     // 1. Visual Content
     Widget visualContent = Container(
@@ -165,14 +202,13 @@ class VisualFloorPlan extends StatelessWidget {
       height: obj.height,
       decoration: BoxDecoration(
         color: obj.color != null ? Color(obj.color!) : Colors.grey,
-        border: isSelected ? Border.all(color: Colors.white, width: 2) : null,
       ),
       child: (obj.iconPoint != null && obj.iconPoint != 0)
           ? Center(
               child: FaIcon(
                 IconHelper.getIconByCodePoint(obj.iconPoint) ??
                     const IconData(0xe000, fontFamily: 'MaterialIcons'),
-                color: Colors.white,
+                color: Theme.of(context).colorScheme.onSurface,
                 size: min(obj.width, obj.height) * 0.6,
               ),
             )
@@ -181,44 +217,41 @@ class VisualFloorPlan extends StatelessWidget {
               : null,
     );
 
-    // 2. Touch Wrapper with explicit size (contains transparent padding)
-    Widget touchWrapper = Container(
-      width: realW,
-      height: realH,
-      alignment: Alignment.center,
-      color: Colors.transparent,
-      child: visualContent,
-    );
-
-    // 3. Rotation
-    Widget rotated = Transform.rotate(
-      angle: obj.rotation,
-      child: touchWrapper,
-    );
-
     if (isEditable) {
       return Positioned(
-        // Center the larger bounding box on the object's center
-        left: cx - (diag / 2),
-        top: cy - (diag / 2),
-        width: diag,
-        height: diag,
-        child: GestureDetector(
-          onPanStart: (details) => onObjectPanStart?.call(obj),
-          onPanUpdate: (details) => onObjectDragUpdate?.call(obj, details),
+        left: obj.x,
+        top: obj.y,
+        child: TransformableBox(
+          isSelected: isSelected,
+          width: obj.width,
+          height: obj.height,
+          rotation: obj.rotation,
+          currentScale: scale,
           onTap: () => onObjectTap?.call(obj),
-          behavior: HitTestBehavior
-              .translucent, // Allow hitting transparent parts of children if robust check passes
-          child: Center(child: rotated),
+           onDrag: (delta) {
+             onObjectDragUpdate?.call(obj, DragUpdateDetails(
+               delta: delta, 
+               globalPosition: Offset.zero, 
+              ));
+          },
+          onResize: (w, h) => onObjectResize?.call(obj, w, h),
+          onRotate: (angle) => onObjectRotate?.call(obj, obj.rotation + angle),
+          child: visualContent,
         ),
       );
     } else {
-      return Positioned(
-        left: cx - (diag / 2),
-        top: cy - (diag / 2),
-        width: diag,
-        height: diag,
-        child: Center(child: rotated),
+      Widget rotated = Transform.rotate(
+        angle: obj.rotation,
+        child: visualContent,
+      );
+      
+       return Positioned(
+        left: obj.x,
+        top: obj.y,
+        child: GestureDetector(
+          onTap: () => onObjectTap?.call(obj),
+          child: rotated,
+        ),
       );
     }
   }

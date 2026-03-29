@@ -304,14 +304,12 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
       children: [
         // LEFT PANE: Receipt Preview
         Expanded(
-          flex: 1,
           child: _buildReceiptPane(),
         ),
         // Vertical Divider
         VerticalDivider(width: 1.w, thickness: 2, color: Colors.grey.shade300),
         // RIGHT PANE: Payment Controls (Cash only)
         Expanded(
-          flex: 1,
           child: _buildPaymentPane(),
         ),
       ],
@@ -467,7 +465,6 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
         // Buffet subtotal line
         ReceiptLine(
           label: 'BUFFET SUBTOTAL',
-          price: null,
           total: _buffetSubtotal,
           isBold: true,
         ),
@@ -599,14 +596,12 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
           // Buffet subtotal
           ReceiptLine(
             label: 'Buffet Subtotal',
-            price: null,
             total: _buffetSubtotal,
           ),
           SizedBox(height: 8.h),
           // Extras subtotal
           ReceiptLine(
             label: 'Extras Subtotal',
-            price: null,
             total: _extrasSubtotal,
           ),
           SizedBox(height: 8.h),
@@ -615,7 +610,6 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
           // GRAND TOTAL
           ReceiptLine(
             label: 'GRAND TOTAL',
-            price: null,
             total: _grandTotal,
             isBold: true,
             isTotal: true,
@@ -881,7 +875,7 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
 
   /// Show print receipt dialog
   void _showPrintReceiptDialog() {
-    showDialog(
+    showDialog<void>(
       context: context,
       barrierDismissible: false,
       builder: (context) => AlertDialog(
@@ -925,18 +919,17 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
                         orderItems: _orderItems,
                       );
 
-                      if (mounted) {
-                        if (success) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Receipt printed successfully'),
-                              backgroundColor: Colors.green,
-                              duration: Duration(seconds: 2),
-                            ),
-                          );
-                        } else {
-                          _showPrintErrorDialog();
-                        }
+                      if (!mounted) return;
+                      if (success) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Receipt printed successfully'),
+                            backgroundColor: Colors.green,
+                            duration: Duration(seconds: 2),
+                          ),
+                        );
+                      } else {
+                        _showPrintErrorDialog();
                       }
                     } catch (e) {
                       if (mounted) {
@@ -964,7 +957,7 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
 
   /// Show print error dialog
   void _showPrintErrorDialog({String? errorMessage}) {
-    showDialog(
+    showDialog<void>(
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('Print Error'),

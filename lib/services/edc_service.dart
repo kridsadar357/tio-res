@@ -141,7 +141,7 @@ class EdcService extends ChangeNotifier {
     try {
       // TODO: Implement actual connection test based on terminal type
       // This is a placeholder that simulates connection
-      await Future.delayed(const Duration(seconds: 2));
+      await Future<void>.delayed(const Duration(seconds: 2));
 
       // Simulate successful connection
       _status = EdcPaymentStatus.idle;
@@ -184,17 +184,17 @@ class EdcService extends ChangeNotifier {
           'EDC: Sending payment request for ฿${amount.toStringAsFixed(2)}');
 
       // Simulate connecting
-      await Future.delayed(const Duration(milliseconds: 500));
+      await Future<void>.delayed(const Duration(milliseconds: 500));
       _status = EdcPaymentStatus.waitingForCard;
       notifyListeners();
 
       // Simulate card insertion/tap
-      await Future.delayed(const Duration(seconds: 2));
+      await Future<void>.delayed(const Duration(seconds: 2));
       _status = EdcPaymentStatus.processing;
       notifyListeners();
 
       // Simulate processing
-      await Future.delayed(const Duration(seconds: 2));
+      await Future<void>.delayed(const Duration(seconds: 2));
 
       // Simulate successful transaction
       _lastTransaction = EdcTransactionResult(

@@ -68,7 +68,7 @@ class _ManageCategoryDialogState extends State<ManageCategoryDialog> {
             color:
                 const Color(0xFF252836).withValues(alpha: 0.9), // Dark surface
             borderRadius: BorderRadius.circular(20.r),
-            border: Border.all(color: Colors.white.withValues(alpha: 0.1)),
+            border: Border.all(color: Theme.of(context).brightness == Brightness.dark ? Colors.white.withValues(alpha: 0.1) : Colors.black.withValues(alpha: 0.1)),
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withValues(alpha: 0.3),
@@ -86,7 +86,7 @@ class _ManageCategoryDialogState extends State<ManageCategoryDialog> {
                 style: TextStyle(
                   fontSize: 18.sp,
                   fontWeight: FontWeight.bold,
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.onSurface,
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -99,18 +99,18 @@ class _ManageCategoryDialogState extends State<ManageCategoryDialog> {
                   decoration: InputDecoration(
                     labelText: l10n.categoryName,
                     labelStyle:
-                        TextStyle(color: Colors.white70, fontSize: 14.sp),
+                        TextStyle(color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7), fontSize: 14.sp),
                     filled: true,
                     fillColor: Colors.white.withValues(alpha: 0.05),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12.r),
                       borderSide: BorderSide(
-                          color: Colors.white.withValues(alpha: 0.1)),
+                          color: Theme.of(context).brightness == Brightness.dark ? Colors.white.withValues(alpha: 0.1) : Colors.black.withValues(alpha: 0.1)),
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12.r),
                       borderSide: BorderSide(
-                          color: Colors.white.withValues(alpha: 0.1)),
+                          color: Theme.of(context).brightness == Brightness.dark ? Colors.white.withValues(alpha: 0.1) : Colors.black.withValues(alpha: 0.1)),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12.r),
@@ -133,7 +133,7 @@ class _ManageCategoryDialogState extends State<ManageCategoryDialog> {
                       onPressed: () => Navigator.pop(context),
                       style: OutlinedButton.styleFrom(
                         side: BorderSide(
-                            color: Colors.white.withValues(alpha: 0.3)),
+                            color: Theme.of(context).brightness == Brightness.dark ? Colors.white.withValues(alpha: 0.3) : Colors.black.withValues(alpha: 0.3)),
                         padding: EdgeInsets.symmetric(vertical: 12.h),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12.r)),
@@ -141,7 +141,7 @@ class _ManageCategoryDialogState extends State<ManageCategoryDialog> {
                       child: Text(
                         l10n.cancel,
                         style: TextStyle(
-                            color: Colors.white70,
+                            color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
                             fontSize: 14.sp,
                             fontWeight: FontWeight.bold),
                       ),
@@ -160,7 +160,7 @@ class _ManageCategoryDialogState extends State<ManageCategoryDialog> {
                       child: Text(
                         l10n.save,
                         style: TextStyle(
-                            color: Colors.white,
+                            color: Theme.of(context).colorScheme.onSurface,
                             fontSize: 14.sp,
                             fontWeight: FontWeight.bold),
                       ),

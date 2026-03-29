@@ -9,6 +9,7 @@ class OrderItem {
   final int menuItemId;
   final int quantity;
   final double priceAtMoment; // Price when item was added
+  final String menuItemName; // Name of the menu item (joined from menu_items table)
 
   OrderItem({
     required this.id,
@@ -16,6 +17,7 @@ class OrderItem {
     required this.menuItemId,
     required this.quantity,
     required this.priceAtMoment,
+    this.menuItemName = '',
   });
 
   /// Create OrderItem from database map
@@ -26,6 +28,7 @@ class OrderItem {
       menuItemId: map['menu_item_id'] as int,
       quantity: map['quantity'] as int,
       priceAtMoment: (map['price_at_moment'] as num).toDouble(),
+      menuItemName: (map['menu_item_name'] as String?) ?? '',
     );
   }
 
@@ -47,6 +50,7 @@ class OrderItem {
     int? menuItemId,
     int? quantity,
     double? priceAtMoment,
+    String? menuItemName,
   }) {
     return OrderItem(
       id: id ?? this.id,
@@ -54,6 +58,7 @@ class OrderItem {
       menuItemId: menuItemId ?? this.menuItemId,
       quantity: quantity ?? this.quantity,
       priceAtMoment: priceAtMoment ?? this.priceAtMoment,
+      menuItemName: menuItemName ?? this.menuItemName,
     );
   }
 

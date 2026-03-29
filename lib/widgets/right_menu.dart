@@ -38,14 +38,15 @@ class RightMenuWidget extends StatelessWidget {
 
     return Drawer(
       width: 280.w,
-      backgroundColor: const Color.fromARGB(0, 59, 59, 46),
+      backgroundColor: Theme.of(context).cardTheme.color,
       child: Container(
         decoration: BoxDecoration(
           color: Theme.of(context).cardTheme.color,
           border: Border(
             left: BorderSide(
-              color: const Color.fromARGB(255, 238, 255, 87)
-                  .withValues(alpha: 0.8),
+              color: Theme.of(context).brightness == Brightness.dark
+                  ? Colors.yellow
+                  : Colors.indigo,
               width: 4,
             ),
           ),
@@ -57,7 +58,7 @@ class RightMenuWidget extends StatelessWidget {
               Text(
                 'จัดการโปรแกรม',
                 style: TextStyle(
-                  fontSize: 12.sp,
+                  fontSize: 18.sp,
                   fontWeight: FontWeight.bold,
                   color: Theme.of(context).textTheme.bodySmall?.color,
                   letterSpacing: 2.0,
@@ -86,7 +87,7 @@ class RightMenuWidget extends StatelessWidget {
                   'ResPOS v1.0',
                   style: TextStyle(
                     fontSize: 10.sp,
-                    color: Colors.white24,
+                    color: Theme.of(context).textTheme.bodySmall?.color,
                   ),
                 ),
               ),
@@ -108,10 +109,13 @@ class RightMenuWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(12.r),
         child: Container(
           decoration: BoxDecoration(
-            color: Colors.white.withValues(alpha: 0.05),
+            color: Theme.of(context).cardColor,
             borderRadius: BorderRadius.circular(12.r),
             border: Border.all(
-              color: Colors.white.withValues(alpha: 0.1),
+              color: Theme.of(context).brightness == Brightness.dark
+                  ? Colors.yellow.withValues(alpha: 0.3)
+                  : Colors.indigo.withValues(alpha: 0.3),
+              width: 1,
             ),
           ),
           child: Column(
@@ -137,7 +141,7 @@ class RightMenuWidget extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 11.sp,
                     fontWeight: FontWeight.w500,
-                    color: Colors.white,
+                    color: Theme.of(context).colorScheme.onSurface,
                   ),
                   textAlign: TextAlign.center,
                   maxLines: 2,

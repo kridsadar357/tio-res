@@ -118,10 +118,10 @@ class _PaymentSettingsScreenState extends State<PaymentSettingsScreen> {
         child: Row(
           children: [
             IconButton(
-              icon: const Icon(Icons.arrow_back, color: Colors.white),
+              icon: Icon(Icons.arrow_back, color: Theme.of(context).colorScheme.onSurface),
               onPressed: () => Navigator.pop(context),
               style: IconButton.styleFrom(
-                backgroundColor: Colors.white.withOpacity(0.1),
+                backgroundColor: Colors.white.withValues(alpha: 0.1),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8.r)),
               ),
@@ -172,9 +172,9 @@ class _PaymentSettingsScreenState extends State<PaymentSettingsScreen> {
     return Container(
       padding: EdgeInsets.all(20.w),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.03),
+        color: Colors.white.withValues(alpha: 0.03),
         borderRadius: BorderRadius.circular(16.r),
-        border: Border.all(color: Colors.white.withOpacity(0.05)),
+        border: Border.all(color: Colors.white.withValues(alpha: 0.05)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -184,7 +184,7 @@ class _PaymentSettingsScreenState extends State<PaymentSettingsScreen> {
               Container(
                 padding: EdgeInsets.all(10.w),
                 decoration: BoxDecoration(
-                  color: Colors.blue.withOpacity(0.1),
+                  color: Colors.blue.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(10.r),
                 ),
                 child: Icon(Icons.qr_code, color: Colors.blue, size: 24.sp),
@@ -232,7 +232,7 @@ class _PaymentSettingsScreenState extends State<PaymentSettingsScreen> {
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(16.r),
                   border: Border.all(
-                      color: Colors.white.withOpacity(0.2), width: 2),
+                      color: Colors.white.withValues(alpha: 0.2), width: 2),
                 ),
                 child: _qrPath.isNotEmpty
                     ? ClipRRect(
@@ -268,15 +268,15 @@ class _PaymentSettingsScreenState extends State<PaymentSettingsScreen> {
           colors: _edcEnabled
               ? [const Color(0xFF1E3A5F), const Color(0xFF0D2137)]
               : [
-                  Colors.grey.shade800.withOpacity(0.5),
-                  Colors.grey.shade900.withOpacity(0.5)
+                  Colors.grey.shade800.withValues(alpha: 0.5),
+                  Colors.grey.shade900.withValues(alpha: 0.5)
                 ],
         ),
         borderRadius: BorderRadius.circular(16.r),
         border: Border.all(
           color: _edcEnabled
-              ? AppTheme.accent.withOpacity(0.3)
-              : Colors.white.withOpacity(0.05),
+              ? AppTheme.accent.withValues(alpha: 0.3)
+              : Colors.white.withValues(alpha: 0.05),
         ),
       ),
       child: Column(
@@ -289,8 +289,8 @@ class _PaymentSettingsScreenState extends State<PaymentSettingsScreen> {
                 padding: EdgeInsets.all(10.w),
                 decoration: BoxDecoration(
                   color: _edcEnabled
-                      ? Colors.green.withOpacity(0.2)
-                      : Colors.grey.withOpacity(0.1),
+                      ? Colors.green.withValues(alpha: 0.2)
+                      : Colors.grey.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(10.r),
                 ),
                 child: Icon(
@@ -329,7 +329,7 @@ class _PaymentSettingsScreenState extends State<PaymentSettingsScreen> {
 
           if (_edcEnabled) ...[
             SizedBox(height: 24.h),
-            Divider(color: Colors.white.withOpacity(0.1)),
+            Divider(color: Colors.white.withValues(alpha: 0.1)),
             SizedBox(height: 16.h),
 
             // Terminal Type
@@ -339,9 +339,9 @@ class _PaymentSettingsScreenState extends State<PaymentSettingsScreen> {
             Container(
               padding: EdgeInsets.symmetric(horizontal: 16.w),
               decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.05),
+                color: Colors.white.withValues(alpha: 0.05),
                 borderRadius: BorderRadius.circular(12.r),
-                border: Border.all(color: Colors.white.withOpacity(0.1)),
+                border: Border.all(color: Colors.white.withValues(alpha: 0.1)),
               ),
               child: DropdownButtonHideUnderline(
                 child: DropdownButton<EdcTerminalType>(
@@ -368,9 +368,9 @@ class _PaymentSettingsScreenState extends State<PaymentSettingsScreen> {
             Container(
               padding: EdgeInsets.symmetric(horizontal: 16.w),
               decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.05),
+                color: Colors.white.withValues(alpha: 0.05),
                 borderRadius: BorderRadius.circular(12.r),
-                border: Border.all(color: Colors.white.withOpacity(0.1)),
+                border: Border.all(color: Colors.white.withValues(alpha: 0.1)),
               ),
               child: DropdownButtonHideUnderline(
                 child: DropdownButton<EdcConnectionType>(
@@ -461,7 +461,7 @@ class _PaymentSettingsScreenState extends State<PaymentSettingsScreen> {
                 label: Text(l10n.testConnection),
                 style: OutlinedButton.styleFrom(
                   foregroundColor: Colors.white70,
-                  side: BorderSide(color: Colors.white.withOpacity(0.2)),
+                  side: BorderSide(color: Colors.white.withValues(alpha: 0.2)),
                   padding: EdgeInsets.symmetric(vertical: 14.h),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12.r)),
@@ -479,14 +479,14 @@ class _PaymentSettingsScreenState extends State<PaymentSettingsScreen> {
       hintText: hint,
       hintStyle: TextStyle(color: Colors.white30, fontSize: 16.sp),
       filled: true,
-      fillColor: Colors.white.withOpacity(0.05),
+      fillColor: Colors.white.withValues(alpha: 0.05),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(12.r),
         borderSide: BorderSide.none,
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(12.r),
-        borderSide: BorderSide(color: Colors.white.withOpacity(0.1)),
+        borderSide: BorderSide(color: Colors.white.withValues(alpha: 0.1)),
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(12.r),

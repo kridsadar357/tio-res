@@ -11,7 +11,7 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  intl: ^0.20.2
+  intl: any
 
   # State Management
   flutter_riverpod: ^2.4.9
@@ -33,24 +33,68 @@ dependencies:
   flutter_screenutil: ^5.9.0
   qr_flutter: ^4.1.0
   # Bluetooth Thermal Printer
-  # blue_thermal_printer:
-  #   path: ./plugins/blue_thermal_printer
+  blue_thermal_printer:
+    path: ./plugins/blue_thermal_printer
   esc_pos_utils_plus: ^2.0.4
   permission_handler: ^11.1.0
   shared_preferences: ^2.2.2
-  google_fonts: ^7.0.0
+  image: ^4.1.3  # For image processing in receipt printing
+  archive: ^3.4.9  # For backup/restore ZIP functionality
+  file_picker: ^8.0.0+1  # For selecting backup files
+  google_fonts: ^6.3.2
   animate_do: ^4.2.0
   http: ^1.2.0
-  # flutter_tts: ^4.2.0
+  flutter_tts: ^4.2.0
   fl_chart: ^1.1.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^3.0.0
+  flutter_native_splash: ^2.4.1
+
+dependency_overrides:
+  vector_math: ^2.2.0
 
 flutter:
   generate: true
   uses-material-design: true
   assets:
     - assets/images/
+
+flutter_native_splash:
+  # This package generates native code to customize Flutter's default white native splash screen
+  # with background color and splash image.
+  # Customize the parameters below, and run the following command in the terminal:
+  # dart run flutter_native_splash:create
+  # To remove the splash screen, run:
+  # dart run flutter_native_splash:remove
+
+  color: "#FFFFFF"
+  #color_dark: "#042a49"  # Optional: Uncomment to set a dark mode splash screen color
+
+  image: assets/images/tio_res_splash.jpg
+  #image_dark: assets/dark-mode-icon.png  # Optional: Uncomment to set a dark mode splash screen image
+
+  # The color and image_dark parameters are optional - if not specified, the app will use the
+  # color and image parameters for both light and dark mode.
+
+  android_12:
+    # The image parameter sets the splash screen icon image.  If this parameter is not specified,
+    # the app's launcher icon will be used instead.
+    # Please note that the splash screen will be clipped to a circle on the center of the screen.
+    # App icon with an icon background: This should be used for app icons with a background.
+    # App icon without an icon background: This should be used for app icons without a background.
+    image: assets/images/tio_res_splash.jpg
+    color: "#FFFFFF"
+    #color_dark: "#042a49"  # Optional: Uncomment to set a dark mode splash screen color
+    #image_dark: assets/dark-mode-icon.png  # Optional: Uncomment to set a dark mode splash screen image
+    # The color and image_dark parameters are optional - if not specified, the app will use the
+    # color and image parameters for both light and dark mode.
+
+  android_gravity: center  # Center the splash image on screen
+  ios_content_mode: scaleAspectFill  # Scale image to fill screen while maintaining aspect ratio
+  
+  fullscreen: true  # Enable full screen splash screen on Android for larger image display
+
+  web_image_mode: cover  # Use cover mode to make image fill more of the screen

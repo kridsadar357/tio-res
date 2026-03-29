@@ -22,50 +22,53 @@ class LayoutSidePanel extends StatelessWidget {
         color: Theme.of(context).cardTheme.color?.withValues(alpha: 0.8),
         border: Border(
           left: BorderSide(
-            color: Colors.white.withValues(alpha: 0.1),
+            color: Theme.of(context).brightness == Brightness.dark ? Colors.white.withValues(alpha: 0.1) : Colors.black.withValues(alpha: 0.1),
             width: 1,
           ),
         ),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Floor Status',
-            style: TextStyle(
-              fontSize: 20.sp,
-              fontWeight: FontWeight.bold,
-              color: Theme.of(context).textTheme.titleLarge?.color,
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              'Floor Status',
+              style: TextStyle(
+                fontSize: 20.sp,
+                fontWeight: FontWeight.bold,
+                color: Theme.of(context).textTheme.titleLarge?.color,
+              ),
             ),
-          ),
-          SizedBox(height: 24.h),
-          _buildStatCard(context, 'ทั้งหมด', total.toString(),
-              Icons.table_restaurant, Colors.blue),
-          SizedBox(height: 12.h),
-          _buildStatCard(context, 'ว่าง', available.toString(),
-              Icons.check_circle, AppTheme.statusAvailable),
-          SizedBox(height: 12.h),
-          _buildStatCard(context, 'มีลูกค้า', occupied.toString(), Icons.people,
-              AppTheme.statusOccupied),
-          SizedBox(height: 12.h),
-          _buildStatCard(context, 'กำลังทำความสะอาด', cleaning.toString(),
-              Icons.cleaning_services, AppTheme.statusCleaning),
-          SizedBox(height: 32.h),
-          Text(
-            'Legend',
-            style: TextStyle(
-              fontSize: 16.sp,
-              fontWeight: FontWeight.bold,
-              color: Theme.of(context).textTheme.titleMedium?.color,
+            SizedBox(height: 24.h),
+            _buildStatCard(context, 'ทั้งหมด', total.toString(),
+                Icons.table_restaurant, Colors.blue),
+            SizedBox(height: 12.h),
+            _buildStatCard(context, 'ว่าง', available.toString(),
+                Icons.check_circle, AppTheme.statusAvailable),
+            SizedBox(height: 12.h),
+            _buildStatCard(context, 'มีลูกค้า', occupied.toString(), Icons.people,
+                AppTheme.statusOccupied),
+            SizedBox(height: 12.h),
+            _buildStatCard(context, 'กำลังทำความสะอาด', cleaning.toString(),
+                Icons.cleaning_services, AppTheme.statusCleaning),
+            SizedBox(height: 32.h),
+            Text(
+              'Legend',
+              style: TextStyle(
+                fontSize: 16.sp,
+                fontWeight: FontWeight.bold,
+                color: Theme.of(context).textTheme.titleMedium?.color,
+              ),
             ),
-          ),
-          SizedBox(height: 16.h),
-          _buildLegendItem(context, 'กำแพง', Icons.crop_landscape, Colors.grey),
-          _buildLegendItem(
-              context, 'ตกแต่ง', Icons.local_florist, Colors.green),
-          _buildLegendItem(
-              context, 'ทางเข้า', Icons.meeting_room, Colors.blueGrey),
-        ],
+            SizedBox(height: 16.h),
+            _buildLegendItem(context, 'กำแพง', Icons.crop_landscape, Colors.grey),
+            _buildLegendItem(
+                context, 'ตกแต่ง', Icons.local_florist, Colors.green),
+            _buildLegendItem(
+                context, 'ทางเข้า', Icons.meeting_room, Colors.blueGrey),
+          ],
+        ),
       ),
     );
   }

@@ -4,11 +4,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../l10n/app_localizations.dart';
 import '../models/table_model.dart';
+import '../core/constants/app_constants.dart';
 import '../models/layout_object_model.dart';
 import '../services/database_helper.dart';
 import '../widgets/right_menu.dart';
 import '../widgets/visual_floor_plan.dart';
 import '../widgets/takeaway_order_panel.dart';
+import '../services/api_service.dart';
 import 'pos_screen.dart';
 
 import 'menu_management/menu_management_screen.dart';
@@ -24,9 +26,11 @@ import 'management/customers_screen.dart';
 import 'management/promotions_screen.dart';
 import '../theme/app_theme.dart';
 import '../services/printer_service.dart';
+import '../services/api_service.dart';
 import '../utils/currency_helper.dart';
 import '../models/buffet_tier.dart';
 import '../widgets/premium_toast.dart';
+import '../widgets/pending_orders_dialog.dart';
 import '../providers/notification_provider.dart';
 
 /// Provider to fetch all tables
@@ -69,6 +73,13 @@ class _TableSelectionScreenState extends ConsumerState<TableSelectionScreen> {
   // View Mode: 0 = List, 1 = Map
   int _viewMode = 0;
 
+  // Takeaway panel expanded state
+  bool _takeawayExpanded = false;
+
+  // Track seen order item IDs to detect truly new items
+  Set<int> _seenOrderItemIds = {};
+  int _previousOrderCount = 0;
+
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -93,19 +104,89 @@ class _TableSelectionScreenState extends ConsumerState<TableSelectionScreen> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
+    
+    // Listen for new pending orders and show notification
+    ref.listen<NotificationState>(notificationProvider, (previous, next) {
+      // Collect all current order item IDs
+      final currentItemIds = <int>{};
+      for (final order in next.pendingOrders) {
+        for (final item in order.items) {
+          currentItemIds.add(item.id);
+        }
+      }
+      
+      // Find truly new items (not seen before)
+      final newItemIds = currentItemIds.difference(_seenOrderItemIds);
+      final hasNewOrders = next.count > _previousOrderCount;
+      final hasNewItems = newItemIds.isNotEmpty;
+      
+      // Only show notification if this is not the initial load (previous != null)
+      if (previous != null && (hasNewOrders || hasNewItems) && next.pendingOrders.isNotEmpty) {
+        // New orders or items arrived - show toast and auto-open dialog
+        final newItemCount = newItemIds.length;
+        final newOrderCount = next.count - _previousOrderCount;
+        
+        // Show appropriate message based on what's new
+        String message;
+        if (newOrderCount > 0 && newItemCount > 0) {
+          message = '🔔 $newOrderCount ${l10n.pendingOrders} ($newItemCount ${l10n.items})!';
+        } else if (newItemCount > 0) {
+          message = '🔔 $newItemCount ${l10n.items} ${l10n.pendingOrders}!';
+        } else {
+          message = '🔔 $newOrderCount ${l10n.pendingOrders}!';
+        }
+        
+        PremiumToast.show(context, message);
+        
+        // Auto-show dialog for new orders
+        Future.delayed(const Duration(milliseconds: 500), () {
+          if (mounted && next.pendingOrders.isNotEmpty) {
+            PendingOrdersDialog.show(
+              context,
+              next.pendingOrders,
+              () {
+                // When dialog is closed via callback (refresh), mark current items as seen
+                // This prevents re-showing dialog for the same items
+                _seenOrderItemIds = currentItemIds;
+                ref.read(notificationProvider.notifier).refresh();
+              },
+            );
+          }
+        });
+        
+        // Mark new items as seen immediately after showing dialog
+        _seenOrderItemIds.addAll(newItemIds);
+      }
+      
+      // Update order count tracking
+      _previousOrderCount = next.count;
+      
+      // Clean up: remove IDs that are no longer pending (acknowledged items)
+      _seenOrderItemIds = _seenOrderItemIds.intersection(currentItemIds);
+    });
+    
     return Scaffold(
       key: _scaffoldKey,
       endDrawer: _buildRightMenu(l10n),
       body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [
-              Color(0xFF1A1F2C), // Deep premium navy
-              Color(0xFF13161F), // Darker shade
-            ],
-          ),
+        decoration: BoxDecoration(
+          gradient: Theme.of(context).brightness == Brightness.dark
+              ? const LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    Color(0xFF1A1F2C), // Deep premium navy
+                    Color(0xFF13161F), // Darker shade
+                  ],
+                )
+              : LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    Theme.of(context).scaffoldBackgroundColor,
+                    Theme.of(context).scaffoldBackgroundColor, // Solid color for light theme
+                  ],
+                ),
         ),
         child: SafeArea(
           child: Column(
@@ -118,11 +199,15 @@ class _TableSelectionScreenState extends ConsumerState<TableSelectionScreen> {
                     padding:
                         EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
                     decoration: BoxDecoration(
-                      color: Colors.white.withValues(alpha: 0.05),
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? Colors.white.withValues(alpha: 0.05)
+                          : Colors.white.withValues(alpha: 0.8),
                       border: Border(
                         bottom: BorderSide(
-                          color: Colors.white.withValues(alpha: 0.1),
-                          width: 1,
+                          color: Theme.of(context).brightness == Brightness.dark
+                              ? Colors.yellow
+                              : Colors.indigo,
+                          width: 5,
                         ),
                       ),
                     ),
@@ -154,7 +239,7 @@ class _TableSelectionScreenState extends ConsumerState<TableSelectionScreen> {
                         SizedBox(width: 20.w),
                         // Date & Time Display
                         StreamBuilder(
-                          stream: Stream.periodic(const Duration(seconds: 1)),
+                          stream: Stream<int>.periodic(const Duration(seconds: 1), (i) => i),
                           builder: (context, snapshot) {
                             final now = DateTime.now();
                             final locale =
@@ -168,32 +253,36 @@ class _TableSelectionScreenState extends ConsumerState<TableSelectionScreen> {
                               padding: EdgeInsets.symmetric(
                                   horizontal: 12.w, vertical: 8.h),
                               decoration: BoxDecoration(
-                                color: Colors.white.withValues(alpha: 0.08),
+                                color: Theme.of(context).brightness == Brightness.dark
+                                    ? Colors.white.withValues(alpha: 0.08)
+                                    : Colors.black.withValues(alpha: 0.05),
                                 borderRadius: BorderRadius.circular(10.r),
                                 border: Border.all(
-                                    color: Colors.white.withValues(alpha: 0.1)),
+                                    color: Theme.of(context).brightness == Brightness.dark
+                                        ? Colors.white.withValues(alpha: 0.1)
+                                        : Colors.black.withValues(alpha: 0.1)),
                               ),
                               child: Row(
                                 children: [
                                   Icon(Icons.calendar_today,
-                                      size: 14.sp, color: Colors.white54),
+                                      size: 14.sp, color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6)),
                                   SizedBox(width: 6.w),
                                   Text(
                                     dateFormat,
                                     style: TextStyle(
                                         fontSize: 13.sp,
-                                        color: Colors.white70,
+                                        color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
                                         fontWeight: FontWeight.w500),
                                   ),
                                   SizedBox(width: 12.w),
                                   Icon(Icons.access_time,
-                                      size: 14.sp, color: Colors.white54),
+                                      size: 14.sp, color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6)),
                                   SizedBox(width: 6.w),
                                   Text(
                                     timeFormat,
                                     style: TextStyle(
                                         fontSize: 13.sp,
-                                        color: Colors.white70,
+                                        color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
                                         fontWeight: FontWeight.w600),
                                   ),
                                 ],
@@ -207,10 +296,14 @@ class _TableSelectionScreenState extends ConsumerState<TableSelectionScreen> {
                         Container(
                           padding: EdgeInsets.all(4.w),
                           decoration: BoxDecoration(
-                            color: Colors.white.withValues(alpha: 0.08),
+                            color: Theme.of(context).brightness == Brightness.dark
+                                ? Colors.yellow.withValues(alpha: 0.08)
+                                : Colors.indigo.withValues(alpha: 0.05),
                             borderRadius: BorderRadius.circular(12.r),
                             border: Border.all(
-                              color: Colors.white.withValues(alpha: 0.1),
+                              color: Theme.of(context).brightness == Brightness.dark
+                                  ? Colors.yellow.withValues(alpha: 0.1)
+                                  : Colors.indigo.withValues(alpha: 0.1),
                             ),
                           ),
                           child: Row(
@@ -227,10 +320,14 @@ class _TableSelectionScreenState extends ConsumerState<TableSelectionScreen> {
                         Container(
                           padding: EdgeInsets.all(4.w),
                           decoration: BoxDecoration(
-                            color: Colors.white.withValues(alpha: 0.06),
+                            color: Theme.of(context).brightness == Brightness.dark
+                                ? Colors.yellow.withValues(alpha: 0.06)
+                                : Colors.indigo.withValues(alpha: 0.03),
                             borderRadius: BorderRadius.circular(16.r),
                             border: Border.all(
-                              color: Colors.white.withValues(alpha: 0.08),
+                              color: Theme.of(context).brightness == Brightness.dark
+                                  ? Colors.yellow.withValues(alpha: 0.08)
+                                  : Colors.indigo.withValues(alpha: 0.08),
                             ),
                           ),
                           child: Row(
@@ -253,39 +350,52 @@ class _TableSelectionScreenState extends ConsumerState<TableSelectionScreen> {
                         Consumer(builder: (context, ref, child) {
                           final notifState = ref.watch(notificationProvider);
                           final count = notifState.count;
+                          final orders = notifState.pendingOrders;
                           return Container(
                             decoration: BoxDecoration(
-                              color: Colors.white.withValues(alpha: 0.08),
+                              color: count > 0 
+                                  ? Colors.orange.withValues(alpha: 0.15)
+                                  : Theme.of(context).brightness == Brightness.dark
+                                      ? Colors.yellow.withValues(alpha: 0.08)
+                                      : Colors.indigo.withValues(alpha: 0.05),
                               borderRadius: BorderRadius.circular(12.r),
+                              border: count > 0 ? Border.all(color: Colors.orange.withValues(alpha: 0.3)) : null,
                             ),
                             child: Stack(
                               clipBehavior: Clip.none,
                               children: [
                                 IconButton(
                                   onPressed: () {
-                                    if (count == 0) {
-                                      ref
-                                          .read(notificationProvider.notifier)
-                                          .triggerMockNotification();
-                                      PremiumToast.show(
-                                          context, 'Checked for new orders');
+                                    if (count > 0 && orders.isNotEmpty) {
+                                      // Show pending orders dialog
+                                      PendingOrdersDialog.show(
+                                        context,
+                                        orders,
+                                        () {
+                                          // Refresh notification state
+                                          ref.read(notificationProvider.notifier).refresh();
+                                        },
+                                      );
                                     } else {
-                                      ref
-                                          .read(notificationProvider.notifier)
-                                          .clear();
-                                      PremiumToast.show(
-                                          context, 'Notifications cleared');
+                                      // Manual check for new orders
+                                      ref.read(notificationProvider.notifier).refresh();
+                                      PremiumToast.show(context, l10n.noPendingOrders);
                                     }
                                   },
-                                  icon: Icon(Icons.notifications_outlined,
-                                      color: Colors.white70, size: 24.sp),
+                                  icon: Icon(
+                                    count > 0 ? Icons.notifications_active : Icons.notifications_outlined,
+                                    color: count > 0 
+                                        ? Colors.orange 
+                                        : Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7), 
+                                    size: 24.sp,
+                                  ),
                                 ),
                                 if (count > 0)
                                   Positioned(
-                                    right: 6,
-                                    top: 6,
+                                    right: 4,
+                                    top: 4,
                                     child: Container(
-                                      padding: const EdgeInsets.all(5),
+                                      padding: const EdgeInsets.all(4),
                                       decoration: BoxDecoration(
                                         gradient: const LinearGradient(
                                           colors: [
@@ -296,22 +406,21 @@ class _TableSelectionScreenState extends ConsumerState<TableSelectionScreen> {
                                         shape: BoxShape.circle,
                                         boxShadow: [
                                           BoxShadow(
-                                            color: Colors.red
-                                                .withValues(alpha: 0.4),
+                                            color: Colors.red.withValues(alpha: 0.5),
                                             blurRadius: 8,
-                                            spreadRadius: 1,
+                                            spreadRadius: 2,
                                           ),
                                         ],
                                       ),
                                       constraints: BoxConstraints(
-                                        minWidth: 18.w,
-                                        minHeight: 18.w,
+                                        minWidth: 20.w,
+                                        minHeight: 20.w,
                                       ),
                                       child: Text(
                                         '$count',
                                         style: TextStyle(
                                           color: Colors.white,
-                                          fontSize: 10.sp,
+                                          fontSize: 11.sp,
                                           fontWeight: FontWeight.bold,
                                         ),
                                         textAlign: TextAlign.center,
@@ -328,12 +437,14 @@ class _TableSelectionScreenState extends ConsumerState<TableSelectionScreen> {
                         // Menu Button - Premium Style
                         Container(
                           decoration: BoxDecoration(
-                            color: Colors.white.withValues(alpha: 0.08),
+                            color: Theme.of(context).brightness == Brightness.dark
+                                ? Colors.yellow.withValues(alpha: 0.08)
+                                : Colors.indigo.withValues(alpha: 0.05),
                             borderRadius: BorderRadius.circular(12.r),
                           ),
                           child: IconButton(
                             icon: Icon(Icons.menu_rounded,
-                                color: Colors.white70, size: 24.sp),
+                                color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7), size: 24.sp),
                             onPressed: () {
                               _scaffoldKey.currentState?.openEndDrawer();
                             },
@@ -346,114 +457,198 @@ class _TableSelectionScreenState extends ConsumerState<TableSelectionScreen> {
                 ),
               ),
 
-              // Main Content - 80/20 Split
+              // Main Content with Toggle
               Expanded(
-                child: Row(
+                child: Stack(
                   children: [
-                    // 70% - Table Grid/Map
-                    Expanded(
-                      flex: 7,
-                      child: Consumer(
-                        builder: (context, ref, child) {
-                          final tablesAsync = ref.watch(tablesProvider);
+                    // Tables View (shown when takeaway collapsed)
+                    AnimatedPositioned(
+                      duration: const Duration(milliseconds: 300),
+                      curve: Curves.easeInOut,
+                      left: 0,
+                      right: _takeawayExpanded ? MediaQuery.of(context).size.width : 40.w,
+                      top: 0,
+                      bottom: 0,
+                      child: AnimatedOpacity(
+                        duration: const Duration(milliseconds: 200),
+                        opacity: _takeawayExpanded ? 0.0 : 1.0,
+                        child: Consumer(
+                          builder: (context, ref, child) {
+                            final tablesAsync = ref.watch(tablesProvider);
 
-                          return tablesAsync.when(
-                            loading: () => const Center(
-                              child: CircularProgressIndicator(),
-                            ),
-                            error: (error, stack) => Center(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Icon(Icons.error_outline,
-                                      size: 64.sp, color: Colors.red),
-                                  SizedBox(height: 16.h),
-                                  Text(
-                                    'Error loading tables',
-                                    style: TextStyle(fontSize: 18.sp),
-                                  ),
-                                  SizedBox(height: 8.h),
-                                  Text(
-                                    error.toString(),
-                                    style: TextStyle(
-                                        fontSize: 14.sp, color: Colors.grey),
-                                  ),
-                                ],
+                            return tablesAsync.when(
+                              loading: () => const Center(
+                                child: CircularProgressIndicator(),
                               ),
-                            ),
-                            data: (tables) {
-                              if (tables.isEmpty) {
-                                return Center(
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Icon(Icons.table_restaurant,
-                                          size: 64.sp, color: Colors.grey),
-                                      SizedBox(height: 16.h),
-                                      Text(
-                                        'No tables available',
-                                        style: TextStyle(fontSize: 18.sp),
-                                      ),
-                                    ],
-                                  ),
-                                );
-                              }
+                              error: (error, stack) => Center(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(Icons.error_outline,
+                                        size: 64.sp, color: Colors.red),
+                                    SizedBox(height: 16.h),
+                                    Text(
+                                      'Error loading tables',
+                                      style: TextStyle(fontSize: 18.sp),
+                                    ),
+                                    SizedBox(height: 8.h),
+                                    Text(
+                                      error.toString(),
+                                      style: TextStyle(
+                                          fontSize: 14.sp, color: Colors.grey),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              data: (tables) {
+                                if (tables.isEmpty) {
+                                  return Center(
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Icon(Icons.table_restaurant,
+                                            size: 64.sp, color: Colors.grey),
+                                        SizedBox(height: 16.h),
+                                        Text(
+                                          'No tables available',
+                                          style: TextStyle(fontSize: 18.sp),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                }
 
-                              // Filter tables
-                              final filteredTables = _selectedFilter == -1
-                                  ? tables
-                                  : tables
-                                      .where((table) =>
-                                          table.status == _selectedFilter)
-                                      .toList();
+                                // Filter tables
+                                final filteredTables = _selectedFilter == -1
+                                    ? tables
+                                    : tables
+                                        .where((table) =>
+                                            table.status == _selectedFilter)
+                                        .toList();
 
-                              // Calculate grid columns based on screen width
-                              final crossAxisCount = _getCrossAxisCount();
+                                // Calculate grid columns based on screen width
+                                final crossAxisCount = _getCrossAxisCount();
 
-                              return _viewMode == 0
-                                  ? Padding(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 32.w, vertical: 16.h),
-                                      child: filteredTables.isEmpty
-                                          ? Center(
-                                              child: Text(
-                                                'No tables found',
-                                                style: TextStyle(
-                                                    fontSize: 16.sp,
-                                                    color: Colors.grey),
+                                return _viewMode == 0
+                                    ? Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 32.w, vertical: 16.h),
+                                        child: filteredTables.isEmpty
+                                            ? Center(
+                                                child: Text(
+                                                  'No tables found',
+                                                  style: TextStyle(
+                                                      fontSize: 16.sp,
+                                                      color: Colors.grey),
+                                                ),
+                                              )
+                                            : GridView.builder(
+                                                gridDelegate:
+                                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                                  crossAxisCount: crossAxisCount,
+                                                  crossAxisSpacing: 20.w,
+                                                  mainAxisSpacing: 20.h,
+                                                  childAspectRatio:
+                                                      1.0, // Square cards (shorter height)
+                                                ),
+                                                itemCount: filteredTables.length,
+                                                cacheExtent: 500,
+                                                itemBuilder: (context, index) {
+                                                  final table =
+                                                      filteredTables[index];
+                                                  return RepaintBoundary(
+                                                    child: _buildTableCard(table),
+                                                  );
+                                                },
                                               ),
-                                            )
-                                          : GridView.builder(
-                                              gridDelegate:
-                                                  SliverGridDelegateWithFixedCrossAxisCount(
-                                                crossAxisCount: crossAxisCount,
-                                                crossAxisSpacing: 20.w,
-                                                mainAxisSpacing: 20.h,
-                                                childAspectRatio:
-                                                    1.0, // Square cards (shorter height)
-                                              ),
-                                              itemCount: filteredTables.length,
-                                              itemBuilder: (context, index) {
-                                                final table =
-                                                    filteredTables[index];
-                                                return _buildTableCard(table);
-                                              },
-                                            ),
-                                    )
-                                  : _buildMapView(filteredTables);
-                            },
-                          );
-                        },
+                                      )
+                                    : _buildMapView(filteredTables);
+                              },
+                            );
+                          },
+                        ),
                       ),
                     ),
 
-                    // 30% - Takeaway Panel
-                    Expanded(
-                      flex: 3,
-                      child: TakeawayOrderPanel(
-                        onOrderComplete: () {
-                          // Optionally refresh or show success
+                    // Takeaway Panel (shown when expanded)
+                    AnimatedPositioned(
+                      duration: const Duration(milliseconds: 300),
+                      curve: Curves.easeInOut,
+                      left: _takeawayExpanded ? 40.w : MediaQuery.of(context).size.width,
+                      right: 0,
+                      top: 0,
+                      bottom: 0,
+                      child: AnimatedOpacity(
+                        duration: const Duration(milliseconds: 200),
+                        opacity: _takeawayExpanded ? 1.0 : 0.0,
+                        child: TakeawayOrderPanel(
+                          onOrderComplete: () {
+                            // Optionally refresh or show success
+                          },
+                        ),
+                      ),
+                    ),
+
+                    // Toggle Button - always visible on right edge
+                    Positioned(
+                      right: _takeawayExpanded ? null : 0,
+                      left: _takeawayExpanded ? 0 : null,
+                      top: 0,
+                      bottom: 0,
+                      child: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            _takeawayExpanded = !_takeawayExpanded;
+                          });
                         },
+                        child: Container(
+                          width: 40.w,
+                          decoration: BoxDecoration(
+                            gradient: const LinearGradient(
+                              colors: [Colors.orange, Colors.deepOrange],
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.orange.withValues(alpha: 0.5),
+                                blurRadius: 12,
+                                spreadRadius: 2,
+                              ),
+                            ],
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                _takeawayExpanded
+                                    ? Icons.keyboard_double_arrow_right
+                                    : Icons.keyboard_double_arrow_left,
+                                color: Colors.white,
+                                size: 28.sp,
+                              ),
+                              SizedBox(height: 16.h),
+                              RotatedBox(
+                                quarterTurns: _takeawayExpanded ? 1 : 3,
+                                child: Text(
+                                  l10n.takeAway.toUpperCase(),
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 12.sp,
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 1,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: 16.h),
+                              Icon(
+                                Icons.takeout_dining,
+                                color: Colors.white,
+                                size: 24.sp,
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
                     ),
                   ],
@@ -483,7 +678,9 @@ class _TableSelectionScreenState extends ConsumerState<TableSelectionScreen> {
         child: Icon(
           icon,
           size: 20.sp,
-          color: isSelected ? Theme.of(context).primaryColor : Colors.white54,
+          color: isSelected 
+              ? Theme.of(context).primaryColor 
+              : Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6),
         ),
       ),
     );
@@ -530,7 +727,9 @@ class _TableSelectionScreenState extends ConsumerState<TableSelectionScreen> {
             Text(
               label,
               style: TextStyle(
-                color: isSelected ? color : Colors.white60,
+                color: isSelected 
+                    ? color 
+                    : Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6),
                 fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
                 fontSize: 13.sp,
               ),
@@ -551,52 +750,55 @@ class _TableSelectionScreenState extends ConsumerState<TableSelectionScreen> {
       duration: const Duration(milliseconds: 300),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(24.r),
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
-          child: Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [
-                  Colors.white.withValues(alpha: 0.08),
-                  Colors.white.withValues(alpha: 0.03),
-                ],
-              ),
-              borderRadius: BorderRadius.circular(24.r),
-              border: Border.all(
-                color: isOccupied
-                    ? statusColor.withValues(alpha: 0.3)
-                    : Colors.white.withValues(alpha: 0.1),
-                width: isOccupied ? 1.5 : 1,
-              ),
-              boxShadow: isOccupied
-                  ? [
-                      BoxShadow(
-                        color: statusColor.withValues(alpha: 0.15),
-                        blurRadius: 20,
-                        spreadRadius: 2,
-                      ),
-                    ]
-                  : null,
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: Theme.of(context).brightness == Brightness.dark
+                ? LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [
+                      Colors.white.withValues(alpha: 0.08),
+                      Colors.white.withValues(alpha: 0.03),
+                    ],
+                  )
+                : LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [
+                      Theme.of(context).cardColor,
+                      Theme.of(context).cardColor,
+                    ],
+                  ),
+            borderRadius: BorderRadius.circular(24.r),
+            border: Border.all(
+              color: isOccupied
+                  ? statusColor.withValues(alpha: 0.3)
+                  : Theme.of(context).brightness == Brightness.dark
+                      ? Colors.white.withValues(alpha: 0.1)
+                      : Colors.black.withValues(alpha: 0.1),
+              width: isOccupied ? 1.5 : 1,
             ),
-            child: Material(
-              color: Colors.transparent,
+            boxShadow: isOccupied
+                ? [
+                    BoxShadow(
+                      color: statusColor.withValues(alpha: 0.15),
+                      blurRadius: 20,
+                      spreadRadius: 2,
+                    ),
+                  ]
+                : null,
+          ),
+          child: Material(
+              color: _getStatusColor(table.status).withValues(alpha: 0.5),
               child: InkWell(
                 onTap: () => _handleTableTap(table),
+                onLongPress:
+                    isOccupied ? () => _handleTableLongPress(table) : null,
                 borderRadius: BorderRadius.circular(24.r),
                 splashColor: statusColor.withValues(alpha: 0.1),
                 highlightColor: statusColor.withValues(alpha: 0.05),
                 child: Stack(
                   children: [
-                    // Subtle Diagonal Pattern Overlay
-                    Positioned.fill(
-                      child: CustomPaint(
-                        painter: _DiagonalPatternPainter(
-                          color: statusColor.withValues(alpha: 0.03),
-                        ),
-                      ),
-                    ),
                     // Status Glow - Top Right Corner
                     Positioned(
                       top: -30,
@@ -629,9 +831,10 @@ class _TableSelectionScreenState extends ConsumerState<TableSelectionScreen> {
                       ),
 
                     Padding(
-                      padding: EdgeInsets.all(16.w),
+                      padding: EdgeInsets.all(12.w),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
                         children: [
                           // Header Row: Table Name + Status Icon
                           Row(
@@ -643,76 +846,53 @@ class _TableSelectionScreenState extends ConsumerState<TableSelectionScreen> {
                                 child: Text(
                                   table.tableName,
                                   style: TextStyle(
-                                    fontSize: 26.sp,
+                                    fontSize: 20.sp,
                                     fontWeight: FontWeight.w700,
-                                    color: Colors.white,
+                                    color: Theme.of(context).colorScheme.onSurface,
                                     letterSpacing: -0.5,
                                   ),
+                                  overflow: TextOverflow.ellipsis,
                                 ),
                               ),
                               // Status Icon with Glow
                               Container(
-                                padding: EdgeInsets.all(8.w),
+                                padding: EdgeInsets.all(6.w),
                                 decoration: BoxDecoration(
                                   color: statusColor.withValues(alpha: 0.15),
-                                  borderRadius: BorderRadius.circular(10.r),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: statusColor.withValues(alpha: 0.3),
-                                      blurRadius: 8,
-                                      spreadRadius: 1,
-                                    ),
-                                  ],
+                                  borderRadius: BorderRadius.circular(8.r),
                                 ),
                                 child: Icon(
                                   _getTableIcon(table.status),
-                                  size: 18.sp,
-                                  color: statusColor,
+                                  size: 14.sp,
+                                  color: Colors.black,
                                 ),
                               ),
                             ],
                           ),
 
-                          const Spacer(),
+                          SizedBox(height: 4.h),
 
                           // Content: Price (Occupied) or Status Badge
                           if (isOccupied && table.totalAmount != null) ...[
                             Text(
-                              'Total',
+                              '฿${_formatCurrency(table.totalAmount!)}',
                               style: TextStyle(
-                                fontSize: 11.sp,
-                                color: Colors.white54,
-                                fontWeight: FontWeight.w500,
+                                fontSize: 18.sp,
+                                fontWeight: FontWeight.w800,
+                                color: Colors.black87,
                               ),
-                            ),
-                            SizedBox(height: 4.h),
-                            ShaderMask(
-                              shaderCallback: (bounds) => LinearGradient(
-                                colors: [
-                                  statusColor,
-                                  statusColor.withValues(alpha: 0.7)
-                                ],
-                              ).createShader(bounds),
-                              child: Text(
-                                '฿${_formatCurrency(table.totalAmount!)}',
-                                style: TextStyle(
-                                  fontSize: 28.sp,
-                                  fontWeight: FontWeight.w800,
-                                  color: Colors.white,
-                                  letterSpacing: -0.5,
-                                ),
-                              ),
+                              overflow: TextOverflow.ellipsis,
                             ),
                           ] else ...[
-                            // Status Badge
+                            // Status Badge - Compact
                             Container(
                               padding: EdgeInsets.symmetric(
-                                  horizontal: 12.w, vertical: 6.h),
+                                  horizontal: 8.w, vertical: 4.h),
                               decoration: BoxDecoration(
                                 color: statusColor.withValues(alpha: 0.15),
-                                borderRadius: BorderRadius.circular(20.r),
+                                borderRadius: BorderRadius.circular(12.r),
                                 border: Border.all(
-                                    color: statusColor.withValues(alpha: 0.3)),
+                                    color: Colors.black.withValues(alpha: 0.1)),
                               ),
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
@@ -723,24 +903,15 @@ class _TableSelectionScreenState extends ConsumerState<TableSelectionScreen> {
                                     decoration: BoxDecoration(
                                       color: statusColor,
                                       shape: BoxShape.circle,
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: statusColor.withValues(
-                                              alpha: 0.5),
-                                          blurRadius: 4,
-                                          spreadRadius: 1,
-                                        ),
-                                      ],
                                     ),
                                   ),
-                                  SizedBox(width: 8.w),
+                                  SizedBox(width: 4.w),
                                   Text(
-                                    table.statusText.toUpperCase(),
+                                    table.statusText,
                                     style: TextStyle(
-                                      fontSize: 10.sp,
-                                      fontWeight: FontWeight.w700,
-                                      color: statusColor,
-                                      letterSpacing: 1.0,
+                                      fontSize: 9.sp,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.black87,
                                     ),
                                   ),
                                 ],
@@ -756,8 +927,7 @@ class _TableSelectionScreenState extends ConsumerState<TableSelectionScreen> {
             ),
           ),
         ),
-      ),
-    );
+      );
   }
 
   /// Handle table tap based on status
@@ -781,7 +951,7 @@ class _TableSelectionScreenState extends ConsumerState<TableSelectionScreen> {
       // Occupied - navigate to POS screen
       Navigator.push(
         context,
-        MaterialPageRoute(
+        MaterialPageRoute<void>(
           builder: (context) => POSScreen(table: table),
         ),
       );
@@ -810,7 +980,10 @@ class _TableSelectionScreenState extends ConsumerState<TableSelectionScreen> {
                 color: Theme.of(context).cardTheme.color,
                 borderRadius: BorderRadius.circular(24.r),
                 border: Border.all(
-                    color: Colors.white.withValues(alpha: 0.1), width: 1),
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? Colors.white.withValues(alpha: 0.1)
+                        : Colors.black.withValues(alpha: 0.1),
+                    width: 1),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withValues(alpha: 0.2),
@@ -850,7 +1023,7 @@ class _TableSelectionScreenState extends ConsumerState<TableSelectionScreen> {
                   Text(
                     AppLocalizations.of(context)!.tableBeingCleaned,
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 14.sp, color: Colors.white70),
+                    style: TextStyle(fontSize: 14.sp, color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7)),
                   ),
                   SizedBox(height: 32.h),
 
@@ -863,8 +1036,10 @@ class _TableSelectionScreenState extends ConsumerState<TableSelectionScreen> {
                           style: OutlinedButton.styleFrom(
                             padding: EdgeInsets.symmetric(vertical: 18.h),
                             side: BorderSide(
-                                color: Colors.white.withValues(alpha: 0.2)),
-                            foregroundColor: Colors.white,
+                                color: Theme.of(context).brightness == Brightness.dark
+                                    ? Colors.white.withValues(alpha: 0.2)
+                                    : Colors.black.withValues(alpha: 0.2)),
+                            foregroundColor: Theme.of(context).colorScheme.onSurface,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(12.r)),
                           ),
@@ -878,7 +1053,7 @@ class _TableSelectionScreenState extends ConsumerState<TableSelectionScreen> {
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             backgroundColor: AppTheme.statusAvailable,
-                            foregroundColor: Colors.white,
+                            foregroundColor: Theme.of(context).colorScheme.onSurface,
                             elevation: 8,
                             shadowColor:
                                 AppTheme.statusAvailable.withValues(alpha: 0.4),
@@ -890,6 +1065,8 @@ class _TableSelectionScreenState extends ConsumerState<TableSelectionScreen> {
                             final dbHelper = DatabaseHelper();
                             try {
                               await dbHelper.markTableAvailable(table.id);
+                              // Sync to cloud (Set to Available: 0)
+                              await ApiService().updateTableStatus(table.id, 0);
                               if (context.mounted) {
                                 Navigator.pop(context);
                                 ref.invalidate(tablesProvider);
@@ -1069,7 +1246,7 @@ class _TableSelectionScreenState extends ConsumerState<TableSelectionScreen> {
                                           '${CurrencyHelper.symbol(context)}${tier.price.toInt()}',
                                           style: TextStyle(
                                               color: isSelected
-                                                  ? Colors.white70
+                                                  ? Colors.white.withOpacity(0.9) // White on colored background when selected
                                                   : Theme.of(context)
                                                       .textTheme
                                                       .bodyMedium
@@ -1095,7 +1272,9 @@ class _TableSelectionScreenState extends ConsumerState<TableSelectionScreen> {
                           color: Theme.of(context).cardColor,
                           borderRadius: BorderRadius.circular(12.r),
                           border: Border.all(
-                              color: Colors.white.withValues(alpha: 0.1)),
+                              color: Theme.of(context).brightness == Brightness.dark
+                                  ? Colors.yellow.withValues(alpha: 0.1)
+                                  : Colors.indigo.withValues(alpha: 0.1)),
                         ),
                         child: SwitchListTile(
                           value: printReceipt,
@@ -1107,7 +1286,6 @@ class _TableSelectionScreenState extends ConsumerState<TableSelectionScreen> {
                                   const TextStyle(fontWeight: FontWeight.bold)),
                           secondary: Icon(Icons.print,
                               color: Theme.of(context).primaryColor),
-                          activeThumbColor: Theme.of(context).primaryColor,
                           contentPadding: EdgeInsets.zero,
                           dense: true,
                         ),
@@ -1161,14 +1339,18 @@ class _TableSelectionScreenState extends ConsumerState<TableSelectionScreen> {
                                     buffetTierPrice: _selectedTier!.price,
                                   );
 
+                                  // Sync table status to hosting (1 = occupied)
+                                  ApiService().updateTableStatus(table.id, 1);
+
                                   // Print Receipt if requested
                                   if (printReceipt) {
                                     final order =
                                         await dbHelper.getOrder(orderId);
                                     if (order != null) {
-                                      PrinterService().printOpenTableReceipt(
+                                      await PrinterService().printOpenTableReceipt(
                                         table: table,
                                         order: order,
+                                        buffetTierId: _selectedTier?.id,
                                       );
                                     }
                                   }
@@ -1220,6 +1402,220 @@ class _TableSelectionScreenState extends ConsumerState<TableSelectionScreen> {
     );
   }
 
+  /// Handle Long Press on Occupied Table (Move/Cancel)
+  void _handleTableLongPress(TableModel table) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      builder: (context) => Container(
+        decoration: BoxDecoration(
+          color: Theme.of(context).scaffoldBackgroundColor,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(24.r)),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.2),
+              blurRadius: 20,
+              spreadRadius: 5,
+            )
+          ],
+        ),
+        child: SafeArea(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // Handle Bar
+              Container(
+                margin: EdgeInsets.only(top: 12.h, bottom: 20.h),
+                width: 40.w,
+                height: 4.h,
+                decoration: BoxDecoration(
+                  color: Colors.grey.withValues(alpha: 0.3),
+                  borderRadius: BorderRadius.circular(2),
+                ),
+              ),
+              
+              Text(
+                table.tableName,
+                style: TextStyle(
+                  fontSize: 20.sp,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(height: 24.h),
+
+              // Options
+              ListTile(
+                leading: Container(
+                  padding: EdgeInsets.all(8.w),
+                  decoration: BoxDecoration(
+                    color: Colors.blue.withValues(alpha: 0.1),
+                    shape: BoxShape.circle,
+                  ),
+                  child: const Icon(Icons.drive_file_move, color: Colors.blue),
+                ),
+                title: Text(AppLocalizations.of(context)!.moveTable),
+                onTap: () {
+                  Navigator.pop(context);
+                  _showMoveTableDialog(table);
+                },
+              ),
+              Divider(height: 1, color: Theme.of(context).dividerColor),
+              ListTile(
+                leading: Container(
+                  padding: EdgeInsets.all(8.w),
+                  decoration: BoxDecoration(
+                    color: Colors.red.withValues(alpha: 0.1),
+                    shape: BoxShape.circle,
+                  ),
+                  child: const Icon(Icons.cancel, color: Colors.red),
+                ),
+                title: Text(
+                  AppLocalizations.of(context)!.cancelTable,
+                  style: const TextStyle(color: Colors.red),
+                ),
+                onTap: () {
+                  Navigator.pop(context);
+                  _confirmCancelTable(table);
+                },
+              ),
+              SizedBox(height: 24.h),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  /// Show Move Table Dialog
+  void _showMoveTableDialog(TableModel fromTable) {
+    showDialog(
+      context: context,
+      builder: (context) => Consumer(
+        builder: (context, ref, _) {
+          final tablesAsync = ref.watch(tablesProvider);
+          return tablesAsync.when(
+            data: (tables) {
+              final availableTables = tables
+                  .where((t) => t.status == AppConstants.tableAvailable)
+                  .toList();
+
+              return AlertDialog(
+                title: Text(AppLocalizations.of(context)!.selectDestinationTable),
+                content: SizedBox(
+                  width: double.maxFinite,
+                  child: availableTables.isEmpty
+                      ? Center(child: Text(AppLocalizations.of(context)!.table)) 
+                      : GridView.builder(
+                          shrinkWrap: true,
+                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 3,
+                            mainAxisSpacing: 10.h,
+                            crossAxisSpacing: 10.w,
+                            childAspectRatio: 1.5,
+                          ),
+                          itemCount: availableTables.length,
+                          itemBuilder: (context, index) {
+                            final table = availableTables[index];
+                            return InkWell(
+                              onTap: () async {
+                                final dbHelper = DatabaseHelper();
+                                try {
+                                  await dbHelper.moveTable(fromTable.id, table.id);
+                                  // Update API
+                                  await ApiService().updateTableStatus(fromTable.id, 0);
+                                  await ApiService().updateTableStatus(table.id, 1); // Assuming 1 is occupied
+                                  
+                                  if (context.mounted) {
+                                    Navigator.pop(context);
+                                    ref.invalidate(tablesProvider);
+                                    PremiumToast.show(
+                                      context,
+                                      AppLocalizations.of(context)!.tableMoved,
+                                    );
+                                  }
+                                } catch (e) {
+                                  if (context.mounted) {
+                                    PremiumToast.show(context, 'Error: $e', isError: true);
+                                  }
+                                }
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: AppTheme.statusAvailable.withValues(alpha: 0.2),
+                                  borderRadius: BorderRadius.circular(8.r),
+                                  border: Border.all(color: AppTheme.statusAvailable),
+                                ),
+                                alignment: Alignment.center,
+                                child: Text(
+                                  table.tableName,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: AppTheme.statusAvailable,
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                ),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(context),
+                    child: Text(AppLocalizations.of(context)!.cancel),
+                  ),
+                ],
+              );
+            },
+            loading: () => const Center(child: CircularProgressIndicator()),
+            error: (e, s) => Text('Error: $e'),
+          );
+        },
+      ),
+    );
+  }
+
+  /// Confirm Cancel Table
+  void _confirmCancelTable(TableModel table) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(AppLocalizations.of(context)!.cancelTable),
+        content: Text(AppLocalizations.of(context)!.confirmCancelTable),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text(AppLocalizations.of(context)!.cancel),
+          ),
+          TextButton(
+            style: TextButton.styleFrom(foregroundColor: Colors.red),
+            onPressed: () async {
+              final dbHelper = DatabaseHelper();
+              try {
+                await dbHelper.cancelTableOrder(table.id);
+                // Update API
+                await ApiService().updateTableStatus(table.id, 0);
+                
+                if (context.mounted) {
+                  Navigator.pop(context);
+                  ref.invalidate(tablesProvider);
+                  PremiumToast.show(
+                    context,
+                    AppLocalizations.of(context)!.tableCancelled,
+                  );
+                }
+              } catch (e) {
+                if (context.mounted) {
+                   PremiumToast.show(context, 'Error: $e', isError: true);
+                }
+              }
+            },
+            child: Text(AppLocalizations.of(context)!.confirm),
+          ),
+        ],
+      ),
+    );
+  }
+
   /// Get color based on table status
   Color _getStatusColor(int status) {
     switch (status) {
@@ -1262,7 +1658,7 @@ class _TableSelectionScreenState extends ConsumerState<TableSelectionScreen> {
         RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]},');
   }
 
-  Widget _buildModernCounter(String label, int value, Function(int) onChanged) {
+  Widget _buildModernCounter(String label, int value, void Function(int) onChanged) {
     return Column(
       children: [
         Text(label,
@@ -1315,7 +1711,7 @@ class _TableSelectionScreenState extends ConsumerState<TableSelectionScreen> {
           label: l10n.reports,
           onTap: () => Navigator.push(
             context,
-            MaterialPageRoute(builder: (_) => const ReportsScreen()),
+            MaterialPageRoute<void>(builder: (_) => const ReportsScreen()),
           ),
         ),
         RightMenuItem(
@@ -1323,7 +1719,7 @@ class _TableSelectionScreenState extends ConsumerState<TableSelectionScreen> {
           label: l10n.shift,
           onTap: () => Navigator.push(
             context,
-            MaterialPageRoute(builder: (_) => const ShiftScreen()),
+            MaterialPageRoute<void>(builder: (_) => const ShiftScreen()),
           ),
         ),
         RightMenuItem(
@@ -1331,7 +1727,7 @@ class _TableSelectionScreenState extends ConsumerState<TableSelectionScreen> {
           label: l10n.menu,
           onTap: () => Navigator.push(
             context,
-            MaterialPageRoute(builder: (_) => const MenuManagementScreen()),
+            MaterialPageRoute<void>(builder: (_) => const MenuManagementScreen()),
           ).then((_) => ref.invalidate(tablesProvider)),
         ),
         RightMenuItem(
@@ -1339,7 +1735,7 @@ class _TableSelectionScreenState extends ConsumerState<TableSelectionScreen> {
           label: 'Buffet Tiers',
           onTap: () => Navigator.push(
             context,
-            MaterialPageRoute(builder: (_) => const BuffetTierScreen()),
+            MaterialPageRoute<void>(builder: (_) => const BuffetTierScreen()),
           ),
         ),
         RightMenuItem(
@@ -1347,7 +1743,7 @@ class _TableSelectionScreenState extends ConsumerState<TableSelectionScreen> {
           label: 'Tables',
           onTap: () => Navigator.push(
             context,
-            MaterialPageRoute(builder: (_) => const TableLayoutScreen()),
+            MaterialPageRoute<void>(builder: (_) => const TableLayoutScreen()),
           ).then((_) => ref.invalidate(tablesProvider)),
         ),
         RightMenuItem(
@@ -1355,7 +1751,7 @@ class _TableSelectionScreenState extends ConsumerState<TableSelectionScreen> {
           label: 'Customers',
           onTap: () => Navigator.push(
             context,
-            MaterialPageRoute(builder: (_) => const CustomersScreen()),
+            MaterialPageRoute<void>(builder: (_) => const CustomersScreen()),
           ),
         ),
         RightMenuItem(
@@ -1363,7 +1759,7 @@ class _TableSelectionScreenState extends ConsumerState<TableSelectionScreen> {
           label: 'Promotions',
           onTap: () => Navigator.push(
             context,
-            MaterialPageRoute(builder: (_) => const PromotionsScreen()),
+            MaterialPageRoute<void>(builder: (_) => const PromotionsScreen()),
           ),
         ),
         RightMenuItem(
@@ -1371,7 +1767,7 @@ class _TableSelectionScreenState extends ConsumerState<TableSelectionScreen> {
           label: l10n.printers,
           onTap: () => Navigator.push(
             context,
-            MaterialPageRoute(builder: (_) => const PrinterSettingsScreen()),
+            MaterialPageRoute<void>(builder: (_) => const PrinterSettingsScreen()),
           ),
         ),
         RightMenuItem(
@@ -1379,7 +1775,7 @@ class _TableSelectionScreenState extends ConsumerState<TableSelectionScreen> {
           label: l10n.layout,
           onTap: () => Navigator.push(
             context,
-            MaterialPageRoute(
+            MaterialPageRoute<void>(
                 builder: (_) => const VisualReceiptDesignerScreen()),
           ),
         ),
@@ -1388,7 +1784,7 @@ class _TableSelectionScreenState extends ConsumerState<TableSelectionScreen> {
           label: l10n.settings,
           onTap: () => Navigator.push(
             context,
-            MaterialPageRoute(builder: (_) => const SettingsScreen()),
+            MaterialPageRoute<void>(builder: (_) => const SettingsScreen()),
           ),
         ),
         RightMenuItem(
@@ -1401,56 +1797,34 @@ class _TableSelectionScreenState extends ConsumerState<TableSelectionScreen> {
   }
 
   Widget _buildMapView(List<TableModel> filteredTables) {
-    return Consumer(
-      builder: (context, ref, child) {
-        final objectsAsync = ref.watch(layoutObjectsProvider);
-        return objectsAsync.when(
-          data: (objects) {
-            return Row(
-              children: [
-                Expanded(
-                  child: VisualFloorPlan(
-                    tables: filteredTables,
-                    objects: objects,
-                    isEditable: false,
-                    onTableTap: _handleTableTap,
+    return RepaintBoundary(
+      child: Consumer(
+        builder: (context, ref, child) {
+          final objectsAsync = ref.watch(layoutObjectsProvider);
+          return objectsAsync.when(
+            data: (objects) {
+              return Row(
+                children: [
+                  Expanded(
+                    child: VisualFloorPlan(
+                      tables: filteredTables,
+                      objects: objects,
+                      isEditable: false,
+                      onTableTap: _handleTableTap,
+                    ),
                   ),
-                ),
-                LayoutSidePanel(tables: filteredTables),
-              ],
-            );
-          },
-          loading: () => const Center(child: CircularProgressIndicator()),
-          error: (_, __) => const Center(child: Text('Error loading layout')),
-        );
-      },
+                  RepaintBoundary(
+                    child: LayoutSidePanel(tables: filteredTables),
+                  ),
+                ],
+              );
+            },
+            loading: () => const Center(child: CircularProgressIndicator()),
+            error: (_, __) => const Center(child: Text('Error loading layout')),
+          );
+        },
+      ),
     );
   }
 }
 
-/// Custom painter for diagonal stripe pattern on table cards
-class _DiagonalPatternPainter extends CustomPainter {
-  final Color color;
-
-  _DiagonalPatternPainter({required this.color});
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = color
-      ..strokeWidth = 1.0
-      ..style = PaintingStyle.stroke;
-
-    const spacing = 12.0;
-    for (double i = -size.height; i < size.width + size.height; i += spacing) {
-      canvas.drawLine(
-        Offset(i, 0),
-        Offset(i + size.height, size.height),
-        paint,
-      );
-    }
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
-}

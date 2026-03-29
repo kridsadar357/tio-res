@@ -1,11 +1,14 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:provider/provider.dart';
 import '../../models/receipt_layout.dart';
 import '../../widgets/premium_scaffold.dart';
 import '../../l10n/app_localizations.dart';
 import '../../utils/currency_helper.dart';
+import '../../providers/settings_provider.dart';
 
 class VisualReceiptDesignerScreen extends StatefulWidget {
   const VisualReceiptDesignerScreen({super.key});
@@ -39,7 +42,7 @@ class _VisualReceiptDesignerScreenState
       final prefs = await SharedPreferences.getInstance();
       final jsonString = prefs.getString(_currentPrefsKey);
       if (jsonString != null) {
-        final Map<String, dynamic> jsonMap = jsonDecode(jsonString);
+        final Map<String, dynamic> jsonMap = jsonDecode(jsonString) as Map<String, dynamic>;
         var layout = ReceiptLayout.fromJson(jsonMap);
 
         // Check for duplicate IDs and fix them
@@ -292,6 +295,36 @@ class _VisualReceiptDesignerScreenState
             child: ListView(
               padding: EdgeInsets.symmetric(horizontal: 16.w),
               children: [
+                // Store Info Section
+                Padding(
+                  padding: EdgeInsets.only(bottom: 12.h),
+                  child: Text('Store Info',
+                      style: TextStyle(
+                          fontSize: 14.sp,
+                          color: Colors.white54,
+                          fontWeight: FontWeight.bold)),
+                ),
+                _buildDraggableItem(ReceiptComponentType.shopLogo, Icons.image,
+                    'Shop Logo'),
+                _buildDraggableItem(ReceiptComponentType.shopName, Icons.storefront,
+                    'Shop Name'),
+                _buildDraggableItem(ReceiptComponentType.shopAddress, Icons.location_on,
+                    'Shop Address'),
+                _buildDraggableItem(ReceiptComponentType.shopTel, Icons.phone,
+                    'Shop Tel'),
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 16.h),
+                  child: Divider(color: Colors.white.withValues(alpha: 0.1)),
+                ),
+                // Basic Components Section
+                Padding(
+                  padding: EdgeInsets.only(bottom: 12.h),
+                  child: Text('Basic Components',
+                      style: TextStyle(
+                          fontSize: 14.sp,
+                          color: Colors.white54,
+                          fontWeight: FontWeight.bold)),
+                ),
                 _buildDraggableItem(ReceiptComponentType.header, Icons.store,
                     l10n.headerComponent),
                 _buildDraggableItem(ReceiptComponentType.text,
@@ -308,6 +341,7 @@ class _VisualReceiptDesignerScreenState
                   padding: EdgeInsets.symmetric(vertical: 16.h),
                   child: Divider(color: Colors.white.withValues(alpha: 0.1)),
                 ),
+                // Dynamic Data Section
                 Padding(
                   padding: EdgeInsets.only(bottom: 12.h),
                   child: Text(l10n.dynamicData,
@@ -491,9 +525,9 @@ class _VisualReceiptDesignerScreenState
   }
 
   Widget _renderComponentPreview(ReceiptComponent component) {
-    final align = _getAlignment(component.style['alignment']);
-    final double fontSize = (component.style['fontSize'] ?? 14).toDouble();
-    final bool isBold = component.style['bold'] == true;
+    final align = _getAlignment(component.style['alignment'] as String?);
+    final double fontSize = ((component.style['fontSize'] as num?) ?? 14).toDouble();
+    final bool isBold = (component.style['bold'] as bool?) == true;
 
     switch (component.type) {
       case ReceiptComponentType.header:
@@ -502,8 +536,8 @@ class _VisualReceiptDesignerScreenState
           alignment: align,
           padding: EdgeInsets.symmetric(vertical: 4.h),
           child: Text(
-            component.data['text'] ?? '',
-            textAlign: _getTextAlign(component.style['alignment']),
+            (component.data['text'] as String?) ?? '',
+            textAlign: _getTextAlign(component.style['alignment'] as String?),
             style: TextStyle(
               fontSize: ScreenUtil().setSp(fontSize),
               fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
@@ -542,7 +576,7 @@ class _VisualReceiptDesignerScreenState
             children: [
               Icon(Icons.qr_code, size: 48.sp, color: Colors.black),
               SizedBox(height: 4.h),
-              Text(component.data['payload'] ?? 'QR Code',
+              Text((component.data['payload'] as String?) ?? 'QR Code',
                   style:
                       TextStyle(fontSize: 12.sp, color: Colors.grey.shade600)),
             ],
@@ -551,7 +585,7 @@ class _VisualReceiptDesignerScreenState
       case ReceiptComponentType.space:
         return SizedBox(
             height: ScreenUtil()
-                .setHeight((component.style['height'] ?? 20).toDouble()));
+                .setHeight(((component.style['height'] as num?) ?? 20).toDouble()));
       case ReceiptComponentType.dynamicItems:
         return Container(
           padding: EdgeInsets.symmetric(vertical: 8.h),
@@ -594,6 +628,79 @@ class _VisualReceiptDesignerScreenState
                 fontFamily: 'Courier',
                 fontSize: 16,
                 color: Colors.black),
+          ),
+        );
+      case ReceiptComponentType.shopLogo:
+        final settings = context.read<SettingsProvider>();
+        final logoPath = settings.shopLogoPath;
+        return Container(
+          alignment: align,
+          padding: EdgeInsets.symmetric(vertical: 8.h),
+          child: logoPath.isNotEmpty && File(logoPath).existsSync()
+              ? Image.file(
+                  File(logoPath),
+                  width: 100.w,
+                  height: 60.h,
+                  fit: BoxFit.contain,
+                )
+              : Column(
+                  children: [
+                    Icon(Icons.image, size: 48.sp, color: Colors.grey.shade400),
+                    SizedBox(height: 4.h),
+                    Text('[Shop Logo]',
+                        style: TextStyle(fontSize: 12.sp, color: Colors.grey.shade500)),
+                  ],
+                ),
+        );
+      case ReceiptComponentType.shopName:
+        final settings = context.read<SettingsProvider>();
+        final shopName = settings.shopName.isNotEmpty ? settings.shopName : 'Shop Name';
+        return Container(
+          alignment: align,
+          padding: EdgeInsets.symmetric(vertical: 4.h),
+          child: Text(
+            shopName,
+            textAlign: _getTextAlign(component.style['alignment'] as String?),
+            style: TextStyle(
+              fontSize: ScreenUtil().setSp(fontSize),
+              fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
+              fontFamily: 'Courier',
+              color: Colors.black,
+            ),
+          ),
+        );
+      case ReceiptComponentType.shopAddress:
+        final settings = context.read<SettingsProvider>();
+        final shopAddress = settings.shopAddress.isNotEmpty ? settings.shopAddress : 'Shop Address';
+        return Container(
+          alignment: align,
+          padding: EdgeInsets.symmetric(vertical: 2.h),
+          child: Text(
+            shopAddress,
+            textAlign: _getTextAlign(component.style['alignment'] as String?),
+            style: TextStyle(
+              fontSize: ScreenUtil().setSp(fontSize),
+              fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
+              fontFamily: 'Courier',
+              color: Colors.black,
+            ),
+          ),
+        );
+      case ReceiptComponentType.shopTel:
+        final settings = context.read<SettingsProvider>();
+        final shopTel = settings.shopTel.isNotEmpty ? 'Tel: ${settings.shopTel}' : 'Tel: 000-000-0000';
+        return Container(
+          alignment: align,
+          padding: EdgeInsets.symmetric(vertical: 2.h),
+          child: Text(
+            shopTel,
+            textAlign: _getTextAlign(component.style['alignment'] as String?),
+            style: TextStyle(
+              fontSize: ScreenUtil().setSp(fontSize),
+              fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
+              fontFamily: 'Courier',
+              color: Colors.black,
+            ),
           ),
         );
       default:
@@ -660,7 +767,10 @@ class _VisualReceiptDesignerScreenState
                   color: Colors.white)),
           SizedBox(height: 24.h),
           if (component.type == ReceiptComponentType.text ||
-              component.type == ReceiptComponentType.header) ...[
+              component.type == ReceiptComponentType.header ||
+              component.type == ReceiptComponentType.shopName ||
+              component.type == ReceiptComponentType.shopAddress ||
+              component.type == ReceiptComponentType.shopTel) ...[
             Text(l10n.alignmentLabel,
                 style: TextStyle(
                     fontSize: 14.sp,
@@ -684,44 +794,78 @@ class _VisualReceiptDesignerScreenState
               ),
             ),
             SizedBox(height: 24.h),
-            Text(l10n.textContentLabel,
-                style: TextStyle(
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white70)),
-            SizedBox(height: 8.h),
-            TextFormField(
-              key: ValueKey('${component.id}_text'),
-              initialValue: component.data['text'],
-              style: const TextStyle(color: Colors.white),
-              decoration: InputDecoration(
-                  filled: true,
-                  fillColor: Colors.white.withValues(alpha: 0.05),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.r),
-                      borderSide: BorderSide.none),
-                  isDense: true),
-              maxLines: 2,
-              onChanged: (val) {
-                setState(() {
-                  component.data['text'] = val;
-                });
-              },
-            ),
-            SizedBox(height: 24.h),
+            // Only show text content field for editable text components
+            // Shop info components get content from settings automatically
+            if (component.type == ReceiptComponentType.text ||
+                component.type == ReceiptComponentType.header) ...[
+              Text(l10n.textContentLabel,
+                  style: TextStyle(
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white70)),
+              SizedBox(height: 8.h),
+              TextFormField(
+                key: ValueKey('${component.id}_text'),
+                initialValue: component.data['text'] as String?,
+                style: const TextStyle(color: Colors.white),
+                decoration: InputDecoration(
+                    filled: true,
+                    fillColor: Colors.white.withValues(alpha: 0.05),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8.r),
+                        borderSide: BorderSide.none),
+                    isDense: true),
+                maxLines: 2,
+                onChanged: (val) {
+                  setState(() {
+                    component.data['text'] = val;
+                  });
+                },
+              ),
+              SizedBox(height: 24.h),
+            ],
+            // Show info message for shop info components
+            if (component.type == ReceiptComponentType.shopName ||
+                component.type == ReceiptComponentType.shopAddress ||
+                component.type == ReceiptComponentType.shopTel) ...[
+              Container(
+                padding: EdgeInsets.all(12.w),
+                decoration: BoxDecoration(
+                  color: Colors.blue.withValues(alpha: 0.1),
+                  borderRadius: BorderRadius.circular(8.r),
+                  border: Border.all(color: Colors.blue.withValues(alpha: 0.3)),
+                ),
+                child: Row(
+                  children: [
+                    Icon(Icons.info_outline, color: Colors.blue, size: 20.sp),
+                    SizedBox(width: 8.w),
+                    Expanded(
+                      child: Text(
+                        'Content from Settings > Shop Info',
+                        style: TextStyle(
+                          fontSize: 12.sp,
+                          color: Colors.blue,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 24.h),
+            ],
             Text(l10n.fontSizeLabel,
                 style: TextStyle(
                     fontSize: 14.sp,
                     fontWeight: FontWeight.bold,
                     color: Colors.white70)),
             Slider(
-              value: (component.style['fontSize'] ?? 14).toDouble(),
+              value: ((component.style['fontSize'] as num?) ?? 14).toDouble(),
               min: 10,
               max: 40,
               divisions: 30,
               activeColor: Theme.of(context).primaryColor,
               inactiveColor: Colors.white10,
-              label: component.style['fontSize'].toString(),
+              label: (component.style['fontSize'] as num?)?.toString() ?? '14',
               onChanged: (val) {
                 setState(() {
                   component.style['fontSize'] = val.toInt();
@@ -736,7 +880,7 @@ class _VisualReceiptDesignerScreenState
                     fontWeight: FontWeight.bold,
                     color: Colors.white70)),
             Slider(
-              value: (component.style['height'] ?? 20).toDouble(),
+              value: ((component.style['height'] as num?) ?? 20).toDouble(),
               min: 5,
               max: 100,
               activeColor: Theme.of(context).primaryColor,
@@ -778,7 +922,7 @@ class _VisualReceiptDesignerScreenState
                     fontWeight: FontWeight.bold,
                     color: Colors.white70)),
             Slider(
-              value: (component.style['size'] ?? 6).toDouble(),
+              value: ((component.style['size'] as num?) ?? 6).toDouble(),
               min: 1,
               max: 8,
               divisions: 7,
@@ -791,6 +935,77 @@ class _VisualReceiptDesignerScreenState
                 });
               },
             ),
+          ],
+          if (component.type == ReceiptComponentType.shopLogo ||
+              component.type == ReceiptComponentType.image) ...[
+            Text(l10n.alignmentLabel,
+                style: TextStyle(
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white70)),
+            SizedBox(height: 8.h),
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.white.withValues(alpha: 0.05),
+                borderRadius: BorderRadius.circular(8.r),
+              ),
+              child: Row(
+                children: [
+                  _buildAlignButton(
+                      component, 'left', Icons.format_align_left, index),
+                  _buildAlignButton(
+                      component, 'center', Icons.format_align_center, index),
+                  _buildAlignButton(
+                      component, 'right', Icons.format_align_right, index),
+                ],
+              ),
+            ),
+            SizedBox(height: 24.h),
+            Text('Width',
+                style: TextStyle(
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white70)),
+            Slider(
+              value: ((component.style['width'] as num?) ?? 150).toDouble(),
+              min: 50,
+              max: 300,
+              divisions: 25,
+              activeColor: Theme.of(context).primaryColor,
+              inactiveColor: Colors.white10,
+              label: '${((component.style['width'] as num?) ?? 150).toInt()}px',
+              onChanged: (val) {
+                setState(() {
+                  component.style['width'] = val.toInt();
+                });
+              },
+            ),
+            SizedBox(height: 12.h),
+            // Info for shop logo
+            if (component.type == ReceiptComponentType.shopLogo)
+              Container(
+                padding: EdgeInsets.all(12.w),
+                decoration: BoxDecoration(
+                  color: Colors.blue.withValues(alpha: 0.1),
+                  borderRadius: BorderRadius.circular(8.r),
+                  border: Border.all(color: Colors.blue.withValues(alpha: 0.3)),
+                ),
+                child: Row(
+                  children: [
+                    Icon(Icons.info_outline, color: Colors.blue, size: 20.sp),
+                    SizedBox(width: 8.w),
+                    Expanded(
+                      child: Text(
+                        'Logo from Settings > Shop Info',
+                        style: TextStyle(
+                          fontSize: 12.sp,
+                          color: Colors.blue,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
           ],
         ],
       ),

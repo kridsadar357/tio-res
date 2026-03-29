@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:respos/widgets/premium_toast.dart';
 import '../models/order.dart';
 import '../models/order_item.dart';
 import '../models/table_model.dart';
 import '../services/database_helper.dart';
 import '../services/bluetooth_printer_service.dart';
+import '../services/api_service.dart';
 
 /// ReceiptLine: Helper widget for receipt lines
 class ReceiptLine extends StatelessWidget {
@@ -400,7 +402,7 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
                 style: TextStyle(
                   fontSize: 20.sp,
                   fontWeight: FontWeight.bold,
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.onSurface,
                 ),
               ),
               Text(
@@ -762,7 +764,7 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
               border: Border.all(color: Colors.green.shade300, width: 2),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.green.withOpacity(0.1),
+                  color: Colors.green.withValues(alpha: 0.1),
                   blurRadius: 10,
                   offset: const Offset(0, 4),
                 ),
@@ -950,7 +952,7 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
                             style: TextStyle(
                               fontSize: 18.sp,
                               fontWeight: FontWeight.bold,
-                              color: Colors.white,
+                              color: Theme.of(context).colorScheme.onSurface,
                             ),
                           ),
                         ),
@@ -1036,13 +1038,6 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
     });
   }
 
-  /// Clear input
-  void _clearInput() {
-    setState(() {
-      _amountReceivedController.clear();
-      _changeAmount = 0.0;
-    });
-  }
 
   /// Calculate change
   void _calculateChange() {
@@ -1313,6 +1308,9 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
         );
       }
 
+      // Sync table status to cloud (Set to Cleaning: 2)
+      await ApiService().updateTableStatus(widget.table.id, 2);
+
       if (mounted) {
         // Show print receipt dialog
         _showPrintReceiptDialog();
@@ -1337,7 +1335,7 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
 
   /// Show print receipt dialog
   void _showPrintReceiptDialog() {
-    showDialog(
+    showDialog<void>(
       context: context,
       barrierDismissible: false,
       builder: (context) => AlertDialog(
@@ -1383,13 +1381,7 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
 
                       if (mounted) {
                         if (success) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Receipt printed successfully'),
-                              backgroundColor: Colors.green,
-                              duration: Duration(seconds: 2),
-                            ),
-                          );
+                          PremiumToast.show(context, 'Receipt printed successfully');
                         } else {
                           _showPrintErrorDialog();
                         }
@@ -1420,7 +1412,7 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
 
   /// Show print error dialog
   void _showPrintErrorDialog({String? errorMessage}) {
-    showDialog(
+    showDialog<void>(
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('Print Error'),

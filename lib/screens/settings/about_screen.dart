@@ -42,7 +42,7 @@ class AboutScreen extends StatelessWidget {
                   width: 120.w,
                   height: 120.w,
                   decoration: BoxDecoration(
-                      color: Colors.white.withValues( alpha : 0.05),
+                      color: Theme.of(context).brightness == Brightness.dark ? Colors.white.withValues(alpha: 0.05) : Colors.black.withValues(alpha: 0.05),
                       borderRadius: BorderRadius.circular(30.r),
                       boxShadow: [
                         BoxShadow(
@@ -52,7 +52,7 @@ class AboutScreen extends StatelessWidget {
                         )
                       ],
                       border: Border.all(
-                        color: Colors.white.withValues( alpha : 0.1),
+                        color: Theme.of(context).brightness == Brightness.dark ? Colors.white.withValues(alpha: 0.1) : Colors.black.withValues(alpha: 0.1),
                       )),
                   child: Icon(
                     Icons.storefront_rounded,
@@ -66,7 +66,7 @@ class AboutScreen extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 32.sp,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                    color: Theme.of(context).colorScheme.onSurface,
                     letterSpacing: 1.5,
                   ),
                 ),
@@ -75,15 +75,15 @@ class AboutScreen extends StatelessWidget {
                   'Version 1.0.0 (Beta)',
                   style: TextStyle(
                     fontSize: 14.sp,
-                    color: Colors.white54,
+                    color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
                   ),
                 ),
                 SizedBox(height: 48.h),
 
                 // Credits
-                _buildInfoTile('Developer', 'ResPOS Team'),
-                _buildInfoTile('Contact', 'support@respos.com'),
-                _buildInfoTile('License', 'MIT License'),
+                _buildInfoTile(context, 'Developer', 'ResPOS Team'),
+                _buildInfoTile(context, 'Contact', 'support@respos.com'),
+                _buildInfoTile(context, 'License', 'MIT License'),
 
                 const Spacer(),
                 Padding(
@@ -92,7 +92,7 @@ class AboutScreen extends StatelessWidget {
                     '© 2026 ResPOS Inc. All rights reserved.',
                     style: TextStyle(
                       fontSize: 12.sp,
-                      color: Colors.white24,
+                      color: Theme.of(context).colorScheme.onSurface.withOpacity(0.4),
                     ),
                   ),
                 )
@@ -104,13 +104,13 @@ class AboutScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildInfoTile(String label, String value) {
+  Widget _buildInfoTile(BuildContext context, String label, String value) {
     return Container(
       width: 300.w,
       padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 16.w),
       margin: EdgeInsets.only(bottom: 12.h),
       decoration: BoxDecoration(
-        color: Colors.white.withValues( alpha : 0.03),
+        color: Theme.of(context).brightness == Brightness.dark ? Colors.white.withValues(alpha: 0.03) : Colors.black.withValues(alpha: 0.03),
         borderRadius: BorderRadius.circular(12.r),
       ),
       child: Row(
@@ -119,7 +119,7 @@ class AboutScreen extends StatelessWidget {
           Text(
             label,
             style: TextStyle(
-              color: Colors.white54,
+              color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
               fontSize: 14.sp,
             ),
           ),

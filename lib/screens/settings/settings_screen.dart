@@ -9,6 +9,7 @@ import 'shop_info_settings_screen.dart';
 import 'payment_settings_screen.dart';
 import 'printer_settings_screen.dart';
 import 'api_settings_screen.dart';
+import 'backup_settings_screen.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -30,7 +31,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             child: Row(
               children: [
                 IconButton(
-                  icon: const Icon(Icons.arrow_back, color: Colors.white),
+                  icon: Icon(Icons.arrow_back, color: Theme.of(context).colorScheme.onSurface),
                   onPressed: () => Navigator.pop(context),
                   style: IconButton.styleFrom(
                     backgroundColor: Colors.white.withValues(alpha: 0.1),
@@ -44,7 +45,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   style: TextStyle(
                     fontSize: 24.sp,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                    color: Theme.of(context).colorScheme.onSurface,
                     letterSpacing: 0.5,
                   ),
                 ),
@@ -174,6 +175,19 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ]),
                 SizedBox(height: 32.h),
 
+                // Data Management
+                _buildSectionHeader(l10n.backupRestore),
+                SizedBox(height: 16.h),
+                _buildSettingsCard([
+                  _buildNavSetting(
+                    l10n.backupRestore,
+                    'Export & Import data',
+                    Icons.backup,
+                    const BackupSettingsScreen(),
+                  ),
+                ]),
+                SizedBox(height: 32.h),
+
                 // App Info
                 _buildSectionHeader('App Info'),
                 SizedBox(height: 16.h),
@@ -238,7 +252,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return InkWell(
       onTap: () {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => destination));
+            context, MaterialPageRoute<void>(builder: (context) => destination));
       },
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
@@ -259,17 +273,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(label,
-                      style: TextStyle(color: Colors.white, fontSize: 16.sp)),
+                      style: TextStyle(color: Theme.of(context).colorScheme.onSurface, fontSize: 16.sp)),
                   SizedBox(height: 4.h),
                   Text(
                     subtitle,
-                    style: TextStyle(color: Colors.white54, fontSize: 12.sp),
+                    style: TextStyle(color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6), fontSize: 12.sp),
                     overflow: TextOverflow.ellipsis,
                   ),
                 ],
               ),
             ),
-            Icon(Icons.arrow_forward_ios, color: Colors.white54, size: 16.sp),
+            Icon(Icons.arrow_forward_ios, color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6), size: 16.sp),
           ],
         ),
       ),
@@ -280,15 +294,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return InkWell(
       onTap: () {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => destination));
+            context, MaterialPageRoute<void>(builder: (context) => destination));
       },
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(label, style: TextStyle(color: Colors.white, fontSize: 16.sp)),
-            Icon(Icons.arrow_forward_ios, color: Colors.white54, size: 16.sp),
+            Text(label, style: TextStyle(color: Theme.of(context).colorScheme.onSurface, fontSize: 16.sp)),
+            Icon(Icons.arrow_forward_ios, color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6), size: 16.sp),
           ],
         ),
       ),
@@ -300,7 +314,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     String currentValue,
     IconData icon,
     Map<String, String> options,
-    Function(String) onChanged,
+    void Function(String) onChanged,
   ) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.h),
@@ -331,9 +345,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
               child: DropdownButton<String>(
                 value: currentValue,
                 dropdownColor: const Color(0xFF2A2A3E),
-                style: TextStyle(color: Colors.white, fontSize: 14.sp),
+                style: TextStyle(color: Theme.of(context).colorScheme.onSurface, fontSize: 14.sp),
                 icon: Icon(Icons.arrow_drop_down,
-                    color: Colors.white54, size: 20.sp),
+                    color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6), size: 20.sp),
                 items: options.entries.map((entry) {
                   return DropdownMenuItem(
                     value: entry.key,
@@ -352,7 +366,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 
   Widget _buildSliderSetting(
-      String label, double value, Function(double) onChanged,
+      String label, double value, void Function(double) onChanged,
       {double min = 0, double max = 100}) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
@@ -393,7 +407,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 
   Widget _buildSwitchSetting(
-      String label, bool value, Function(bool) onChanged) {
+      String label, bool value, void Function(bool) onChanged) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.h),
       child: Row(
@@ -402,7 +416,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
           Text(label, style: TextStyle(color: Colors.white, fontSize: 16.sp)),
           Switch(
             value: value,
-            activeThumbColor: Theme.of(context).primaryColor,
             onChanged: onChanged,
           ),
         ],

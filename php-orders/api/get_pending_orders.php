@@ -1,7 +1,10 @@
 <?php
 /**
  * GET /api/get_pending_orders.php
- * Returns pending orders from web customers for POS polling
+ * Returns pending orders from web customers for POS polling (store-specific)
+ * 
+ * FIXED: Now fetches orders that have pending ITEMS, not based on order's acknowledged flag
+ * This ensures new items added to an already-acknowledged order will still be returned.
  * 
  * Query params:
  * - since: Timestamp to get orders after (optional)
@@ -9,7 +12,7 @@
  */
 
 require_once 'config.php';
-validateApiKey();
+$storeId = validateApiKey();
 
 try {
     $pdo = getConnection();
@@ -17,21 +20,25 @@ try {
     $since = $_GET['since'] ?? null;
     $limit = min((int)($_GET['limit'] ?? 50), 100);
 
+    // FIXED: Get orders that have at least one pending item
+    // Instead of filtering by order.acknowledged, we check for pending items
     $sql = "
-        SELECT 
+        SELECT DISTINCT
             o.id, o.table_id, o.total_amount, o.status, o.created_at,
+            o.guest_count, o.adult_count, o.child_count,
             t.table_name
         FROM orders o
-        JOIN tables t ON o.table_id = t.id
-        WHERE o.status = 'open' 
+        LEFT JOIN tables t ON o.table_id = t.id
+        INNER JOIN order_items oi ON o.id = oi.order_id AND oi.status = 'pending'
+        WHERE o.store_id = :store_id
+          AND o.status = 'open' 
           AND o.source = 'web'
-          AND o.acknowledged = 0
     ";
 
-    $params = [];
+    $params = [':store_id' => $storeId];
 
     if ($since) {
-        $sql .= " AND o.created_at > :since";
+        $sql .= " AND oi.created_at > :since";
         $params[':since'] = $since;
     }
 
@@ -41,18 +48,51 @@ try {
     $stmt->execute($params);
     $orders = $stmt->fetchAll();
 
-    // Get items for each order
+    if (empty($orders)) {
+        sendResponse([
+            'success' => true,
+            'orders' => [],
+            'count' => 0,
+            'timestamp' => date('Y-m-d H:i:s')
+        ]);
+        exit;
+    }
+
+    // Get all order IDs
+    $orderIds = array_column($orders, 'id');
+    $placeholders = implode(',', array_fill(0, count($orderIds), '?'));
+    
+    // Get all PENDING items for all orders in a single query
+    $itemsSql = "
+        SELECT 
+            oi.order_id,
+            oi.id, oi.menu_item_id as item_id, oi.quantity, oi.notes, oi.status,
+            oi.price_at_moment as price,
+            mi.name, mi.name_th
+        FROM order_items oi
+        JOIN menu_items mi ON oi.menu_item_id = mi.id
+        WHERE oi.order_id IN ($placeholders) AND oi.status = 'pending'
+        ORDER BY oi.order_id, oi.id
+    ";
+    
+    $itemsStmt = $pdo->prepare($itemsSql);
+    $itemsStmt->execute($orderIds);
+    $allItems = $itemsStmt->fetchAll(PDO::FETCH_ASSOC);
+    
+    // Group items by order_id
+    $itemsByOrder = [];
+    foreach ($allItems as $item) {
+        $orderId = $item['order_id'];
+        unset($item['order_id']); // Remove order_id from item data
+        if (!isset($itemsByOrder[$orderId])) {
+            $itemsByOrder[$orderId] = [];
+        }
+        $itemsByOrder[$orderId][] = $item;
+    }
+    
+    // Attach items to orders
     foreach ($orders as &$order) {
-        $itemsStmt = $pdo->prepare("
-            SELECT 
-                oi.id, oi.menu_item_id as item_id, oi.quantity, oi.notes, oi.status,
-                mi.name, mi.price
-            FROM order_items oi
-            JOIN menu_items mi ON oi.menu_item_id = mi.id
-            WHERE oi.order_id = :order_id AND oi.status = 'pending'
-        ");
-        $itemsStmt->execute([':order_id' => $order['id']]);
-        $order['items'] = $itemsStmt->fetchAll();
+        $order['items'] = $itemsByOrder[$order['id']] ?? [];
     }
 
     sendResponse([
@@ -65,3 +105,4 @@ try {
 } catch (PDOException $e) {
     sendResponse(['error' => 'Database error', 'message' => $e->getMessage()], 500);
 }
+

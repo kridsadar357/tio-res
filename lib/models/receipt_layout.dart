@@ -10,6 +10,11 @@ enum ReceiptComponentType {
   space,
   dynamicItems, // The list of order items
   dynamicTotal, // The total/tax summary
+  // Store Info components (auto-filled from settings)
+  shopLogo,     // Shop logo image
+  shopName,     // Shop name from settings
+  shopAddress,  // Shop address from settings
+  shopTel,      // Shop telephone from settings
 }
 
 enum ReceiptAlignment {
@@ -94,6 +99,34 @@ class ReceiptComponent {
           data: {'label': 'Totals'},
           style: {'fontSize': 12},
         );
+      case ReceiptComponentType.shopLogo:
+        return ReceiptComponent(
+          id: id,
+          type: type,
+          data: {'useSettings': true}, // Auto-load from settings
+          style: {'alignment': 'center', 'width': 150},
+        );
+      case ReceiptComponentType.shopName:
+        return ReceiptComponent(
+          id: id,
+          type: type,
+          data: {'useSettings': true}, // Auto-load from settings
+          style: {'fontSize': 24, 'alignment': 'center', 'bold': true},
+        );
+      case ReceiptComponentType.shopAddress:
+        return ReceiptComponent(
+          id: id,
+          type: type,
+          data: {'useSettings': true},
+          style: {'fontSize': 12, 'alignment': 'center', 'bold': false},
+        );
+      case ReceiptComponentType.shopTel:
+        return ReceiptComponent(
+          id: id,
+          type: type,
+          data: {'useSettings': true},
+          style: {'fontSize': 12, 'alignment': 'center', 'bold': false},
+        );
       default:
         return ReceiptComponent(id: id, type: type);
     }
@@ -123,13 +156,13 @@ class ReceiptComponent {
 
   factory ReceiptComponent.fromJson(Map<String, dynamic> json) {
     return ReceiptComponent(
-      id: json['id'],
+      id: json['id'] as String,
       type: ReceiptComponentType.values.firstWhere(
-        (e) => e.name == json['type'],
+        (e) => e.name == json['type'] as String,
         orElse: () => ReceiptComponentType.text,
       ),
-      data: Map<String, dynamic>.from(json['data'] ?? {}),
-      style: Map<String, dynamic>.from(json['style'] ?? {}),
+      data: Map<String, dynamic>.from(json['data'] as Map<dynamic, dynamic>? ?? {}),
+      style: Map<String, dynamic>.from(json['style'] as Map<dynamic, dynamic>? ?? {}),
     );
   }
 }
@@ -163,10 +196,10 @@ class ReceiptLayout {
 
   factory ReceiptLayout.fromJson(Map<String, dynamic> json) {
     return ReceiptLayout(
-      paperSizeMm: json['paperSizeMm'] ?? 80,
-      components: (json['components'] as List?)
+      paperSizeMm: (json['paperSizeMm'] as num?)?.toInt() ?? 80,
+      components: (json['components'] as List<dynamic>?)
               ?.map((c) =>
-                  ReceiptComponent.fromJson(Map<String, dynamic>.from(c)))
+                  ReceiptComponent.fromJson(Map<String, dynamic>.from(c as Map<dynamic, dynamic>)))
               .toList() ??
           [],
     );
@@ -175,7 +208,6 @@ class ReceiptLayout {
   // Helper to create a default starter layout
   factory ReceiptLayout.defaultLayout() {
     return ReceiptLayout(
-      paperSizeMm: 80,
       components: [
         ReceiptComponent.create(ReceiptComponentType.header)
           ..data['text'] = 'My Restaurant',

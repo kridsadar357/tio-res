@@ -18,19 +18,31 @@ class PremiumScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+    
     return Scaffold(
       extendBodyBehindAppBar: extendBodyBehindAppBar,
-      backgroundColor: Colors.transparent, // Important for gradient visibility
+      backgroundColor: Colors.transparent,
       body: Container(
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [
-              Theme.of(context).scaffoldBackgroundColor,
-              const Color(0xFF202533), // Slightly lighter navy for depth
-            ],
-          ),
+          gradient: isDark
+              ? LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    theme.scaffoldBackgroundColor,
+                    const Color(0xFF202533), // Slightly lighter navy for depth
+                  ],
+                )
+              : LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    theme.scaffoldBackgroundColor,
+                    theme.scaffoldBackgroundColor, // Solid color for light theme
+                  ],
+                ),
         ),
         child: SafeArea(
           child: Column(

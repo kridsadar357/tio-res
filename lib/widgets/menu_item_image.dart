@@ -80,6 +80,8 @@ class MenuItemImage extends StatelessWidget {
       fit: fit,
       width: width,
       height: height,
+      cacheWidth: width?.toInt(),
+      cacheHeight: height?.toInt(),
       errorBuilder: (context, error, stackTrace) {
         return _buildPlaceholder(
           error: true,
@@ -233,14 +235,14 @@ class AssetPlaceholderImage extends StatelessWidget {
             Icon(
               Icons.restaurant_menu,
               size: (width ?? 100).sp * 0.4,
-              color: Colors.white.withValues(alpha: 0.7),
+              color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
             ),
             SizedBox(height: 8.h),
             Text(
               'No Image',
               style: TextStyle(
                 fontSize: 12.sp,
-                color: Colors.white.withValues(alpha: 0.8),
+                color: Theme.of(context).colorScheme.onSurface.withOpacity(0.8),
               ),
             ),
           ],

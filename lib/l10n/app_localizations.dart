@@ -62,8 +62,7 @@ import 'app_localizations_th.dart';
 /// be consistent with the languages listed in the AppLocalizations.supportedLocales
 /// property.
 abstract class AppLocalizations {
-  AppLocalizations(String locale)
-      : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+  AppLocalizations(String locale) : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
   final String localeName;
 
@@ -71,8 +70,7 @@ abstract class AppLocalizations {
     return Localizations.of<AppLocalizations>(context, AppLocalizations);
   }
 
-  static const LocalizationsDelegate<AppLocalizations> delegate =
-      _AppLocalizationsDelegate();
+  static const LocalizationsDelegate<AppLocalizations> delegate = _AppLocalizationsDelegate();
 
   /// A list of this localizations delegate along with the default localizations
   /// delegates.
@@ -84,8 +82,7 @@ abstract class AppLocalizations {
   /// Additional delegates can be added by appending to this list in
   /// MaterialApp. This list does not have to be used at all if a custom list
   /// of delegates is preferred or required.
-  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
-      <LocalizationsDelegate<dynamic>>[
+  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates = <LocalizationsDelegate<dynamic>>[
     delegate,
     GlobalMaterialLocalizations.delegate,
     GlobalCupertinoLocalizations.delegate,
@@ -1136,6 +1133,138 @@ abstract class AppLocalizations {
   /// **'รีเฟรชรายการ'**
   String get refreshList;
 
+  /// No description provided for @scanForNew.
+  ///
+  /// In th, this message translates to:
+  /// **'สแกนหาอุปกรณ์ใหม่'**
+  String get scanForNew;
+
+  /// No description provided for @stopScan.
+  ///
+  /// In th, this message translates to:
+  /// **'หยุดสแกน'**
+  String get stopScan;
+
+  /// No description provided for @pairedDevices.
+  ///
+  /// In th, this message translates to:
+  /// **'อุปกรณ์ที่จับคู่แล้ว'**
+  String get pairedDevices;
+
+  /// No description provided for @nearbyDevices.
+  ///
+  /// In th, this message translates to:
+  /// **'อุปกรณ์ใกล้เคียง'**
+  String get nearbyDevices;
+
+  /// No description provided for @tapToPairConnect.
+  ///
+  /// In th, this message translates to:
+  /// **'แตะเพื่อจับคู่และเชื่อมต่อ'**
+  String get tapToPairConnect;
+
+  /// No description provided for @notPaired.
+  ///
+  /// In th, this message translates to:
+  /// **'ยังไม่ได้จับคู่'**
+  String get notPaired;
+
+  /// No description provided for @scanningForDevices.
+  ///
+  /// In th, this message translates to:
+  /// **'กำลังสแกนหาอุปกรณ์ใกล้เคียง...'**
+  String get scanningForDevices;
+
+  /// No description provided for @noPrintersFound.
+  ///
+  /// In th, this message translates to:
+  /// **'ไม่พบเครื่องพิมพ์'**
+  String get noPrintersFound;
+
+  /// No description provided for @howToConnectPrinter.
+  ///
+  /// In th, this message translates to:
+  /// **'วิธีเชื่อมต่อเครื่องพิมพ์:'**
+  String get howToConnectPrinter;
+
+  /// No description provided for @putPrinterPairingMode.
+  ///
+  /// In th, this message translates to:
+  /// **'เปิดโหมดจับคู่ของเครื่องพิมพ์ (ดูคู่มือเครื่องพิมพ์)'**
+  String get putPrinterPairingMode;
+
+  /// No description provided for @openBluetoothSettings.
+  ///
+  /// In th, this message translates to:
+  /// **'เปิดการตั้งค่าบลูทูธของ Android'**
+  String get openBluetoothSettings;
+
+  /// No description provided for @findAndPair.
+  ///
+  /// In th, this message translates to:
+  /// **'ค้นหาและจับคู่ชื่อเครื่องพิมพ์ของคุณ'**
+  String get findAndPair;
+
+  /// No description provided for @returnAndRefresh.
+  ///
+  /// In th, this message translates to:
+  /// **'กลับมาที่แอปนี้และแตะรีเฟรช'**
+  String get returnAndRefresh;
+
+  /// No description provided for @openBluetoothSettingsButton.
+  ///
+  /// In th, this message translates to:
+  /// **'เปิดการตั้งค่าบลูทูธ'**
+  String get openBluetoothSettingsButton;
+
+  /// No description provided for @connectionFailed.
+  ///
+  /// In th, this message translates to:
+  /// **'เชื่อมต่อไม่สำเร็จ'**
+  String get connectionFailed;
+
+  /// No description provided for @devicePairedButNotConnected.
+  ///
+  /// In th, this message translates to:
+  /// **'อุปกรณ์จับคู่แล้วแต่เชื่อมต่อไม่สำเร็จ กรุณาลองเชื่อมต่ออีกครั้ง'**
+  String get devicePairedButNotConnected;
+
+  /// No description provided for @connectionFailedDetails.
+  ///
+  /// In th, this message translates to:
+  /// **'การเชื่อมต่อล้มเหลว กรุณาตรวจสอบ:\n1. เครื่องพิมพ์เปิดอยู่และอยู่ในระยะ\n2. คุณยอมรับคำขอจับคู่หากปรากฏ\n3. ลองเชื่อมต่ออีกครั้ง'**
+  String get connectionFailedDetails;
+
+  /// No description provided for @bluetoothPermissionsRequired.
+  ///
+  /// In th, this message translates to:
+  /// **'ต้องการสิทธิ์บลูทูธ กรุณาอนุญาตสิทธิ์ในการตั้งค่าแอป'**
+  String get bluetoothPermissionsRequired;
+
+  /// No description provided for @bluetoothNotAvailable.
+  ///
+  /// In th, this message translates to:
+  /// **'บลูทูธไม่พร้อมใช้งาน กรุณาเปิดบลูทูธบนอุปกรณ์ของคุณ'**
+  String get bluetoothNotAvailable;
+
+  /// No description provided for @errorLoadingDevices.
+  ///
+  /// In th, this message translates to:
+  /// **'เกิดข้อผิดพลาดในการโหลดอุปกรณ์'**
+  String get errorLoadingDevices;
+
+  /// No description provided for @availablePrinters.
+  ///
+  /// In th, this message translates to:
+  /// **'เครื่องพิมพ์ที่มี'**
+  String get availablePrinters;
+
+  /// No description provided for @refreshPairedDevices.
+  ///
+  /// In th, this message translates to:
+  /// **'รีเฟรชอุปกรณ์ที่จับคู่แล้ว'**
+  String get refreshPairedDevices;
+
   /// No description provided for @apiSettings.
   ///
   /// In th, this message translates to:
@@ -1652,12 +1781,6 @@ abstract class AppLocalizations {
   /// **'เชื่อมต่อสำเร็จ'**
   String get connectionSuccess;
 
-  /// No description provided for @connectionFailed.
-  ///
-  /// In th, this message translates to:
-  /// **'เชื่อมต่อไม่สำเร็จ'**
-  String get connectionFailed;
-
   /// No description provided for @waitingForCard.
   ///
   /// In th, this message translates to:
@@ -1891,10 +2014,459 @@ abstract class AppLocalizations {
   /// In th, this message translates to:
   /// **'เลือกรายการ'**
   String get selectItem;
+
+  /// No description provided for @receiptBuffetCharges.
+  ///
+  /// In th, this message translates to:
+  /// **'ค่าบุฟเฟต์'**
+  String get receiptBuffetCharges;
+
+  /// No description provided for @receiptExtraItems.
+  ///
+  /// In th, this message translates to:
+  /// **'รายการเพิ่มเติม'**
+  String get receiptExtraItems;
+
+  /// No description provided for @receiptBuffetSubtotal.
+  ///
+  /// In th, this message translates to:
+  /// **'รวมค่าบุฟเฟต์'**
+  String get receiptBuffetSubtotal;
+
+  /// No description provided for @receiptExtrasSubtotal.
+  ///
+  /// In th, this message translates to:
+  /// **'รวมค่าเพิ่มเติม'**
+  String get receiptExtrasSubtotal;
+
+  /// No description provided for @receiptGrandTotal.
+  ///
+  /// In th, this message translates to:
+  /// **'ยอดรวมทั้งหมด'**
+  String get receiptGrandTotal;
+
+  /// No description provided for @receiptThankYou.
+  ///
+  /// In th, this message translates to:
+  /// **'ขอบคุณที่มาใช้บริการ!'**
+  String get receiptThankYou;
+
+  /// No description provided for @receiptAdult.
+  ///
+  /// In th, this message translates to:
+  /// **'ผู้ใหญ่'**
+  String get receiptAdult;
+
+  /// No description provided for @receiptChild.
+  ///
+  /// In th, this message translates to:
+  /// **'เด็ก'**
+  String get receiptChild;
+
+  /// No description provided for @receiptTable.
+  ///
+  /// In th, this message translates to:
+  /// **'โต๊ะ'**
+  String get receiptTable;
+
+  /// No description provided for @receiptOrder.
+  ///
+  /// In th, this message translates to:
+  /// **'ออเดอร์'**
+  String get receiptOrder;
+
+  /// No description provided for @receiptDate.
+  ///
+  /// In th, this message translates to:
+  /// **'วันที่'**
+  String get receiptDate;
+
+  /// No description provided for @receiptTime.
+  ///
+  /// In th, this message translates to:
+  /// **'เวลา'**
+  String get receiptTime;
+
+  /// No description provided for @receiptGuests.
+  ///
+  /// In th, this message translates to:
+  /// **'จำนวนลูกค้า'**
+  String get receiptGuests;
+
+  /// No description provided for @receiptPayment.
+  ///
+  /// In th, this message translates to:
+  /// **'การชำระเงิน'**
+  String get receiptPayment;
+
+  /// No description provided for @backupRestore.
+  ///
+  /// In th, this message translates to:
+  /// **'สำรองและกู้คืน'**
+  String get backupRestore;
+
+  /// No description provided for @backupDescription.
+  ///
+  /// In th, this message translates to:
+  /// **'สำรองฐานข้อมูล รูปภาพ และการตั้งค่า เพื่อย้ายไปเครื่องอื่นหรือกู้คืนในภายหลัง'**
+  String get backupDescription;
+
+  /// No description provided for @createBackup.
+  ///
+  /// In th, this message translates to:
+  /// **'สร้างข้อมูลสำรอง'**
+  String get createBackup;
+
+  /// No description provided for @restoreBackup.
+  ///
+  /// In th, this message translates to:
+  /// **'กู้คืนข้อมูล'**
+  String get restoreBackup;
+
+  /// No description provided for @backupIncludes.
+  ///
+  /// In th, this message translates to:
+  /// **'ข้อมูลสำรองประกอบด้วย:'**
+  String get backupIncludes;
+
+  /// No description provided for @database.
+  ///
+  /// In th, this message translates to:
+  /// **'ฐานข้อมูล (ออเดอร์, เมนู, โต๊ะ ฯลฯ)'**
+  String get database;
+
+  /// No description provided for @menuImages.
+  ///
+  /// In th, this message translates to:
+  /// **'รูปภาพเมนู'**
+  String get menuImages;
+
+  /// No description provided for @appSettings.
+  ///
+  /// In th, this message translates to:
+  /// **'การตั้งค่าแอป'**
+  String get appSettings;
+
+  /// No description provided for @receiptLayouts.
+  ///
+  /// In th, this message translates to:
+  /// **'รูปแบบใบเสร็จ'**
+  String get receiptLayouts;
+
+  /// No description provided for @createBackupNow.
+  ///
+  /// In th, this message translates to:
+  /// **'สร้างข้อมูลสำรองเดี๋ยวนี้'**
+  String get createBackupNow;
+
+  /// No description provided for @selectBackupFile.
+  ///
+  /// In th, this message translates to:
+  /// **'เลือกไฟล์สำรองเพื่อกู้คืน:'**
+  String get selectBackupFile;
+
+  /// No description provided for @browseFiles.
+  ///
+  /// In th, this message translates to:
+  /// **'เรียกดูไฟล์'**
+  String get browseFiles;
+
+  /// No description provided for @availableBackups.
+  ///
+  /// In th, this message translates to:
+  /// **'ข้อมูลสำรองที่มี'**
+  String get availableBackups;
+
+  /// No description provided for @backupWarning.
+  ///
+  /// In th, this message translates to:
+  /// **'การกู้คืนข้อมูลจะแทนที่ข้อมูลปัจจุบันทั้งหมด กรุณาสำรองข้อมูลปัจจุบันก่อนหากต้องการ'**
+  String get backupWarning;
+
+  /// No description provided for @qrCodeOrdering.
+  ///
+  /// In th, this message translates to:
+  /// **'สั่งอาหารผ่าน QR Code'**
+  String get qrCodeOrdering;
+
+  /// No description provided for @qrOrderingEnabled.
+  ///
+  /// In th, this message translates to:
+  /// **'ลูกค้าสามารถสแกน QR เพื่อสั่งอาหาร'**
+  String get qrOrderingEnabled;
+
+  /// No description provided for @qrOrderingDisabled.
+  ///
+  /// In th, this message translates to:
+  /// **'ปิดการสั่งอาหารผ่าน QR'**
+  String get qrOrderingDisabled;
+
+  /// No description provided for @qrUrlConfig.
+  ///
+  /// In th, this message translates to:
+  /// **'ตั้งค่า URL สำหรับ QR'**
+  String get qrUrlConfig;
+
+  /// No description provided for @qrBaseUrl.
+  ///
+  /// In th, this message translates to:
+  /// **'URL หลัก'**
+  String get qrBaseUrl;
+
+  /// No description provided for @qrUrlStructure.
+  ///
+  /// In th, this message translates to:
+  /// **'โครงสร้าง URL'**
+  String get qrUrlStructure;
+
+  /// No description provided for @openTableQrDesc.
+  ///
+  /// In th, this message translates to:
+  /// **'QR เปิดโต๊ะ'**
+  String get openTableQrDesc;
+
+  /// No description provided for @menuPageDesc.
+  ///
+  /// In th, this message translates to:
+  /// **'หน้าเมนู'**
+  String get menuPageDesc;
+
+  /// No description provided for @storeInfo.
+  ///
+  /// In th, this message translates to:
+  /// **'ข้อมูลร้าน'**
+  String get storeInfo;
+
+  /// No description provided for @shopLogo.
+  ///
+  /// In th, this message translates to:
+  /// **'โลโก้ร้าน'**
+  String get shopLogo;
+
+  /// No description provided for @shopAddress.
+  ///
+  /// In th, this message translates to:
+  /// **'ที่อยู่ร้าน'**
+  String get shopAddress;
+
+  /// No description provided for @shopTel.
+  ///
+  /// In th, this message translates to:
+  /// **'เบอร์โทรร้าน'**
+  String get shopTel;
+
+  /// No description provided for @completed.
+  ///
+  /// In th, this message translates to:
+  /// **'เสร็จสมบูรณ์'**
+  String get completed;
+
+  /// No description provided for @receiptPrintedSuccessfully.
+  ///
+  /// In th, this message translates to:
+  /// **'พิมพ์ใบเสร็จสำเร็จ'**
+  String get receiptPrintedSuccessfully;
+
+  /// No description provided for @errorOccurred.
+  ///
+  /// In th, this message translates to:
+  /// **'เกิดข้อผิดพลาด'**
+  String get errorOccurred;
+
+  /// No description provided for @earned.
+  ///
+  /// In th, this message translates to:
+  /// **'ได้รับ'**
+  String get earned;
+
+  /// No description provided for @points.
+  ///
+  /// In th, this message translates to:
+  /// **'คะแนน'**
+  String get points;
+
+  /// No description provided for @insufficientFunds.
+  ///
+  /// In th, this message translates to:
+  /// **'เงินไม่พอ! กรุณาใส่อย่างน้อย'**
+  String get insufficientFunds;
+
+  /// No description provided for @takeAway.
+  ///
+  /// In th, this message translates to:
+  /// **'สั่งกลับบ้าน'**
+  String get takeAway;
+
+  /// No description provided for @takeAwayDescription.
+  ///
+  /// In th, this message translates to:
+  /// **'ออเดอร์สำหรับลูกค้าที่ไม่ได้นั่งทานในร้าน'**
+  String get takeAwayDescription;
+
+  /// No description provided for @newTakeAwayOrder.
+  ///
+  /// In th, this message translates to:
+  /// **'สั่งกลับบ้านใหม่'**
+  String get newTakeAwayOrder;
+
+  /// No description provided for @takeAwayComingSoon.
+  ///
+  /// In th, this message translates to:
+  /// **'ฟีเจอร์สั่งกลับบ้านเร็วๆ นี้!'**
+  String get takeAwayComingSoon;
+
+  /// No description provided for @todayOrders.
+  ///
+  /// In th, this message translates to:
+  /// **'ออเดอร์วันนี้'**
+  String get todayOrders;
+
+  /// No description provided for @pendingOrders.
+  ///
+  /// In th, this message translates to:
+  /// **'รอดำเนินการ'**
+  String get pendingOrders;
+
+  /// No description provided for @completedOrders.
+  ///
+  /// In th, this message translates to:
+  /// **'เสร็จสมบูรณ์'**
+  String get completedOrders;
+
+  /// No description provided for @orderItems.
+  ///
+  /// In th, this message translates to:
+  /// **'รายการสั่ง'**
+  String get orderItems;
+
+  /// No description provided for @syncAllData.
+  ///
+  /// In th, this message translates to:
+  /// **'ซิงค์ข้อมูลทั้งหมด'**
+  String get syncAllData;
+
+  /// No description provided for @syncAllDataDesc.
+  ///
+  /// In th, this message translates to:
+  /// **'ส่งข้อมูล POS ทั้งหมดไปยังเซิร์ฟเวอร์ (สำหรับการตั้งค่าครั้งแรก)'**
+  String get syncAllDataDesc;
+
+  /// No description provided for @sendAllData.
+  ///
+  /// In th, this message translates to:
+  /// **'ส่งข้อมูลทั้งหมด'**
+  String get sendAllData;
+
+  /// No description provided for @syncing.
+  ///
+  /// In th, this message translates to:
+  /// **'กำลังซิงค์...'**
+  String get syncing;
+
+  /// No description provided for @buffetTiers.
+  ///
+  /// In th, this message translates to:
+  /// **'แพ็กเกจบุฟเฟ่ต์'**
+  String get buffetTiers;
+
+  /// No description provided for @tables.
+  ///
+  /// In th, this message translates to:
+  /// **'โต๊ะ'**
+  String get tables;
+
+  /// No description provided for @apiNotEnabled.
+  ///
+  /// In th, this message translates to:
+  /// **'กรุณาเปิดใช้งาน API และบันทึกการตั้งค่าก่อน'**
+  String get apiNotEnabled;
+
+  /// No description provided for @apiConnectionFailed.
+  ///
+  /// In th, this message translates to:
+  /// **'เชื่อมต่อไม่สำเร็จ กรุณาตรวจสอบ URL และ API key'**
+  String get apiConnectionFailed;
+
+  /// No description provided for @apiSyncSuccess.
+  ///
+  /// In th, this message translates to:
+  /// **'ซิงค์ข้อมูลทั้งหมดสำเร็จ!'**
+  String get apiSyncSuccess;
+
+  /// No description provided for @apiSyncPartialFail.
+  ///
+  /// In th, this message translates to:
+  /// **'บางรายการซิงค์ไม่สำเร็จ'**
+  String get apiSyncPartialFail;
+
+  /// No description provided for @printToKitchen.
+  ///
+  /// In th, this message translates to:
+  /// **'พิมพ์ส่งครัว'**
+  String get printToKitchen;
+
+  /// No description provided for @served.
+  ///
+  /// In th, this message translates to:
+  /// **'เสิร์ฟแล้ว'**
+  String get served;
+
+  /// No description provided for @printSuccess.
+  ///
+  /// In th, this message translates to:
+  /// **'ส่งไปยังเครื่องพิมพ์แล้ว'**
+  String get printSuccess;
+
+  /// No description provided for @orderServed.
+  ///
+  /// In th, this message translates to:
+  /// **'รับออเดอร์แล้ว'**
+  String get orderServed;
+
+  /// No description provided for @noPendingOrders.
+  ///
+  /// In th, this message translates to:
+  /// **'ไม่มีออเดอร์รอดำเนินการ'**
+  String get noPendingOrders;
+
+  /// No description provided for @moveTable.
+  ///
+  /// In th, this message translates to:
+  /// **'ย้ายโต๊ะ'**
+  String get moveTable;
+
+  /// No description provided for @cancelTable.
+  ///
+  /// In th, this message translates to:
+  /// **'ยกเลิกโต๊ะ'**
+  String get cancelTable;
+
+  /// No description provided for @confirmCancelTable.
+  ///
+  /// In th, this message translates to:
+  /// **'คุณแน่ใจหรือไม่ว่าต้องการยกเลิกโต๊ะนี้? ออเดอร์จะถูกล้าง'**
+  String get confirmCancelTable;
+
+  /// No description provided for @selectDestinationTable.
+  ///
+  /// In th, this message translates to:
+  /// **'เลือกโต๊ะปลายทาง'**
+  String get selectDestinationTable;
+
+  /// No description provided for @tableMoved.
+  ///
+  /// In th, this message translates to:
+  /// **'ย้ายโต๊ะเรียบร้อย'**
+  String get tableMoved;
+
+  /// No description provided for @tableCancelled.
+  ///
+  /// In th, this message translates to:
+  /// **'ยกเลิกโต๊ะเรียบร้อย'**
+  String get tableCancelled;
 }
 
-class _AppLocalizationsDelegate
-    extends LocalizationsDelegate<AppLocalizations> {
+class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
   const _AppLocalizationsDelegate();
 
   @override
@@ -1903,25 +2475,25 @@ class _AppLocalizationsDelegate
   }
 
   @override
-  bool isSupported(Locale locale) =>
-      <String>['en', 'th'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => <String>['en', 'th'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
 }
 
 AppLocalizations lookupAppLocalizations(Locale locale) {
+
+
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
-    case 'en':
-      return AppLocalizationsEn();
-    case 'th':
-      return AppLocalizationsTh();
+    case 'en': return AppLocalizationsEn();
+    case 'th': return AppLocalizationsTh();
   }
 
   throw FlutterError(
-      'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
-      'an issue with the localizations generation tool. Please file an issue '
-      'on GitHub with a reproducible sample app and the gen-l10n configuration '
-      'that was used.');
+    'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
+    'an issue with the localizations generation tool. Please file an issue '
+    'on GitHub with a reproducible sample app and the gen-l10n configuration '
+    'that was used.'
+  );
 }
